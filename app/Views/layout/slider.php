@@ -4,6 +4,7 @@
     <div id="myCarousel" class="carousel slide">
       <!-- Carousel items with forms -->
       <div class="carousel-inner">
+
         <!-- First form slide -->
         <div class="carousel-item active">
           <div class="form-container">
@@ -13,7 +14,7 @@
                 <!-- First column of fields -->
                 <div class="col-md-6">
                   <label for="selectBox1" class="form-label">Final Status</label>
-                  <select class="form-select" id="selectBox" aria-label="Default select example">
+                  <select class="form-select final-status" id="final-status" aria-label="Default select example">
                     <option value="not-approached">Not Approached</option>
                     <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
                     <option value="dead-or-no-response">Dead/No Response</option>
@@ -26,44 +27,79 @@
                   </select>
                 </div>
 
-                <!-- Second column of fields -->
                 <div class="col-md-6">
-                  <label for="inputBox1" class="form-label">Input Field</label>
-                  <input type="text" class="form-control" id="inputBox1" placeholder="Enter value">
+                  <label for="inputBox1" class="form-label">Rebate</label>
+                  <input type="text" class="form-control" id="rebate" placeholder="0">
                 </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="inputBox1" class="form-label">FBM Company Name</label>
+                  <input type="text" class="form-control" id="fbm-company-name">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="linkField1" class="form-label">Website</label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">http://</span>
+                    <input type="text" class="form-control" placeholder="Ex. google.com" aria-label="website" aria-describedby="basic-addon1">  
+                  </div>
+                </div>
+
               </div>
 
               <div class="row mb-3">
                 <!-- First column of fields -->
                 <div class="col-md-6">
-                  <label for="linkField1" class="form-label">Link Field</label>
-                  <input type="url" class="form-control" id="linkField1" placeholder="Enter URL">
+                  <label for="textField1" class="form-label">FBA Company Name</label>
+                  <input type="text" class="form-control" id="fba-company-name" aria-label="FBA Company Name"  placeholder="Ex. " aria-describedby="basic-addon1">  
                 </div>
 
                 <!-- Second column of fields -->
                 <div class="col-md-6">
-                  <label for="multiSelect1" class="form-label">Multiple Select</label>
-                  <select class="form-select" id="multiSelect1" multiple>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
+                  <label for="dateField1" class="form-label">Account Manager</label>
+                  <input type="text" class="form-control" id="account-manager" aria-label="Account Manager" aria-describedby="basic-addon1" placeholder="Ex. James Mary">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="textField1" class="form-label">Not visible</label>
+                  <input type="text" class="form-control" id="fba-company-name" aria-label="FBA Company Name"  placeholder="Ex. " aria-describedby="basic-addon1">  
+                </div>
+
+                <div class="col-md-6">
+                  <label for="dateField1" class="form-label">Vendor Heighlighted Concern</label>
+                  <input type="text" class="form-control" id="account-manager" aria-label="Account Manager" aria-describedby="basic-addon1" placeholder="Ex. James Mary">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="textField1" class="form-label">Brand</label>
+                  <input type="text" class="form-control" id="fba-company-name" aria-label="FBA Company Name"  placeholder="Nike" aria-describedby="basic-addon1">  
+                </div>
+
+                <div class="col-md-6">
+                  <label for="dateField1" class="form-label">Business Unit</label>
+                  <select class="form-select business-unit" id="business-unit" aria-label="Default select example">
+                    <option value="home-hobbies">Home & Hobbies</option>
+                    <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
+                    <option value="dead-or-no-response">Dead/No Response</option>
+                    <option value="approached">Approached</option>
                   </select>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <!-- First column of fields -->
                 <div class="col-md-6">
-                  <label for="textField1" class="form-label">Text Field</label>
-                  <textarea class="form-control" id="textField1" rows="1" placeholder="Enter text"></textarea>
-                </div>
-
-                <!-- Second column of fields -->
-                <div class="col-md-6">
-                  <label for="dateField1" class="form-label">Date Field</label>
-                  <input type="date" class="form-control" id="dateField1">
+                  <label for="textField1" class="form-label">Description</label>
+                  <input type="text" class="form-control" id="fba-company-name" aria-label="FBA Company Name"  placeholder="Describe here.." aria-describedby="basic-addon1">  
                 </div>
               </div>
+              <button type="submit" class="btn gradient-custom">Save</button>
+
             </form>
           </div>
         </div>
@@ -71,178 +107,257 @@
         <!-- Second form slide -->
         <div class="carousel-item">
           <div class="form-container">
-            <h5>Shipping Information</h5>
+            <h5>Contact Information</h5>
             <form>
               <div class="row mb-3">
-                <!-- First column -->
                 <div class="col-md-6">
-                  <label for="selectBox2" class="form-label">Select Option</label>
-                  <select class="form-select" id="selectBox2">
-                    <option selected>Select an option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="inputBox2" class="form-label">Input Field</label>
-                  <input type="text" class="form-control" id="inputBox2" placeholder="Enter value">
+                    <label for="exampleInputEmail1" class="form-label">Additional Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <!-- First column -->
                 <div class="col-md-6">
-                  <label for="linkField2" class="form-label">Link Field</label>
-                  <input type="url" class="form-control" id="linkField2" placeholder="Enter URL">
+                  <label for="Contact Number" class="form-label">Contact Number</label>
+                  <input type="number" class="form-control" id="alt-contact-no">
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="multiSelect2" class="form-label">Multiple Select</label>
-                  <select class="form-select" id="multiSelect2" multiple>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
+                  <label for="Altarnate Number" class="form-label">Altarnate Number</label>
+                  <input type="number" class="form-control" id="alt-contact-no"/>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <!-- First column -->
+                <div class="col-md-3">
+                    <label for="Street" class="form-label">Zipcode</label>
+                    <input type="number" class="form-control" id="business-zipcode"/>
+                </div>
+                <div class="col-md-3">
+                    <label for="Email" class="form-label">City</label>
+                    <input type="text" class="form-control" id="business-city"/>
+                </div>
+                <div class="col-md-3">
+                    <label for="Contact Number" class="form-label">Street</label>
+                    <input type="text" class="form-control" id="business-street"/>
+                </div>
+                <div class="col-md-3">
+                    <label for="Contact Number" class="form-label">Country</label>
+                    <select class="form-select business-country" id="business-country">
+                        <option value="United State" selected>United State</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                  </select>
+                </div>
+                
+              </div>  
+
+              <div class="row mb-3">
+                <div class="col-md-3 m-2">
+                    <label for="Email" class="form-label">Inventory Email</label>
+                    <input type="email" class="form-control" id="inventory-email"/>
+                </div>
+                <div class="col-md-3 m-2">
+                    <label for="Contact Number" class="form-label">Inventory Contact Number</label>
+                    <input type="number" class="form-control" id="inventory-contact-no"/>
+                </div>
+                <div class="col-md-3 m-2">
+                    <label for="State" class="form-label">State</label>
+                    <select class="form-select business-country" id="inventory-state">
+                        <option value="United State" selected>sndhsd</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                  </select>
+                </div>
+                
+              </div> 
+
+              <div class="row mb-3">
                 <div class="col-md-6">
-                  <label for="textField2" class="form-label">Text Field</label>
-                  <textarea class="form-control" id="textField2" rows="1" placeholder="Enter text"></textarea>
+                  <label for="Modified On" class="form-label">Modified On</label>
+                  <input type="date" class="form-control" id="inventory-modified-on">
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="dateField2" class="form-label">Date Field</label>
-                  <input type="date" class="form-control" id="dateField2">
+                  <label for="Modified By" class="form-label">Modified By</label>
+                  <input type="type" class="form-control" id="inventory-modified-by">
                 </div>
               </div>
+              <button type="submit" class="btn gradient-custom">Save</button>
+
             </form>
           </div>
         </div>
 
-
         <!-- Third form slide -->
+        <div class="carousel-item">
+          <div class="form-container">
+            <h5>Shipping Information</h5>
+            <form>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label">Shipping Account</label>
+                  <select class="form-select shipping-account" id="shipping-account">
+                    <option value="Vendor Account" selected>Vendor Account</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="inputBox2" class="form-label">LTL/Freight Shipments</label>
+                  <select class="form-select shipping-account" id="shipping-account">
+                    <option value="Vendor Account" selected>Select LTL</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label">Need to share the Label</label>
+                  <select class="form-select share-Label" id="share-label">
+                    <option selected>Select One</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label">Rate Type</label>
+                  <select class="form-select rate-type" id="rate-type">
+                    <option selected>Select Rate Type</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label">International Shipping</label>
+                  <select class="form-select shipping-account" id="shipping-account">
+                    <option value="Vendor Account" selected>Vendor Account</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label">Push CompanyName in AddressLine1 ?</label>
+                  <select class="form-select shipping-account" id="shipping-account">
+                    <option value="Vendor Account" selected>Vendor Account</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label">Comments</label>
+                  <textarea class="form-control" id="shipping-info-comments" rows="2"></textarea>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label">Modified On</label>
+                  <input type="date" class="form-control" id="dateField2">
+                </div>
+              </div>
+
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="Modified By" class="form-label">Modified By</label>
+                  <input type="date" class="form-control" id="shipping-modified-on">
+                </div>
+                <div class="col-md-6">
+                  <label for="Modified By" class="form-label">Shipment Updating Type</label>
+                  <select class="form-select shipment-updating-type" id="shipment-updating-type">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="Shipping Tracking Source" class="form-label">Shipping Tracking Source</label>
+                  <input type="text" class="form-control" id="shipping-tracking-source">
+                </div>
+                
+              </div>
+              <button type="submit" class="btn gradient-custom">Save</button>
+
+            </form>  
+            </div>
+        </div>
+
+
+        <!-- Fourth form slide -->
         <div class="carousel-item">
           <div class="form-container">
             <h5>Vendor's Finanace Details</h5>
             <form>
               <div class="row mb-3">
-                <!-- First column -->
+                <div class="col-md-12"><b>Invoice Sourcing Details</b></div>
                 <div class="col-md-6">
-                  <label for="selectBox2" class="form-label">Select Option</label>
+                  <label for="selectBox2" class="form-label">Allocation</label>
                   <select class="form-select" id="selectBox2">
-                    <option selected>Select an option</option>
+                    <option selected>Select</option>
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
                     <option value="3">Option 3</option>
                   </select>
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="inputBox2" class="form-label">Input Field</label>
-                  <input type="text" class="form-control" id="inputBox2" placeholder="Enter value">
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <!-- First column -->
-                <div class="col-md-6">
-                  <label for="linkField2" class="form-label">Link Field</label>
-                  <input type="url" class="form-control" id="linkField2" placeholder="Enter URL">
-                </div>
-
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="multiSelect2" class="form-label">Multiple Select</label>
-                  <select class="form-select" id="multiSelect2" multiple>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
+                  <label for="inputBox2" class="form-label">Vendor Level</label>
+                  <select class="form-select" id="vendor-level">
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
                   </select>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <!-- First column -->
+                <div class="col-md-12"><b>Dropship fee ans shiipping Details</b></div>
                 <div class="col-md-6">
-                  <label for="textField2" class="form-label">Text Field</label>
-                  <textarea class="form-control" id="textField2" rows="1" placeholder="Enter text"></textarea>
+                  <label for="Dropship Fee" class="form-label">Dropship Fee</label>
+                  <input type="text" class="form-control" id="dropship-fee">
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="dateField2" class="form-label">Date Field</label>
-                  <input type="date" class="form-control" id="dateField2">
+                  <label for="Shipping Terms - Ground" class="form-label">Shipping Terms - Ground</label>
+                  <input type="text" class="form-control" id="shipping-terms" placeholder="Shipping Terms - Ground">
                 </div>
               </div>
-            </form>
-          </div>
-        </div>
 
-        
-        <!-- Fourth form slide -->
-        <div class="carousel-item">
-          <div class="form-container">
-            <h5>Vendor Settings</h5>
-            <form>
               <div class="row mb-3">
-                <!-- First column -->
+                <div class="col-md-12"><b>Charge Details</b></div>
                 <div class="col-md-6">
-                  <label for="selectBox2" class="form-label">Select Option</label>
-                  <select class="form-select" id="selectBox2">
-                    <option selected>Select an option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
+                  <label for="textField2" class="form-label">Mode Of Payment</label>
+                  <select class="form-select" id="mode-of-payment">
+                    <option>Select Payment Mode</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
                   </select>
                 </div>
 
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="inputBox2" class="form-label">Input Field</label>
-                  <input type="text" class="form-control" id="inputBox2" placeholder="Enter value">
-                </div>
               </div>
+              <button type="submit" class="btn gradient-custom">Save</button>
 
-              <div class="row mb-3">
-                <!-- First column -->
-                <div class="col-md-6">
-                  <label for="linkField2" class="form-label">Link Field</label>
-                  <input type="url" class="form-control" id="linkField2" placeholder="Enter URL">
-                </div>
-
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="multiSelect2" class="form-label">Multiple Select</label>
-                  <select class="form-select" id="multiSelect2" multiple>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <!-- First column -->
-                <div class="col-md-6">
-                  <label for="textField2" class="form-label">Text Field</label>
-                  <textarea class="form-control" id="textField2" rows="1" placeholder="Enter text"></textarea>
-                </div>
-
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="dateField2" class="form-label">Date Field</label>
-                  <input type="date" class="form-control" id="dateField2">
-                </div>
-              </div>
             </form>
           </div>
         </div>
@@ -251,39 +366,36 @@
         <!-- Fifth form slide -->
         <div class="carousel-item">
           <div class="form-container">
-            <h5>Other Details</h5>
+            <h5>Vendor Settings</h5>
             <form>
               <div class="row mb-3">
-                <!-- First column -->
                 <div class="col-md-6">
-                  <label for="selectBox2" class="form-label">Select Option</label>
+                  <label for="selectBox2" class="form-label">Type</label>
                   <select class="form-select" id="selectBox2">
-                    <option selected>Select an option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
+                    <option value="fba" selected>FBA</option>
+                    <option value="fbm">FBM</option>
                   </select>
                 </div>
 
                 <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="inputBox2" class="form-label">Input Field</label>
-                  <input type="text" class="form-control" id="inputBox2" placeholder="Enter value">
+                  <label for="inputBox2" class="form-label">FBA SKU</label>
+                  <input type="text" class="form-control" id="fba-sku" placeholder="Ex. VVULK">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <!-- First column -->
                 <div class="col-md-6">
-                  <label for="linkField2" class="form-label">Link Field</label>
-                  <input type="url" class="form-control" id="linkField2" placeholder="Enter URL">
+                  <label for="linkField2" class="form-label">Credit Card</label>
+                  <input type="text" class="form-control" id="credit-card" placeholder="Ex. 982309872356">
                 </div>
 
                 <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="multiSelect2" class="form-label">Multiple Select</label>
-                  <select class="form-select" id="multiSelect2" multiple>
-                    <option value="1">Option 1</option>
+                  <label for="Vendor Manager" class="form-label">Vendor Manager</label>
+                  <select class="form-select" id="vendor-manager">
+                    <option>Select Vendor Manager</option>
                     <option value="2">Option 2</option>
                     <option value="3">Option 3</option>
                   </select>
@@ -291,18 +403,84 @@
               </div>
 
               <div class="row mb-3">
-                <!-- First column -->
                 <div class="col-md-6">
-                  <label for="textField2" class="form-label">Text Field</label>
-                  <textarea class="form-control" id="textField2" rows="1" placeholder="Enter text"></textarea>
+                  <label for="Prime Eligible" class="form-label">Prime Eligible</label>
+                  <select class="form-select" id="prime-eligible">
+                    <option value="1" selected>YES</option>
+                    <option value="0">No</option>
+                  </select>
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="dateField2" class="form-label">Date Field</label>
-                  <input type="date" class="form-control" id="dateField2">
+                  <label for="dateField2" class="form-label">Our Shipping Account</label>
+                  <select class="form-select" id="vendor-manager">
+                    <option value="1" selected>YES</option>
+                    <option value="0">No</option>
+                  </select>
                 </div>
               </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="Shipping Account Detail" class="form-label">Shipping Account Detail</label>
+                  <select class="form-select" id="shipping-account-detail">
+                    <option value="usps" selected>USPS</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="dateField2" class="form-label">Shipping Account Number</label>
+                  <select class="form-select" id="shipping-account-number">
+                    <option value="1" selected>YES</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+              </div>
+
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="Shipping Account Detail" class="form-label">Need to share the Label</label>
+                  <select class="form-select" id="vendor-share-label">
+                    <option value="1" selected>YES</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="dateField2" class="form-label">Modified On</label>
+                  <input type="date" class="form-control" id="modified-on">
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="Shipping Account Detail" class="form-label">Modified By</label>
+                  <select class="form-select" id="vendor-share-label">
+                    <option value="1" selected>YES</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="dateField2" class="form-label">Vendor Note</label>
+                  <input type="date" class="form-control" id="modified-on">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="moq-flag">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        MOQ Flag
+                    </label>
+                    </div>
+                </div>
+              </div>
+              <button type="submit" class="btn gradient-custom">Save</button>
+
             </form>
           </div>
         </div>
@@ -311,58 +489,21 @@
         <!-- Sixth form slide -->
         <div class="carousel-item">
           <div class="form-container">
-            <h5>Company RMA Information</h5>
+            <h5>Other Details</h5>
             <form>
               <div class="row mb-3">
-                <!-- First column -->
                 <div class="col-md-6">
-                  <label for="selectBox2" class="form-label">Select Option</label>
-                  <select class="form-select" id="selectBox2">
-                    <option selected>Select an option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
+                  <label for="Modified On" class="form-label">Record added On</label>
+                  <input type="date" class="form-control" id="record-added-on">
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="inputBox2" class="form-label">Input Field</label>
-                  <input type="text" class="form-control" id="inputBox2" placeholder="Enter value">
+                  <label for="Modified By" class="form-label">Record added By</label>
+                  <input type="type" class="form-control" id="record-added-by">
                 </div>
               </div>
+              <button type="submit" class="btn gradient-custom">Save</button>
 
-              <div class="row mb-3">
-                <!-- First column -->
-                <div class="col-md-6">
-                  <label for="linkField2" class="form-label">Link Field</label>
-                  <input type="url" class="form-control" id="linkField2" placeholder="Enter URL">
-                </div>
-
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="multiSelect2" class="form-label">Multiple Select</label>
-                  <select class="form-select" id="multiSelect2" multiple>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <!-- First column -->
-                <div class="col-md-6">
-                  <label for="textField2" class="form-label">Text Field</label>
-                  <textarea class="form-control" id="textField2" rows="1" placeholder="Enter text"></textarea>
-                </div>
-
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="dateField2" class="form-label">Date Field</label>
-                  <input type="date" class="form-control" id="dateField2">
-                </div>
-              </div>
             </form>
           </div>
         </div>
@@ -371,58 +512,243 @@
         <!-- Seventh form slide -->
         <div class="carousel-item">
           <div class="form-container">
+            <h5>Company RMA Information</h5>
+            <form>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="selectBox2" class="form-label"><b>Do you offer additonal discount against No Return Policy? (Yes/No)</b></label>
+                  <select class="form-select" id="selectBox2">
+                    <option value="1" selected>Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="selectBox2" class="form-label"><b>Contact person for RMA.</b></label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="moq-flag">
+                        <label class="form-check-label" for="rma-contact-person">
+                            If POC is same as Account Manager , then click this checkbox
+                        </label>
+                    </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <label for="Account Manager" class="form-label">Account Manager</label>
+                  <input type="text" class="form-control" id="rma-acc-mangr">
+                </div>
+
+                <div class="col-md-4">
+                  <label for="Email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="rma-email">
+                </div>
+
+                <div class="col-md-4">
+                  <label for="Contact Number" class="form-label">Contact Number</label>
+                  <input type="number" class="form-control" id="rma-contact-no">
+                </div>
+
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <label for="days of delivery" class="form-label"><b>In how many days returns would be authorized from the date of delivery?</b></label>
+                  <input type="text" class="form-control" id="days-of-delivery" placeholder="Ex. 2"></textarea>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <label for="dateField2" class="form-label"><b>Please provide us with the return address where customer should send defective/damaged items?</b></label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="return-add-check">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        If return address is same as company address then click this checkbox.
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+            <div class="d-flex mb-3">
+                <div class="m-2">
+                    <label for="Street" class="form-label">Street</label>
+                    <input type="text" class="form-control" id="street">
+                </div>
+                <div class="m-2">
+                    <label for="Email" class="form-label">City</label>
+                    <input type="email" class="form-control" id="city">
+                </div>
+                <div class="m-2">
+                    <label for="Contact Number" class="form-label">Contry</label>
+                    <select class="form-select" id="selectBox2">
+                        <option value="1">United State</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="m-2">
+                    <label for="Email" class="form-label">State</label>
+                    <select class="form-select" id="selectBox2">
+                        <option value="1">smndns</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="m-2">
+                    <label for="Zipcode" class="form-label">Zipcode</label>
+                    <input type="number" class="form-control" id="Zipcode">
+                </div>
+            </div>
+
+              
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="days of delivery" class="form-label"><b>In how many days returns would be authorized from the date of delivery?</b></label>
+                    <input type="text" class="form-control" id="days-of-delivery" placeholder="Ex. 2"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="dateField2" class="form-label"><b>Please advice the restocking fees in case of Buyer's Remourse</b></label>
+                <div class="col-md-6">
+                    <select class="form-select" id="selectBox2">
+                        <option value="1" selected>%</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="days-of-delivery" placeholder="10"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                <label for="comments" class="form-label"><b>Comments</b></label>
+                <textarea class="form-control" placeholder="Leave a comment here" id="comment"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <label for="Modified On" class="form-label"><b>Modified On</b></label>
+                    <input type="date" class="form-control" id="modified-on"/>
+                </div>
+                <div class="col-md-4">
+                    <label for="Modified By" class="form-label"><b>Modified By</b></label>
+                    <input type="text" class="form-control" id="modified-by">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="formFile" class="form-label"><b>Processed file</b></label>
+                    <input class="form-control" type="file" id="formFile">
+                    <label for="formFile" class="form-label m-1"><b>Processed file list:</b></label>
+                </div>    
+            </div>
+            <button type="submit" class="btn gradient-custom">Save</button>
+
+            </form>
+          </div>
+        </div>
+
+        
+        <!-- Eighth form slide -->
+        <div class="carousel-item">
+          <div class="form-container">
             <h5>Finanace/Payment Information</h5>
             <form>
               <div class="row mb-3">
-                <!-- First column -->
                 <div class="col-md-6">
-                  <label for="selectBox2" class="form-label">Select Option</label>
-                  <select class="form-select" id="selectBox2">
-                    <option selected>Select an option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
+                  <label for="Input label" class="form-label"><b>Whom should we contact for finanace statements or invoices?</b></label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="moq-flag">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            If POC is same as Account Manager , then click this checkbox
+                        </label>
+                    </div>
+                </div>
+              </div>
+
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="Account Manager" class="form-label">Account Manager</label>
+                        <input type="text" class="form-control" id="finance-acc-mag">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="finance-email">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Contact Number" class="form-label">Contact Number</label>
+                        <input type="number" class="form-control" id="finance-con-no">
+                    </div>
+                </div>      
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="Mode of Payment" class="form-label">Mode of Payment</label>
+                        <select class="form-select" id="mode-of-payment">
+                            <option value="1" selected>Select One</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Email" class="form-label">Payment Term</label>
+                        <select class="form-select" id="payment-term">
+                            <option value="1" selected>Select Payment Term</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Contact Number" class="form-label">Select any</label>
+                        <select class="form-select" id="select-one">
+                            <option value="1" selected>Select One</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="inputBox2" class="form-label">Input Field</label>
-                  <input type="text" class="form-control" id="inputBox2" placeholder="Enter value">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                    <label for="linkField2" class="form-label"><b>Charging Company Name (How charge will reflect on our card system)</b></label>
+                    <input type="text" class="form-control" id="linkField2">
+                    </div>
+
+                    <div class="col-md-6">
+                    <label for="multiSelect2" class="form-label"><b>Do you charge Dropship fee?</b></label>
+                    <select class="form-select" id="do-u-charge-drps-fee">
+                        <option value="1">YES</option>
+                        <option value="0">NO</option>
+                    </select>
+                    </div>
+                </div>
+
+              <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="multiSelect2" class="form-label"><b>Please select if there are any extra charges applicable from your end apart from dropship</b></label>
+                  <select class="form-select" id="extra-charge-drps-fee">
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                  </select>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <!-- First column -->
                 <div class="col-md-6">
-                  <label for="linkField2" class="form-label">Link Field</label>
-                  <input type="url" class="form-control" id="linkField2" placeholder="Enter URL">
+                  <label for="selectBox2" class="form-label">Modified On</label>
+                  <input type="date" class="form-control" id="finanace-modified-on">
                 </div>
 
-                <!-- Second column -->
                 <div class="col-md-6">
-                  <label for="multiSelect2" class="form-label">Multiple Select</label>
-                  <select class="form-select" id="multiSelect2" multiple>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                </div>
+                  <label for="selectBox2" class="form-label">Modified By</label>
+                  <input type="text" class="form-control" id="finanace-modified-by">
+                </div>    
               </div>
-
-              <div class="row mb-3">
-                <!-- First column -->
-                <div class="col-md-6">
-                  <label for="textField2" class="form-label">Text Field</label>
-                  <textarea class="form-control" id="textField2" rows="1" placeholder="Enter text"></textarea>
-                </div>
-
-                <!-- Second column -->
-                <div class="col-md-6">
-                  <label for="dateField2" class="form-label">Date Field</label>
-                  <input type="date" class="form-control" id="dateField2">
-                </div>
-              </div>
+              <button type="submit" class="btn gradient-custom">Save</button>
+            
             </form>
           </div>
         </div>

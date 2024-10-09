@@ -37,7 +37,7 @@
 
     <?= $this->renderSection("content"); ?>
 
-    <footer class="bg-primary px-2 py-2 m-4 gradient-custom footer-section">
+    <footer class="bg-primary py-2 gradient-custom footer-section">
     <div>
         <p class="text-center">&copy; 2024 All copy rights reserved</p>
     </div>

@@ -1,12 +1,9 @@
 .gradient-custom {
-    /* fallback for old browsers */
-    background: #ccddff;
+    background: #0d6efd;
+
+    background: -webkit-linear-gradient(to bottom right, #6a8fd8, #618adb);
     
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to bottom right, #ccddff, #ccddff);
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to bottom right, #ccddff, #ccddff)
+    background: linear-gradient(to bottom right, #6a8fd8, #618adb)
     }
 
     .card-registration .select-input.form-control[readonly]:not([disabled]) {
@@ -19,9 +16,8 @@
     top: 13px;
     }
  
-    /* Custom button style */
     .custom-control {
-      background-color: #007bff;
+      background-color: #0d6efd;
       color: white;
       padding: 6px 12px;
       border: none;
@@ -41,12 +37,11 @@
     }
 
     .carousel-inner {
-      border: 1px solid #ddd; /* Border around slider */
-      border-radius: 10px; /* Rounded corners */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-      padding: 20px; /* Padding around the content */
-      background-color: #f9f9f9; /* Light background */
-      margin: 20px 0; /* Add margin to push the slider away from other content */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      padding: 20px;
+      background-color: #f9f9f9;
+      margin: 20px 0;
     }
 
     .form-container {
@@ -54,7 +49,7 @@
     }
 
     .form-row .col-md-6 {
-      padding-right: 10px; /* Add space between columns */
+      padding-right: 10px; 
     }
 
     /* Make form fields full-width on smaller screens */
