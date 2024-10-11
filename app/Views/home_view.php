@@ -3,7 +3,7 @@
 <?= $this->section("content"); ?>
 
 <section>
-  <?= $this->include("layout/slider"); ?>
+  <?= $this->include("/slider"); ?>
 </section>
 
 <?= $this->endSection(); ?>

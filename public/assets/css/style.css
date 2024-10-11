@@ -1,9 +1,8 @@
 .gradient-custom {
-    background: #0d6efd;
-
-    background: -webkit-linear-gradient(to bottom right, #6a8fd8, #618adb);
-    
-    background: linear-gradient(to bottom right, #6a8fd8, #618adb)
+    background: #98b6e2;
+    background: -webkit-linear-gradient(to bottom right, #98b6e2, #a9b1c1);
+    background: linear-gradient(to bottom right, #98b6e2, #a2aec6);
+    color: #ffff;
     }
 
     .card-registration .select-input.form-control[readonly]:not([disabled]) {
