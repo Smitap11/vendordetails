@@ -12,7 +12,7 @@ class ContactInformationModel extends Model
     protected $allowedFields = [
         'contact_email', 'additional_email', 'contact_number', 'alt_contact_number', 
         'contact_zipcode', 'contact_city', 'contact_street', 'contact_country', 'inventory_email', 
-        'inventory_contact_no', 'inventory_state', 'modified_on', 'modified_by',
+        'inventory_contact_no', 'inventory_state', 'inventory_modified_on', 'inventory_modified_by',
         'created_at', 'updated_at'
     ];
 

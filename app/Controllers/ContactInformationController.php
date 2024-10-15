@@ -2,71 +2,88 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
 use App\Models\ContactInformationModel;
+use CodeIgniter\Controller;
 
 class ContactInformationController extends Controller
 {
     public function saveContactInfoFormData()
     {
-        // Load the validation library
+        // Load the request and validation service
+        $request = \Config\Services::request();
         $validation = \Config\Services::validation();
 
-        // Set validation rules
-        $validation->setRules([
-            'contact-email' => 'required|valid-email',
-            'additional-email' => 'required|valid-email',
-            'contact-number' => 'required|numeric|min_length[10]|max_length[15]',
-            'alt_contact_number' => 'required|numeric|min_length[10]|max_length[15]',
-            'contact-zipcode' => 'required|numeric|exact_length[5]',
-            'inventory-email' => 'required|valid_email',
-            'inventory-contact-no' => 'required|numeric|min_length[10]|max_length[15]',
-        ]);
-
-        // Check if form validation passed
-        if (!$this->validate($validation->getRules())) {
-            // Redirect back to the form page with errors
-            return redirect()->back()->withInput()->with('validation', $this->validator);
-        }
-
-            // Validate CSRF
-        if (!$this->request->is('post')) {
-            return $this->response->setStatusCode(403, 'Forbidden');
-        }
-
-        // Get data from the request
-        $formData = $this->request->getPost();
-
-
-        // Collect form data
-        $formData = [
-            'contact-email' => $this->request->getPost('contact_email'),
-            'additional-email' => $this->request->getPost('additional_email'),
-            'contact-number' => $this->request->getPost('contact_number'),
-            'alt-contact-number' => $this->request->getPost('alt_contact_number'),
-            'contact-zipcode' => $this->request->getPost('zipcode'),
-            'contact-city' => $this->request->getPost('business_city'),
-            'contact-street' => $this->request->getPost('business_street'),
-            'contact-country' => $this->request->getPost('business_country'),
-            'inventory-email' => $this->request->getPost('inventory_email'),
-            'inventory-contact-no' => $this->request->getPost('inventory_contact_no'),
-            'inventory-state' => $this->request->getPost('inventory_state'),
-            'modified-on' => $this->request->getPost('modified_on'),
-            'modified-by' => $this->request->getPost('modified_by'),
+        // Define validation rules
+        $validationRules = [
+            'contact-email'          => 'required',
+            'additional-email'       => 'required',
+            'contact-number'         => 'required|numeric',
+            'alt-contact-number'     => 'permit_empty|numeric',
+            'contact-zipcode'        => 'required|numeric|min_length[5]',
+            'contact-city'           => 'required',
+            'contact-street'         => 'required',
+            'contact-country'        => 'required',
+            'inventory-email'        => 'permit_empty|valid_email',
+            'inventory-contact-no'   => 'permit_empty|numeric',
+            'inventory-state'        => 'permit_empty',
+            'inventory-modified-on'  => 'permit_empty|valid_date[Y-m-d]',
+            'inventory-modified-by'  => 'required'
         ];
 
-        
-    echo '<pre>';
-    print_r($formData);
-    echo '</pre>';
-    exit(); // Prevent further processing
+        // Set validation rules
+        $validation->setRules($validationRules);
 
-        // Save the form data in the database
-        $model = new ContactInformationModel();
-        if ($model->save($formData)) {
-            return redirect()->back()->with('message', 'Form submitted successfully!');
-        } else {
-            return redirect()->back()->with('message', 'Error saving form data.');
+        // Validate input data
+        if (!$this->validate($validationRules)) {
+            // Validation failed, return errors
+            return $this->response->setJSON([
+                'status' => 'error',
+                'errors' => $validation->getErrors()
+            ]);
         }
+
+        
+        // Save data to the database
+        $contactModel = new ContactInformationModel();
+
+        $modifiedOn = $request->getPost('inventory-modified-on');
+        $formattedDate = date('Y-m-d', strtotime($modifiedOn));  // Ensures proper date format    
+
+        // Gather data from the form
+        $contactData = [
+            'contact_email'           => $request->getPost('contact-email'),
+            'additional_email'        => $request->getPost('additional-email'),
+            'contact_number'          => $request->getPost('contact-number'),
+            'alt_contact_number'      => $request->getPost('alt-contact-number'),
+            'contact_zipcode'         => $request->getPost('contact-zipcode'),
+            'contact_city'            => $request->getPost('contact-city'),
+            'contact_street'          => $request->getPost('contact-street'),
+            'contact_country'         => $request->getPost('contact-country'),
+            'inventory_email'         => $request->getPost('inventory-email'),
+            'inventory_contact_no'    => $request->getPost('inventory-contact-no'),
+            'inventory_state'         => $request->getPost('inventory-state'),
+            'inventory_modified_on'   => $formattedDate,
+            'inventory_modified_by'   => $request->getPost('inventory-modified-by')
+        ];
+
+
+        // Insert data and log any errors
+        if ($contactModel->insert($contactData)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Contact information saved successfully'
+            ]);
+        } else {
+            // Log the error and query
+            log_message('error', 'Insert failed: ' . $contactModel->errors());
+            log_message('error', 'Last Query: ' . $contactModel->getLastQuery());
+
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to save Contact information'
+            ]);
+        }
+
+
     }
 }

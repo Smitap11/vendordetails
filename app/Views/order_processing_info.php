@@ -1,7 +1,8 @@
-<div class="carousel-item active">
+
+<div class="carousel-item">
       <div class="form-container">
-        <h5>Business Details</h5>
-        <form id="businessDetailsForm" method="post">
+        <h5>Order Processing Information</h5>
+        <form action="<?= site_url('form/saveOrderProcInfo  Data') ?>" method="post">
         <?= csrf_field() ?>
 
           <div class="row mb-3">
@@ -21,37 +22,45 @@
             </div>
 
             <div class="col-md-6">
-              <label for="inputBox1" class="form-label">Rebate</label>
-              <input type="text" class="form-control" id="rebate" name="rebate" placeholder="0">
+              <label for="inputBox1" class="form-label">website</label>
+              <input type="text" class="form-control" id="ship-time" name="ship-time" placeholder="2-3 days">
             </div>
           </div>
 
           <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="fbm-company-name" class="form-label">FBM Company Name <span style="color: red;">*</span></label>
-              <input type="text" class="form-control" id="fbm-company-name" name="fbm-company-name" required>
+            <div class="col-md-4">
+            <label for="inputBox1" class="form-label"><b>Kindly specify the time to ship the order.</b></label>
+              <input type="text" class="form-control" id="ship-time" name="ship-time">
             </div>
 
-            <div class="col-md-6">
-              <label for="linkField1" class="form-label">Website</label>
-              <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">http://</span>
-                <input type="text" class="form-control" name="business-website" placeholder="Ex. google.com" aria-label="website" aria-describedby="basic-addon1">  
-              </div>
+            <div class="col-md-4">
+              <label for="linkField1" class="form-label">Shipping Contact Email</label>
+              <input type="text" class="form-control" id="ship-email" name="ship-email">
+            </div>
+
+            <div class="col-md-4">
+              <label for="linkField1" class="form-label">Inventory Handling Time</label>
+              <input type="text" class="form-control" id="inventory-time" name="inventory-time">
             </div>
 
           </div>
 
-          <!-- <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="fba-company-name" class="form-label">FBA Company Name <span style="color: red;">*</span></label>
-              <input type="text" class="form-control" id="fba-company-name" name="fba-company-name" aria-label="FBA Company Name"  placeholder="Ex. " aria-describedby="basic-addon1" required>  
+          <div class="row mb-3">
+            <div class="col-md-4">
+            <label for="inputBox1" class="form-label"><b>Kindly provide us with the address from where the orders would be shipped.</b></label>
+              <input type="text" class="form-control" id="ship-time" name="ship-time" placeholder="2-3 days">
             </div>
 
-            <div class="col-md-6">
-              <label for="textField1" class="form-label">Not visible</label>
-              <input type="text" class="form-control" id="fba-company-name" name="not-visible" aria-label="FBA Company Name"  placeholder="Ex. " aria-describedby="basic-addon1">  
-            </div>  
+            <div class="col-md-4">
+              <label for="linkField1" class="form-label">Shipping Contact Email</label>
+              <input type="text" class="form-control" id="ship-email" name="ship-email">
+            </div>
+
+            <div class="col-md-4">
+              <label for="linkField1" class="form-label">Inventory Handling Time</label>
+              <input type="text" class="form-control" id="inventory-time" name="inventory-time">
+            </div>
+
           </div>
 
           <div class="row mb-3">
@@ -142,19 +151,10 @@
               <label for="textField1" class="form-label">Vendor Description</label>
               <input type="text" class="form-control" id="vendor-description" name="vendor-description" aria-label="Vendor Description"  placeholder="Describe here.." aria-describedby="basic-addon1">  
             </div>
-          </div> -->
+          </div>
 
           <button type="submit" class="btn gradient-custom">Save</button>
 
         </form>
       </div>
     </div>
-
-
-  <script type="text/javascript">
-    var csrfName = '<?= csrf_token() ?>';
-    var csrfHash = '<?= csrf_hash() ?>'; 
-
-    var saveBusinessDetailsUrl = "<?= base_url('BusinessDetailsController/saveBusinessFormData') ?>";
-    console.log('saveBusinessDetailsUrl URL: ' + saveBusinessDetailsUrl);
-  </script>    
