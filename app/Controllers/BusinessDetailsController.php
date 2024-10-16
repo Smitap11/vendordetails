@@ -10,67 +10,84 @@ class BusinessDetailsController extends Controller
     public function saveBusinessFormData()
     {
         if ($this->request->isAJAX()) {
-
             // Validate form data
             $validation = \Config\Services::validation();
-            $validation->setRules([
-                'final-status' => 'required',
-                'rebate' => 'required|numeric',
-                'fbm-company-name' => 'required|min_length[3]',
-                'business-website' => 'required|valid_url',
-                // 'fba-company-name' => 'required|min_length[3]',
-                // 'account-manager' => 'required',
-                // 'business-account' => 'required|numeric',
-                // 'modified-on' => 'required|valid_date',
-                // 'modified-by' => 'required',
-                // 'vendor-type' => 'required',
-                // 'vendor-behaviour' => 'required',
-                // 'business-brand' => 'required|min_length[2]',
-                // 'business-unit' => 'required',
-                // 'vendor-description' => 'required|min_length[5]',
-            ]);
+            // $validation->setRules([
+            //     'final-status' => 'required',
+            //     'rebate' => 'required|numeric',
+            //     'fbm-company-name' => 'required',
+            //     'business-website' => 'required',
+            //     'fba-company-name' => 'required',
+            //     'account-manager' => 'required'
+            // ]);
 
-            if (!$validation->withRequest($this->request)->run()) {
-                // If validation fails, return JSON error response
-                return $this->response->setJSON([
-                    'success' => false,
-                    'error' => $validation->getErrors()
-                ]);
-            }
-
-            // Form inputs
-            $formData = [
-                'final_status' => $this->request->getPost('final-status'),
-                'rebate' => $this->request->getPost('rebate'),
-                'fbm_company_name' => $this->request->getPost('fbm-company-name'),
-                'business_website' => $this->request->getPost('business-website'),
-                // 'fba_company_name' => $this->request->getPost('fba-company-name'),
-                // 'account_manager' => $this->request->getPost('account-manager'),
-                // 'business_account' => $this->request->getPost('business-account'),
-                // 'modified_on' => $this->request->getPost('modified-on'),
-                // 'modified_by' => $this->request->getPost('modified-by'),
-                // 'vendor_type' => $this->request->getPost('vendor-type'),
-                // 'vendor_behaviour' => $this->request->getPost('vendor-behaviour'),
-                // 'business_brand' => $this->request->getPost('business-brand'),
-                // 'business_unit' => $this->request->getPost('business-unit'),
-                // 'vendor_description' => $this->request->getPost('vendor-description'),
-            ];
+            // if (!$validation->withRequest($this->request)->run()) {
+            //     // If validation fails, return JSON error response
+            //     return $this->response->setJSON([
+            //         'success' => false,
+            //         'error' => $validation->getErrors()
+            //     ]);
+            // }
             
+            $concernArray = [];
+
+            $jsonData = $this->request->getJSON();
+            if($jsonData) {
+
+                $modifiedOn = $jsonData->modified_on;
+                $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
+
+                $vendorConcern = $jsonData->vendor_heighlighted_concern;
+
+                if (is_array($vendorConcern)) {
+                    // The $vendorConcern is already an array, so no need for explode()
+                    $concernArray = $vendorConcern;
+                }
+                        
+                $formData = [
+                    'final_status' => $jsonData->final_status,
+                    'rebate' => $jsonData->rebate,
+                    'fbm_company_name'  => $jsonData->fbm_company_name,
+                    'business_website'  => $jsonData->business_website,
+                    'fba_company_name'  => $jsonData->fba_company_name,
+                    'account_manager'   => $jsonData->account_manager,
+                    'business_account' => $jsonData->business_account,
+                    'modified_on' => $formattedDate,
+                    'modified-by' => $jsonData->modified_by,
+                    'vendor-type' => $jsonData->vendor_type,
+                    'vendor-type' => $jsonData->vendor_type,
+                    'vendor-behaviour' => $jsonData->vendor_behaviour,
+                    'business-brand' => $jsonData->business_brand,
+                    'business-unit' => $jsonData->business_unit,
+                    'vendor_description' => $jsonData->vendor_description,
+                    'vendor_highlighted_concern' => json_encode($vendorConcern)
+                ];
+            
+            }        
 
             echo '<pre>';
             var_dump($formData);
             echo '</pre>';
-            exit;
+            // exit;
 
             // Proceed to insert the data if validation passes
             $businessModel = new BusinessDetailsModel();
 
+            var_dump($businessModel); exit;
+
             // Insert data and log any errors
             if ($businessModel->insert($formData)) {
+
+
+                echo 'query = ' . $businessModel->getLastQuery();
+                $lastQuery = $businessModel->db->getLastQuery();
+                log_message('info', 'Last Query: ' . $lastQuery);
+
                 return $this->response->setJSON([
                     'status' => 'success',
                     'message' => 'Business details saved successfully'
                 ]);
+                
             } else {
                 // Log the error and query
                 log_message('error', 'Insert failed: ' . $businessModel->errors());

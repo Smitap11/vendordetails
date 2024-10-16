@@ -1,82 +1,87 @@
 $(document).ready(function() {
 
-    const multiSelectInput = document.getElementById('multiSelectInput');
-    const inputField = document.getElementById('vendor-heighlighted-concern');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const dropdownItems = document.querySelectorAll('.dropdown-item');
-    const selectedValues = [];
+  const multiSelectInput = document.getElementById('multiSelectInput');
+  const inputField = document.getElementById('vendorHeighConcern');
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  const dropdownItems = document.querySelectorAll('.dropdown-item');
+  const selectedValues = [];
   
-    // Toggle dropdown visibility
-    multiSelectInput.addEventListener('click', function(event) {
-      dropdownMenu.classList.toggle('show');
+  // Toggle dropdown visibility
+  multiSelectInput.addEventListener('click', function(event) {
+    dropdownMenu.classList.toggle('show');
+  });
+  
+  // Handle item selection
+  dropdownItems.forEach(item => {
+    item.addEventListener('click', function(event) {
+      const value = this.getAttribute('data-value');
+  
+      // Check if the value is already selected
+      if (!selectedValues.includes(value)) {
+        selectedValues.push(value); // Add value to selected list
+        addTag(value); // Add tag for selected option
+        this.classList.add('disabled'); // Disable the selected option
+      }
+    });
+  });
+  
+  // Add selected option as tag in the input box
+  function addTag(value) {
+    const tag = document.createElement('div');
+    tag.classList.add('multi-select-tag');
+    tag.textContent = value;
+  
+    // Remove button for tag
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'x';
+    removeButton.addEventListener('click', function(event) {
+      event.stopPropagation();
+      removeTag(value); // Remove tag and deselect value
     });
   
-    // Handle item selection
-    dropdownItems.forEach(item => {
-      item.addEventListener('click', function(event) {
-        const value = this.getAttribute('data-value');
+    tag.appendChild(removeButton);
+    multiSelectInput.insertBefore(tag, inputField); // Insert tag before the input box
   
-        // Check if the value is already selected
-        if (!selectedValues.includes(value)) {
-          selectedValues.push(value); // Add value to selected list
-          addTag(value); // Add tag for selected option
-          this.classList.add('disabled'); // Disable the selected option
-        }
-      });
-    });
+    updateInputField(); // Adjust input placeholder based on selection
   
-    // Add selected option as tag in the input box
-    function addTag(value) {
-      const tag = document.createElement('div');
-      tag.classList.add('multi-select-tag');
-      tag.textContent = value;
+    // Scroll to the end of the multi-select input to show the new tag
+    multiSelectInput.scrollLeft = multiSelectInput.scrollWidth;
+  }
   
-      // Remove button for tag
-      const removeButton = document.createElement('button');
-      removeButton.textContent = 'x';
-      removeButton.addEventListener('click', function(event) {
-        event.stopPropagation();
-        removeTag(value); // Remove tag and deselect value
-      });
-  
-      tag.appendChild(removeButton);
-      multiSelectInput.insertBefore(tag, inputField); // Insert tag before the input box
-  
-      updateInputField(); // Adjust input placeholder based on selection
-  
-      // Scroll to the end of the multi-select input to show the new tag
-      multiSelectInput.scrollLeft = multiSelectInput.scrollWidth;
+  // Remove tag when 'x' is clicked
+  function removeTag(value) {
+    selectedValues.splice(selectedValues.indexOf(value), 1); // Remove value from selected list
+    const tagToRemove = Array.from(multiSelectInput.querySelectorAll('.multi-select-tag')).find(tag => tag.textContent.includes(value));
+    if (tagToRemove) {
+      tagToRemove.remove();
     }
   
-    // Remove tag when 'x' is clicked
-    function removeTag(value) {
-      selectedValues.splice(selectedValues.indexOf(value), 1); // Remove value from selected list
-      const tagToRemove = Array.from(multiSelectInput.querySelectorAll('.multi-select-tag')).find(tag => tag.textContent.includes(value));
-      if (tagToRemove) {
-        tagToRemove.remove();
-      }
-  
-      // Find the dropdown item and enable it again
-      const itemToDeselect = Array.from(dropdownItems).find(item => item.getAttribute('data-value') === value);
-      if (itemToDeselect) {
-        itemToDeselect.classList.remove('disabled'); // Enable the deselected option
-      }
-  
-      updateInputField(); // Adjust input placeholder based on selection
+    // Find the dropdown item and enable it again
+    const itemToDeselect = Array.from(dropdownItems).find(item => item.getAttribute('data-value') === value);
+    if (itemToDeselect) {
+      itemToDeselect.classList.remove('disabled'); // Enable the deselected option
     }
   
-    // Update input placeholder text
-    function updateInputField() {
-      inputField.placeholder = selectedValues.length > 0 ? '' : 'Select Options';
-    }
+    updateInputField(); // Adjust input placeholder based on selection
+  }
   
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(event) {
-      if (!multiSelectInput.contains(event.target)) {
-        dropdownMenu.classList.remove('show');
-      }
-
-    });
+  // Update input placeholder text
+  function updateInputField() {
+    inputField.placeholder = selectedValues.length > 0 ? '' : 'Select Options';
+  }
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!multiSelectInput.contains(event.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+  
+  // Function to get the selected options
+  function getSelectedOptions() {
+    return selectedValues;
+  }
+  
 
 
     // Business Details Form
@@ -85,36 +90,67 @@ $(document).ready(function() {
     $('#businessDetailsForm').on('submit', function(e) {
         e.preventDefault();
 
-        console.log('inside ');
+        // console.log('inside ');
+
+        // // Serialize the form data
+        // // var formData = $(this).serialize();
+
+        // const selectedOptions = getSelectedOptions();
+        // console.log("Selected options: ", selectedOptions);
 
 
-        // Serialize the form data
-        var formData = $(this).serialize();
+        let vendorHighlightedConcern = getSelectedOptions();
+        // console.log('vendorHighlightedConcern = ', vendorHighlightedConcern);
+  
+        // // Append the selected values to the form data
+        let formData = new FormData(this);
+        // formData.append('vendor-heighlighted-concern', vendorHighlightedConcern);
 
-        console.log("saveBusinessDetailsUrl = ", saveBusinessDetailsUrl);
+        // console.log('json data = ', JSON.stringify(formData));
+
+        // Convert FormData to a plain object
+        let formDataObj = {};
+        formData.forEach((value, key) => {
+          formDataObj[key] = value;
+        });
+
+        // Append 'vendor-heighlighted-concern' to the plain object
+        formDataObj['vendor-heighlighted-concern'] = vendorHighlightedConcern;
+
+        let modifiedFormDataObj = {};
+        for (let key in formDataObj) {
+          let newKey = key.replace(/-/g, '_');  // Replace hyphens with underscores
+          modifiedFormDataObj[newKey] = formDataObj[key];
+        }
+
+        console.log('json data = ', JSON.stringify(modifiedFormDataObj));
+
+
 
         // Send the AJAX request
-        // $.ajax({
-        //     url: saveBusinessDetailsUrl,  // URL for form submission
-        //     type: 'POST',
-        //     data: formData,
-        //     success: function(response) {
-        //         if (response.status === 'error') {
-        //             // Display validation errors
-        //             $.each(response.errors, function(field, error) {
-        //                 $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
-        //             });
-        //         } else if (response.status === 'success') {
-        //             // Handle successful submission (if needed)
-        //             var successToast = new bootstrap.Toast($('#successToast'));
-        //             successToast.show();
-        //         }
-        //     },
-        //     error: function(xhr, status, error) {
-        //         console.log(xhr.responseText);
-        //     }
+        $.ajax({
+            url: saveBusinessDetailsUrl,  // URL for form submission
+            type: 'POST',
+            data: JSON.stringify(modifiedFormDataObj),  // Sending as JSON
+            contentType: 'application/json; charset=utf-8',  // Specify the content type
+            dataType: 'json',  // Expect JSON response from server
+            success: function(response) { 
+                if (response.status === 'error') {
+                    // Display validation errors
+                    $.each(response.errors, function(field, error) {
+                        $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+                    });
+                } else if (response.status === 'success') {
+                    // Handle successful submission (if needed)
+                    var successToast = new bootstrap.Toast($('#successToast'));
+                    successToast.show();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
 
-        // });
+        });
     });
 
 

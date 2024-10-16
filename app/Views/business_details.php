@@ -42,7 +42,7 @@
 
           </div>
 
-          <!-- <div class="row mb-3">
+          <div class="row mb-3">
             <div class="col-md-6">
               <label for="fba-company-name" class="form-label">FBA Company Name <span style="color: red;">*</span></label>
               <input type="text" class="form-control" id="fba-company-name" name="fba-company-name" aria-label="FBA Company Name"  placeholder="Ex. " aria-describedby="basic-addon1" required>  
@@ -82,8 +82,8 @@
               <label for="selectBox1" class="form-label">Vendor Type</label>
               <select class="form-select vendor-type" id="vendor-type" name="vendor-type" aria-label="Default select example">
                 <option value="Manufacturer/Producer" selected>Manufacturer/Producer</option>
-                <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
-                <option value="dead-or-no-response">Dead/No Response</option>
+                <option value="Converted/Pre Qualified">Converted/Pre Qualified</option>
+                <option value="Dead/No Response">Dead/No Response</option>
               </select>
             </div>
 
@@ -100,9 +100,9 @@
             <div class="col-md-6">
               <label for="select" class="form-label">Vendor Highlighted Concern</label>
               
-              <div class="multi-select-container">
+              <div class="multi-select-container vendor-heigh-con">
                 <div class="multi-select-input form-control" id="multiSelectInput">
-                  <input type="text" id="vendor-heighlighted-concern" placeholder="Select Options" readonly>
+                  <input type="text" id="vendorHeighConcern" placeholder="Select Options" readonly>
                 </div>
                 
                 <ul class="dropdown-menu" id="dropdownMenu">
@@ -142,7 +142,7 @@
               <label for="textField1" class="form-label">Vendor Description</label>
               <input type="text" class="form-control" id="vendor-description" name="vendor-description" aria-label="Vendor Description"  placeholder="Describe here.." aria-describedby="basic-addon1">  
             </div>
-          </div> -->
+          </div>
 
           <button type="submit" class="btn gradient-custom">Save</button>
 

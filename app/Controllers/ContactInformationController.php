@@ -47,7 +47,7 @@ class ContactInformationController extends Controller
         $contactModel = new ContactInformationModel();
 
         $modifiedOn = $request->getPost('inventory-modified-on');
-        $formattedDate = date('Y-m-d', strtotime($modifiedOn));  // Ensures proper date format    
+        $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
 
         // Gather data from the form
         $contactData = [

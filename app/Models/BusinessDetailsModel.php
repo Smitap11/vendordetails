@@ -24,7 +24,9 @@ class BusinessDetailsModel extends Model
         'vendor_heighlighted_concern',
         'business_brand',
         'business_unit',
-        'vendor_description','created_at', 'updated_at'
+        'vendor_description',
+        'created_at', 
+        'updated_at'
     ];
 
     protected $useTimestamps = true; // Enable automatic timestamping
