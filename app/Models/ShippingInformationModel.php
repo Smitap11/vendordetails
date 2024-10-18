@@ -5,21 +5,27 @@ use CodeIgniter\Model;
 
 class ShippingInformationModel extends Model
 {
-    protected $table = 'shipping_information';
-    protected $primaryKey = 'shipping_information_id';
+    protected $table = 'shippinginformation';
+    protected $primaryKey = 'shippinginfoid';
     
     // Define the fields to be inserted in the database
     protected $allowedFields = [
-        'shipping_account', 
-        'ltl_freight', 
-        'share_label', 
-        'rate_type', 
-        'international_shipping',
-        'push_company_name', 
-        'comments', 
-        'modified_on', 
-        'modified_by', 
-        'shipment_updating_type', 
-        'shipping_tracking_source'
-    ];
+        'shippingAccount', 
+        'ltlFreight', 
+        'shareLabel', 
+        'rateType', 
+        'internationalShipping',
+        'pushCompanyName', 
+        'shippingInfoComments', 
+        'shippingModifiedOn', 
+        'shippingModifiedBy', 
+        'shipmentUpdatingType', 
+        'shippingTrackingSource'
+    ];    
+    
+    protected $useTimestamps = true; // Enable automatic timestamping
+    protected $createdField  = 'createdAt';
+    protected $updatedField  = 'updatedAt';
+
+
 }

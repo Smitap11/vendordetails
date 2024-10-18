@@ -112,8 +112,20 @@
         pointer-events: none;
         opacity: 0.6;
       }
-        
-  
+      
+    
+  .form-header{
+    font-size: 22px;
+    font-weight: 600; /* Semi-bold */
+    color: #333333; /* Darker text for readability on light background */
+    text-align: left; /* Left align to keep the flow with form */
+    background: linear-gradient(90deg, #c2d4ee, #eaf2fc); /* Lighter gradient colors */
+    padding: 10px 20px; /* Padding for spacing */
+    border-radius: 5px 5px 0 0; /* Rounded top corners */
+    margin-bottom: 30px; /* Remove margin to connect with form */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow for 3D effect */
+  }
+
 
     /* Make form fields full-width on smaller screens */
     @media (max-width: 768px) {

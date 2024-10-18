@@ -1,8 +1,8 @@
 
 <div class="carousel-item">
       <div class="form-container">
-        <h5>Order Processing Information</h5>
-        <form action="<?= site_url('form/saveOrderProcInfo  Data') ?>" method="post">
+        <h5 class="form-header">Order Processing Information</h5>
+        <form id="" method="post">
         <?= csrf_field() ?>
 
           <div class="row mb-3">

@@ -11,51 +11,30 @@ class ShippingInformationController extends Controller
 
         // Check if the request is AJAX
         if ($this->request->isAJAX()) {
-            // Define validation rules
-            $validationRules = [
-                'shipping-account'          => 'required',
-                'ltl-freight'               => 'required',
-                'share-label'               => 'required',
-                'rate-type'                 => 'required',
-                'international-shipping'    => 'required',
-                'push-company-name'         => 'required',
-                'shipping-info-comments'    => 'permit_empty|string|max_length[255]',
-                'shipping-modified-on'      => 'required|valid_date',
-                'shipping-modified-by'      => 'required|string|max_length[100]',
-                'shipment-updating-type'    => 'required|in_list[1,2,3]',
-                'shipping-tracking-source'  => 'required|string|max_length[100]'
-            ];
 
-            // Validate the form data
-            if (!$this->validate($validationRules)) {
-                // Get validation errors
-                $validation = \Config\Services::validation();
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Validation failed',
-                    'errors' => $validation->getErrors()
-                ]);
-            }
-
+            $modifiedOn = $this->request->getPost('shippingModifiedOn') ? $this->request->getPost('shippingModifiedOn') : date('Y-m-d');
+            $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
+            
             // Proceed to insert the data if validation passes
             $shippingModel = new ShippingInformationModel();
 
-            $data = [
-                'shipping_account'          => $this->request->getPost('shipping-account'),
-                'ltl_freight'               => $this->request->getPost('ltl-freight'),
-                'share_label'               => $this->request->getPost('share-label'),
-                'rate_type'                 => $this->request->getPost('rate-type'),
-                'international_shipping'    => $this->request->getPost('international-shipping'),
-                'push_company_name'         => $this->request->getPost('push-company-name'),
-                'comments'                  => $this->request->getPost('shipping-info-comments'),
-                'modified_on'               => $this->request->getPost('shipping-modified-on'),
-                'modified_by'               => $this->request->getPost('shipping-modified-by'),
-                'shipment_updating_type'    => $this->request->getPost('shipment-updating-type'),
-                'shipping_tracking_source'  => $this->request->getPost('shipping-tracking-source')
+            $formData = [
+                'shippingAccount'          => $this->request->getPost('shippingAccount'),
+                'ltlFreight'               => $this->request->getPost('ltlFreight'),
+                'shareLabel'               => $this->request->getPost('shareLabel'),
+                'rateType'                 => $this->request->getPost('rateType'),
+                'internationalShipping'     => $this->request->getPost('internationalShipping'),
+                'pushCompanyName'          => $this->request->getPost('pushCompanyName'),
+                'shippingInfoComments'                 => $this->request->getPost('shippingInfoComments'),
+                'shippingModifiedOn'               => $formattedDate,
+                'shippingModifiedBy'               => $this->request->getPost('shippingModifiedBy'),
+                'shipmentUpdatingType'     => $this->request->getPost('shipmentUpdatingType'),
+                'shippingTrackingSource'   => $this->request->getPost('shippingTrackingSource')
             ];
+            
 
             // Insert data and log any errors
-            if ($shippingModel->insert($data)) {
+            if ($shippingModel->insert($formData)) {
                 return $this->response->setJSON([
                     'status' => 'success',
                     'message' => 'Shipping information saved successfully'

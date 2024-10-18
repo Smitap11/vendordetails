@@ -1,0 +1,56 @@
+<?php
+namespace App\Controllers;
+
+use App\Models\VendorSettingModel;
+use CodeIgniter\Controller;
+
+class VendorSettingController extends Controller
+{
+    public function saveVendorSettingFormData()
+    {
+
+        // Check if the request is AJAX
+        if ($this->request->isAJAX()) {
+
+            $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
+            $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
+            
+            // Proceed to insert the data if validation passes
+            $vendorSettingModel = new VendorSettingModel();
+
+            $formData = [
+                'vendorSettingType'     => $this->request->getPost('vendorSettingType'),
+                'fbaSku'                => $this->request->getPost('fbaSku'),
+                'creditCard'            => $this->request->getPost('creditCard'),
+                'vendorManager'         => $this->request->getPost('vendorManager'),
+                'primeEligible'         => $this->request->getPost('primeEligible'),
+                'ourShippingAccount'    => $this->request->getPost('ourShippingAccount'),
+                'shippingAccountDetail' => $this->request->getPost('shippingAccountDetail'),
+                'shippingAccountNumber' => $this->request->getPost('shippingAccountNumber'),
+                'vendorShareLabel'      => $this->request->getPost('vendorShareLabel'),
+                'modifiedOn'            => $formattedDate,
+                'modifiedBy'            => $this->request->getPost('modifiedBy'),
+                'vendorNote'            => $this->request->getPost('vendorNote'),
+                'moqFlag'               => $this->request->getPost('moqFlag') ? 1 : 0
+            ];    
+            
+
+            // Insert data and log any errors
+            if ($vendorSettingModel->insert($formData)) {
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Vendor Setting information saved successfully'
+                ]);
+            } else {
+                // Log the error and query
+                log_message('error', 'Insert failed: ' . $vendorSettingModel->errors());
+                log_message('error', 'Last Query: ' . $vendorSettingModel->getLastQuery());
+
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Failed to save Vendor Setting information'
+                ]);
+            }
+        }
+    }
+}

@@ -85,28 +85,12 @@ $(document).ready(function() {
 
 
     // Business Details Form
-
-    
     $('#businessDetailsForm').on('submit', function(e) {
         e.preventDefault();
 
-        // console.log('inside ');
-
-        // // Serialize the form data
-        // // var formData = $(this).serialize();
-
-        // const selectedOptions = getSelectedOptions();
-        // console.log("Selected options: ", selectedOptions);
-
-
         let vendorHighlightedConcern = getSelectedOptions();
-        // console.log('vendorHighlightedConcern = ', vendorHighlightedConcern);
   
-        // // Append the selected values to the form data
         let formData = new FormData(this);
-        // formData.append('vendor-heighlighted-concern', vendorHighlightedConcern);
-
-        // console.log('json data = ', JSON.stringify(formData));
 
         // Convert FormData to a plain object
         let formDataObj = {};
@@ -114,24 +98,14 @@ $(document).ready(function() {
           formDataObj[key] = value;
         });
 
-        // Append 'vendor-heighlighted-concern' to the plain object
-        formDataObj['vendor-heighlighted-concern'] = vendorHighlightedConcern;
-
-        let modifiedFormDataObj = {};
-        for (let key in formDataObj) {
-          let newKey = key.replace(/-/g, '_');  // Replace hyphens with underscores
-          modifiedFormDataObj[newKey] = formDataObj[key];
-        }
-
-        console.log('json data = ', JSON.stringify(modifiedFormDataObj));
-
-
+        // Append 'vendorHeighlightedConcern' to the plain object
+        formDataObj['vendorHeighlightedConcern'] = vendorHighlightedConcern;
 
         // Send the AJAX request
         $.ajax({
             url: saveBusinessDetailsUrl,  // URL for form submission
             type: 'POST',
-            data: JSON.stringify(modifiedFormDataObj),  // Sending as JSON
+            data: JSON.stringify(formDataObj),  // Sending as JSON
             contentType: 'application/json; charset=utf-8',  // Specify the content type
             dataType: 'json',  // Expect JSON response from server
             success: function(response) { 
@@ -152,8 +126,6 @@ $(document).ready(function() {
 
         });
     });
-
-
 
 
     //Contact Information form
@@ -212,6 +184,153 @@ $(document).ready(function() {
 
         });
     });
+
+    
+  //Vendor Finanace Details Form
+  $('#vendorFinanceForm').submit(function(e) {
+    e.preventDefault(); 
+
+    // Capture form data
+    var formData = $(this).serialize();
+
+    // Send data using AJAX
+    $.ajax({
+      url: saveVendorFinanceUrl,
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+          if (response.status === 'error') {
+              // Display validation errors
+              $.each(response.errors, function(field, error) {
+                  $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+              });
+          } else if (response.status === 'success') {
+              // Handle successful submission (if needed)
+              var successToast = new bootstrap.Toast($('#successToast'));
+              successToast.show();
+          }
+      },
+      error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+      }
+
+  });
+
+  });
+
+    
+  //Finance/Payment Information Form
+  $('#financePaymentInfo').submit(function(e) {
+    e.preventDefault(); 
+
+    // Capture form data
+    var formData = $(this).serialize();
+
+    console.log(' from js url = ', saveFinancePayInfoUrl);
+    console.log('formData = ', formData);
+
+
+    // Send data using AJAX
+    $.ajax({
+      url: saveFinancePayInfoUrl,
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+          if (response.status === 'error') {
+              // Display validation errors
+              $.each(response.errors, function(field, error) {
+                  $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+              });
+          } else if (response.status === 'success') {
+              // Handle successful submission (if needed)
+              var successToast = new bootstrap.Toast($('#paymentSuccessToast'));
+              successToast.show();
+          }
+      },
+      error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+      }
+
+  });
+
+  });
+
+  
+    
+  //Vendor Setting Details Form
+  $('#vendorSettingForm').submit(function(e) {
+    e.preventDefault(); 
+
+    // Capture form data
+    var formData = $(this).serialize();
+
+    console.log("url = ", saveVendorSettingUrl);
+    console.log("formData = ", formData);
+
+    // Send data using AJAX
+    $.ajax({
+      url: saveVendorSettingUrl,
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+          if (response.status === 'error') {
+              // Display validation errors
+              $.each(response.errors, function(field, error) {
+                  $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+              });
+          } else if (response.status === 'success') {
+              // Handle successful submission (if needed)
+              var successToast = new bootstrap.Toast($('#successToast'));
+              successToast.show();
+          }
+      },
+      error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+      }
+
+  });
+
+  });
+
+
+  // Company RMA Information form
+  $('#companyRmaInfoForm').submit(function(e) {
+    e.preventDefault(); 
+
+    // Capture form data
+    var formData = $(this).serialize();
+
+    console.log("url = ", saveCompanyRmaInfoUrl);
+    console.log("formData = ", formData);
+
+    // Send data using AJAX
+    $.ajax({
+      url: saveCompanyRmaInfoUrl,
+      type: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(response) {
+          if (response.status === 'error') {
+              // Display validation errors
+              $.each(response.errors, function(field, error) {
+                  $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+              });
+          } else if (response.status === 'success') {
+              // Handle successful submission (if needed)
+              var successToast = new bootstrap.Toast($('#rmaSuccessToast'));
+              successToast.show();
+          }
+      },
+      error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+      }
+
+  });
+
+  });
+
+
 
 
 

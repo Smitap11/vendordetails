@@ -6,31 +6,31 @@ use CodeIgniter\Model;
 
 class BusinessDetailsModel extends Model
 {
-    protected $table      = 'business_details'; // Your database table name
-    protected $primaryKey = 'business_id';
+    protected $table      = 'businessdetails'; // Your database table name
+    protected $primaryKey = 'businessId';
 
     protected $allowedFields = [
-        'final_status',
+        'finalStatus', 
         'rebate',
-        'fbm_company_name',
-        'business_website',
-        'fba_company_name',
-        'account_manager',
-        'business_account',
-        'modified_on',
-        'modified_by',
-        'vendor_type',
-        'vendor_behaviour',
-        'vendor_heighlighted_concern',
-        'business_brand',
-        'business_unit',
-        'vendor_description',
-        'created_at', 
-        'updated_at'
-    ];
+        'fbmCompanyName', 
+        'businessWebsite',
+        'fbaCompanyName',
+        'accountManager',
+        'businessAccount',
+        'modifiedOn',
+        'modifiedBy',
+        'vendorType',
+        'vendorBehaviour',
+        'vendorHeighlightedConcern',
+        'businessBrand',
+        'businessUnit',
+        'vendorDescription',
+        'createdAt', 
+        'updatedAt'
+    ];    
 
     protected $useTimestamps = true; // Enable automatic timestamping
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+    protected $createdField  = 'createdAt';
+    protected $updatedField  = 'updatedAt';
 
 }

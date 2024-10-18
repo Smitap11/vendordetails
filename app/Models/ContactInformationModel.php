@@ -6,18 +6,30 @@ use CodeIgniter\Model;
 
 class ContactInformationModel extends Model
 {
-    protected $table = 'contact_information'; // Change to your table name
-    protected $primaryKey = 'contact_info_id';
+    protected $table = 'contactinformation'; // Change to your table name
+    protected $primaryKey = 'contactInfoId';
 
     protected $allowedFields = [
-        'contact_email', 'additional_email', 'contact_number', 'alt_contact_number', 
-        'contact_zipcode', 'contact_city', 'contact_street', 'contact_country', 'inventory_email', 
-        'inventory_contact_no', 'inventory_state', 'inventory_modified_on', 'inventory_modified_by',
-        'created_at', 'updated_at'
+        'contactEmail', 
+        'additionalEmail', 
+        'contactNumber', 
+        'altContactNumber', 
+        'contactZipcode', 
+        'contactCity', 
+        'contactStreet', 
+        'contactCountry', 
+        'inventoryEmail', 
+        'inventoryContactNo', 
+        'inventoryState', 
+        'inventoryModifiedOn', 
+        'inventoryModifiedBy',
+        'createdAt', 
+        'updatedAt'
     ];
+    
 
     protected $useTimestamps = true; // Enable automatic timestamping
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+    protected $createdField  = 'createdAt';
+    protected $updatedField  = 'updatedAt';
 
 }
