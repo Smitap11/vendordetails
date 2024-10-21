@@ -1,7 +1,7 @@
 
 <div class="carousel-item">
     <div class="form-container">
-        <h5>Shipping Information</h5>
+        <h5 class="form-header">Shipping Information</h5>
         <form method="post" id="shippingInfoForm">
         <?= csrf_field() ?>
             <div class="row mb-3">

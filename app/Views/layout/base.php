@@ -26,10 +26,13 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Vendor</a>
+            <a class="nav-link" href="#">Supplier Regstration</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
+            <a class="nav-link" href="#">Supplier</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Product</a>
             </li>
         </ul>
         </div>

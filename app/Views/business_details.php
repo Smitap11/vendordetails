@@ -1,6 +1,6 @@
 <div class="carousel-item">
       <div class="form-container">
-        <h5>Business Details</h5>
+        <h5 class="form-header">Business Details</h5>
         <form id="businessDetailsForm" method="post">
         <?= csrf_field() ?>
 

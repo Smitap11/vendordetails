@@ -1,12 +1,12 @@
-<div class="carousel-item">
+<div class="carousel-item active">
     <div class="form-container">
-      <h5>Contact Information</h5>
+      <h5 class="form-header">Contact Information</h5>
       <form id="contactInfoForm" method="post">
       <?= csrf_field() ?>
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="contact-email" name="contactEmail" value="<?= old('contact-email') ?>">
+          <label for="email" class="form-label">Email <span style="color: red;">*</span></label>
+          <input type="email" class="form-control" id="contact-email" name="contactEmail" value="<?= old('contact-email') ?>" required>
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
 
@@ -18,32 +18,32 @@
 
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="contact_number" class="form-label">Contact Number</label>
-          <input type="number" class="form-control" id="contact-number" name="contactNumber" value="<?= old('contact-number') ?>">
+          <label for="contact_number" class="form-label">Contact Number <span style="color: red;">*</span></label>
+          <input type="number" class="form-control" id="contactNumber" name="contactNumber" value="<?= old('contact-number') ?>" required>
         </div>
 
         <div class="col-md-6">
           <label for="alt_contact_number" class="form-label">Alternate Number</label>
-          <input type="number" class="form-control" id="alt-contact-number" name="altContactNumber" value="<?= old('alt-contact-number') ?>">
+          <input type="number" class="form-control" id="alternateNumber" name="altContactNumber" value="<?= old('alt-contact-number') ?>">
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-md-3">
-          <label for="zipcode" class="form-label">Zipcode</label>
-          <input type="number" class="form-control" name="contactZipcode" value="<?= old('contactZipcode') ?>">
+          <label for="zipcode" class="form-label">Zipcode <span style="color: red;">*</span></label>
+          <input type="number" class="form-control" id="contactZipcode" name="contactZipcode" value="<?= old('contactZipcode') ?>" required>
         </div>
         <div class="col-md-3">
-          <label for="business_city" class="form-label">City</label>
-          <input type="text" class="form-control" name="contactCity" value="<?= old('contactCity') ?>">
+          <label for="business_city" class="form-label">City <span style="color: red;">*</span></label>
+          <input type="text" class="form-control" name="contactCity" value="<?= old('contactCity') ?>" required>
         </div>
         <div class="col-md-3">
-          <label for="business_street" class="form-label">Street</label>
-          <input type="text" class="form-control" name="contactStreet" value="<?= old('contactStreet') ?>">
+          <label for="business_street" class="form-label">Street <span style="color: red;">*</span></label>
+          <input type="text" class="form-control" name="contactStreet" value="<?= old('contactStreet') ?>" required>
         </div>
         <div class="col-md-3">
-          <label for="business_country" class="form-label">Country</label>
-          <select class="form-select" name="contactCountry">
+          <label for="business_country" class="form-label">Country <span style="color: red;">*</span></label>
+          <select class="form-select" name="contactCountry" required>
             <option value="United States">United States</option>
             <option value="Option 2">Option 2</option>
           </select>
@@ -57,11 +57,11 @@
         </div>
         <div class="col-md-3 m-2">
           <label for="inventory_contact_no" class="form-label">Inventory Contact Number</label>
-          <input type="number" class="form-control" name="inventoryContactNo" value="<?= old('inventoryContactNo') ?>">
+          <input type="number" class="form-control" id="inventoryContactNo" name="inventoryContactNo" value="<?= old('inventoryContactNo') ?>">
         </div>
         <div class="col-md-3 m-2">
-          <label for="inventory_state" class="form-label">State</label>
-          <select class="form-select" name="inventoryState">
+          <label for="inventory_state" class="form-label">State <span style="color: red;">*</span></label>
+          <select class="form-select" name="inventoryState" required>
             <option value="State1">State1</option>
             <option value="State2">State2</option>
             <option value="State3">State3</option>
@@ -81,10 +81,13 @@
         </div>
       </div>
 
+      <div class="m-2" id="error-message" style="color: red;"></div>
+
+
         <button type="submit" class="btn contact-info-save gradient-custom">Save</button>
 
         <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 10px; right: 10px; min-height: 200px;">
-          <div class="toast" id="successToast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast" id="contactSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
               <strong class="me-auto">Success</strong>
               <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

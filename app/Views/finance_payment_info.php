@@ -1,6 +1,6 @@
 <div class="carousel-item">
     <div class="form-container">
-    <h5>Finance/Payment Information</h5>
+    <h5 class="form-header">Finance/Payment Information</h5>
     <form id="financePaymentInfo" action="post">
         <?= csrf_field() ?>
         <div class="row mb-3">
@@ -118,6 +118,5 @@
     var csrfHash = '<?= csrf_hash() ?>'; 
 
     var saveFinancePayInfoUrl = "<?= base_url('FinancePayInfoController/saveFinancePayInfoFormData') ?>";
-    console.log('saveFinancePayInfoUrl = ', saveFinancePayInfoUrl);
 </script>
   

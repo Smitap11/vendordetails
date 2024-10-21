@@ -1,4 +1,4 @@
-<div class="carousel-item active">
+<div class="carousel-item">
     <div class="form-container">
     <h5 class="form-header">Company RMA Information</h5>
     <form id="companyRmaInfoForm" action="post" enctype="multipart/form-data">

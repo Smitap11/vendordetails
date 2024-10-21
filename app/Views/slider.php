@@ -27,9 +27,12 @@
         <!-- Finanace/Payment Information Eighth form slide -->
         <?= $this->include("/finance_payment_info");  ?>
         
-        <!-- Finanace/Payment Information Eighth form slide -->
+        <!-- Order Processing Information Ninth form slide -->
         <?= $this->include("/order_processing_info");  ?>
 
+        
+        <!-- Inventory Update Tenth form slide -->
+        <?= $this->include("/inventory_update");  ?>
 
           <!-- Sixth form slide -->
           <div class="carousel-item">
@@ -57,13 +60,27 @@
     </div>
 
     <!-- Button Container Below the Slider -->
-    <div class="button-container">
+    <!-- <div class="button-container">
       <button class="custom-control custom-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev" id="prevButton">
         Previous
       </button>
       <button class="custom-control custom-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next" id="nextButton">
         Next
       </button>
-    </div>
+    </div> -->
+
+
+    
+  <!-- Button Container Below the Slider -->
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+
   </div>
 </div>

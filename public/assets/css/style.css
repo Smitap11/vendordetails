@@ -1,4 +1,55 @@
-.gradient-custom {
+.carousel-control-prev,
+.carousel-control-next {
+  position: fixed; /* Ensures the arrows stay fixed to the sides of the window */
+  top: 50% !important; /* Center vertically in the viewport */
+  transform: translateY(-50%) !important; /* Align vertically to the middle */
+  z-index: 1000; /* Higher z-index to stay on top of the navbar and content */
+  width: 60px !important;
+  height: 50px;
+  background-color: #98b6e2;
+  border-radius: 10%;
+  color: #98b6e2;
+}
+
+.carousel-control-prev {
+  left: 15px !important;
+}
+
+.carousel-control-next {
+  right: 15px !important;
+}
+
+/* .carousel-control-prev.disabled::after, 
+.carousel-control-next.disabled::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 15px !important;
+    height: 15px !important;
+    background-color: red !important;
+    border-radius: 50% !important;
+} */
+
+.carousel-control-prev.disabled, 
+.carousel-control-next.disabled {
+    pointer-events: none !important; /* Disable clicking */
+    opacity: 0.5 !important; /* Light opacity for disabled state */
+}
+
+.carousel-control-prev.disabled {
+    background-color: gray;
+}
+
+.carousel-control-next.disabled {
+    background-color: gray;
+}
+
+
+  
+  .gradient-custom {
     background: #98b6e2;
     background: -webkit-linear-gradient(to bottom right, #98b6e2, #a9b1c1);
     background: linear-gradient(to bottom right, #98b6e2, #a2aec6);

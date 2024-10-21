@@ -15,6 +15,7 @@ $routes->post('VendorFinanceController/saveVendorFinanceFormData', 'VendorFinanc
 $routes->post('VendorSettingController/saveVendorSettingFormData', 'VendorSettingController::saveVendorSettingFormData');
 $routes->post('FinancePayInfoController/saveFinancePayInfoFormData', 'FinancePayInfoController::saveFinancePayInfoFormData');
 $routes->post('CompanyRmaInfoController/saveCompanyRmaFormData', 'CompanyRmaInfoController::saveCompanyRmaFormData');
+$routes->post('InventoryUpdateController/saveInventoryUpdateFormData', 'InventoryUpdateController::saveInventoryUpdateFormData');
 
 
 

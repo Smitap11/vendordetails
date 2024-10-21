@@ -81,7 +81,88 @@ $(document).ready(function() {
   function getSelectedOptions() {
     return selectedValues;
   }
+
+  /*  end of multi select box */
+    var $carousel = $('#myCarousel'); // Carousel selector
+    
+    // Initialize carousel
+    $carousel.carousel({
+      interval: false // Prevent automatic sliding
+    });
   
+    // Function to update the state of arrows
+    function updateArrowState() {
+      var $prevArrow = $('.carousel-control-prev');
+      var $nextArrow = $('.carousel-control-next');
+      var $activeItem = $carousel.find('.carousel-item.active');
+      var $firstItem = $carousel.find('.carousel-item').first();
+      var $lastItem = $carousel.find('.carousel-item').last();
+      var totalItems = $carousel.find('.carousel-item').length;
+      var currentIndex = $carousel.find('.carousel-item.active').index();
+
+      $prevArrow.removeClass('disabled');
+      $nextArrow.removeClass('disabled');
+  
+      if (currentIndex === 0) {
+          $prevArrow.addClass('disabled'); // Add 'disabled' class to the previous arrow
+      }
+  
+      if (currentIndex === totalItems - 1) {
+          $nextArrow.addClass('disabled'); // Add 'disabled' class to the next arrow
+      }
+  
+  
+      // Disable left arrow if at the first item
+      if ($activeItem.is($firstItem)) {
+        $prevArrow.css({
+          'pointer-events': 'none',
+          'cursor': 'not-allowed',
+          'background-color': 'gray'
+        });
+      } else {
+        $prevArrow.css({
+          'pointer-events': 'auto',
+          'cursor': 'pointer',
+          'background-color': '#98b6e2'
+        });
+      }
+  
+      // Disable right arrow if at the last item
+      if ($activeItem.is($lastItem)) {
+        $nextArrow.css({
+          'pointer-events': 'none',
+          'background-color': 'gray',
+          'opacity': '0.5',
+          'cursor': 'default'  // Change cursor to default when disabled
+        });
+      } else {
+        $nextArrow.css({
+          'pointer-events': 'auto',
+          'background-color': '#98b6e2'
+        });
+      }
+    }
+  
+    // Update arrows on slide change
+    $carousel.on('slid.bs.carousel', function () {
+      updateArrowState();
+    });
+  
+    // Initial check on page load
+    updateArrowState();
+
+  /* end of slider arrows functionality */
+
+  function validateContactNumber(number) {
+    const regex = /^\d{10}$/; // Regular expression to match exactly 10 digits
+    return regex.test(number);  // Returns true if valid, false otherwise
+  }
+
+  function validateZipCode(zip) {
+    const regex = /^\d{5}$/; // Matches 5 digits
+    return regex.test(zip); // Returns true if valid, false otherwise
+}
+
 
 
     // Business Details Form
@@ -132,21 +213,74 @@ $(document).ready(function() {
     $('#contactInfoForm').on('submit',function(e) {
         e.preventDefault();
 
-        console.log('form data = ',$(this).serialize());
+        const contactNumber = $('#contactNumber').val();
+        const alternateNumber = $('#alternateNumber').val();
+        const inventoryContactNo = $('#inventoryContactNo').val();
+        const zipcode = $('#contactZipcode').val();
 
-        // AJAX call
-        $.ajax({
-            url: saveContactInfoUrl,
-            type: "POST",
-            data: $(this).serialize(),
-            success: function(response) {
-                console.log(response);
-                // Optionally, show a success message to the user
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
+        // Validate main contact number
+        if (!validateContactNumber(contactNumber)) {
+            $('#error-message').text('Please enter a valid 10-digit contact number.');
+            $('#contactNumber').focus();
+            return;
+        }
+
+        // Validate alternate number if provided
+        if (alternateNumber && !validateContactNumber(alternateNumber)) {
+            $('#error-message').text('Please enter a valid 10-digit alternate number.');
+            $('#alternateNumber').focus();
+            return;
+        }
+
+        // Validate inventory contact number if provided
+        if (inventoryContactNo && !validateContactNumber(inventoryContactNo)) {
+            $('#error-message').text('Please enter a valid 10-digit inventory contact number.');
+            $('#inventoryContactNo').focus();
+            return;
+        }
+
+        // Validate ZIP code if provided
+        if (zipcode && !validateZipCode(zipcode)) {
+            $('#error-message').text('Please enter a valid 5 digits ZIP code.');
+            $('#contactZipcode').focus();
+            return;
+        }
+
+        // Clear the error message
+        $('#error-message').text(''); // Clear error message
+
+       let formData = $(this).serialize();
+
+        
+        // Send data using AJAX
+    $.ajax({
+      url: saveContactInfoUrl,
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+          if (response.status === 'error') {
+              // Display validation errors
+              $.each(response.errors, function(field, error) {
+                  $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+              });
+          } else if (response.status === 'success') {
+              // Handle successful submission (if needed)
+              var successToast = new bootstrap.Toast($('#contactSuccessToast'));
+              successToast.show();
+
+              setTimeout(() => {
+                $('#contactInfoForm')[0].reset();
+              }, 500);
+    
+          }
+      },
+      error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+      }
+
+  });
+
+
     });
 
 
@@ -320,6 +454,60 @@ $(document).ready(function() {
               // Handle successful submission (if needed)
               var successToast = new bootstrap.Toast($('#rmaSuccessToast'));
               successToast.show();
+          }
+      },
+      error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+      }
+
+  });
+
+  });
+
+
+  // Company RMA Information form
+  $('#inventoryUpdateForm').submit(function(e) {
+    e.preventDefault(); 
+
+    const contactNumberInput = document.getElementById('contactNumber');
+    const contactNumber = contactNumberInput.value;
+
+    // Validate contact number
+    if (!validateContactNumber(contactNumber)) {
+        e.preventDefault(); // Prevent form submission
+        document.getElementById('error-message').textContent = 'Please enter a valid contact number.';
+        contactNumberInput.focus(); // Set focus back to input
+        return false;
+    } else {
+        document.getElementById('error-message').textContent = ''; // Clear error message
+    }
+
+    // Capture form data
+    var formData = $(this).serialize();
+
+    console.log("url = ", saveInventoryUpdateUrl);
+    console.log("formData = ", formData);
+
+    // Send data using AJAX
+    $.ajax({
+      url: saveInventoryUpdateUrl,
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+          if (response.status === 'error') {
+              // Display validation errors
+              $.each(response.errors, function(field, error) {
+                  $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+              });
+          } else if (response.status === 'success') {
+              // Handle successful submission (if needed)
+              var successToast = new bootstrap.Toast($('#inventorySuccessToast'));
+              successToast.show();
+
+              setTimeout(() => {
+                document.getElementById('inventoryUpdateForm').reset();
+              }, 500);
+    
           }
       },
       error: function(xhr, status, error) {
