@@ -13,7 +13,7 @@ class FinancePayInfoModel extends Model
         'pocFlag',
         'financeAccManager',
         'financeEmail',
-        'ContactNumber',
+        'contactNumber',
         'modeOfPayment',
         'paymentTerm',
         'paymentSelectAny',

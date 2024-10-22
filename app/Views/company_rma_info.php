@@ -1,4 +1,4 @@
-<div class="carousel-item">
+<div class="carousel-item active">
     <div class="form-container">
     <h5 class="form-header">Company RMA Information</h5>
     <form id="companyRmaInfoForm" action="post" enctype="multipart/form-data">
@@ -7,8 +7,8 @@
             <div class="col-md-6">
                 <label for="selectBox2" class="form-label"><b>Do you offer additonal discount against No Return Policy? (Yes/No)</b></label>
                 <select class="form-select" id="add-disc-no-return" name="addDiscNoReturn">
-                <option value="1" selected>Yes</option>
-                <option value="0">No</option>
+                <option value="YES" selected>Yes</option>
+                <option value="NO">No</option>
                 </select>
             </div>
 
@@ -25,24 +25,24 @@
 
         <div class="row mb-3">
             <div class="col-md-4">
-                <label for="Account Manager" class="form-label">Account Manager</label>
-                <input type="text" class="form-control" id="rma-acc-mangr" name="rmaAccManager">
+                <label for="Account Manager" class="form-label">Account Manager <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="rma-acc-mangr" name="rmaAccManager" required>
             </div>
 
             <div class="col-md-4">
-                <label for="Email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="rma-email" name="rmaEmail">
+                <label for="Email" class="form-label">Email <span style="color: red;">*</span></label>
+                <input type="email" class="form-control" id="rma-email" name="rmaEmail" required>
             </div>
 
             <div class="col-md-4">
-                <label for="Contact Number" class="form-label">Contact Number</label>
-                <input type="number" class="form-control" id="rma-contact-no" name="rmaContactNumber">
+                <label for="Contact Number" class="form-label">Contact Number <span style="color: red;">*</span></label>
+                <input type="number" class="form-control" id="rmaContactNumber" name="rmaContactNumber" required>
             </div>
 
         </div>
 
-        <!-- <div class="row mb-3">
-            <div class="col-md-12">
+        <div class="row mb-3">
+            <div class="col-md-6">
                 <label for="days of delivery" class="form-label"><b>In how many days returns would be authorized from the date of delivery?</b></label>
                 <input type="text" class="form-control" id="days-of-delivery" name="daysOfDelivery" placeholder="Ex. 2"></textarea>
             </div>
@@ -85,11 +85,11 @@
             </div>
             <div class="m-2">
                 <label for="Zipcode" class="form-label">Zipcode</label>
-                <input type="number" class="form-control" id="Zipcode" name="rmaZipcode">
+                <input type="number" class="form-control" id="rmaZipcode" name="rmaZipcode">
             </div>
-        </div> -->
+        </div>
 
-    <!-- <div class="row mb-3">
+    <div class="row mb-3">
         <label for="dateField2" class="form-label"><b>Please advice the restocking fees in case of Buyer's Remourse</b></label>
         <div class="col-md-6">
             <select class="form-select" id="selectBox2" name="restockingFeeUnit">
@@ -100,9 +100,9 @@
         <div class="col-md-6">
             <input type="text" class="form-control" id="restocking-fee" name="restockingFee" placeholder="10"></textarea>
         </div>
-    </div> -->
+    </div>
 
-    <!-- <div class="row mb-3">
+    <div class="row mb-3">
         <div class="col-md-4">
         <label for="comments" class="form-label"><b>Comments</b></label>
         <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="Comments"></textarea>
@@ -115,7 +115,7 @@
             <label for="Modified By" class="form-label"><b>Modified By</b></label>
             <input type="text" class="form-control" id="modified-by" name="modifiedBy">
         </div>
-    </div> -->
+    </div>
 
     <div class="row mb-3">
         <div class="col-md-6">
@@ -124,7 +124,11 @@
             <label for="formFile" class="form-label m-1"><b>Processed file list:</b></label>
         </div>    
     </div>
+
+    <div class="m-2" id="rma-error-message" style="color: red;"></div>
+
     <button type="submit" class="btn gradient-custom">Save</button>
+
     <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 10px; right: 10px; min-height: 200px;">
           <div class="toast" id="rmaSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">

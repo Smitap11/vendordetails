@@ -26,7 +26,7 @@
       </div>
 
       <div class="row mb-3">
-      <label for="contact_number" class="form-label"><b>Inventory Cycle:Specify which days of week inventory file will be shared?</b> <span style="color: red;">*</span></label>
+      <label for="contact_number" class="form-label"><b>Inventory Cycle: Specify which days of week inventory file will be shared?</b> <span style="color: red;">*</span></label>
         <div class="col-md-6">
           <label for="time period" class="form-label">Select Time Period</label>
           <select class="form-select" name="timePeriod" required>
@@ -69,12 +69,9 @@
         </div> 
       </div> 
 
-      <div class="m-2" id="error-message" style="color: red;"></div>
+      <div class="m-2" id="inventoryErrMsg" style="color: red;"></div>
 
-
-        <button type="submit" class="btn contact-info-save gradient-custom">Save</button>
-
-
+      <button type="submit" class="btn contact-info-save gradient-custom">Save</button>
 
         <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 10px; right: 10px; min-height: 200px;">
           <div class="toast" id="inventorySuccessToast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -99,7 +96,6 @@
     var csrfHash = '<?= csrf_hash() ?>'; 
 
     var saveInventoryUpdateUrl = "<?= base_url('InventoryUpdateController/saveInventoryUpdateFormData') ?>";
-    console.log('saveInventoryUpdateUrl = ', saveInventoryUpdateUrl);
 
 </script>
   

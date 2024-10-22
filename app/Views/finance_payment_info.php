@@ -28,14 +28,14 @@
 
             <div class="col-md-4">
                 <label for="Contact Number" class="form-label">Contact Number</label>
-                <input type="number" class="form-control" id="finance-con-no" name="ContactNumber">
+                <input type="number" class="form-control" id="ContactNumber" name="contactNumber">
             </div>
         </div>      
 
         <div class="row mb-3">
             <div class="col-md-4">
-                <label for="Mode of Payment" class="form-label">Mode of Payment</label>
-                <select class="form-select" id="mode-of-payment" name="modeOfPayment">
+                <label for="Mode of Payment" class="form-label">Mode of Payment <span style="color: red;">*</span></label>
+                <select class="form-select" id="mode-of-payment" name="modeOfPayment" required>
                     <option value="1" selected>Select One</option>
                     <option value="0">No</option>
                 </select>
@@ -94,6 +94,9 @@
                   <input type="text" class="form-control" id="finanace-modified-by" name="modifiedBy">
                 </div>    
               </div>
+
+              <div class="m-2" id="financeErrMsg" style="color: red;"></div>
+
               <button type="submit" class="btn gradient-custom">Save</button>
             
               <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 10px; right: 10px; min-height: 200px;">

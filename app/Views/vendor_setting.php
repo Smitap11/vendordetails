@@ -1,5 +1,5 @@
 <div class="carousel-item">
-    <div class="form-container">
+    <div class="form-container" >
     <h5 class="form-header">Vendor Settings</h5>
     <form id="vendorSettingForm" method="post">
         <?= csrf_field() ?>
@@ -39,16 +39,16 @@
             <div class="col-md-6">
                 <label for="Prime Eligible" class="form-label">Prime Eligible</label>
                 <select class="form-select" id="prime-eligible" name="primeEligible">
-                <option value="1" selected>YES</option>
-                <option value="0">No</option>
+                <option value="YES" selected>YES</option>
+                <option value="NO">No</option>
                 </select>
             </div>
 
             <div class="col-md-6">
-                <label for="dateField2" class="form-label">Our Shipping Account</label>
-                <select class="form-select" id="vendor-manager" name="ourShippingAccount">
-                <option value="1" selected>YES</option>
-                <option value="0">No</option>
+                <label for="dateField2" class="form-label">Our Shipping Account <span style="color: red;">*</span></label>
+                <select class="form-select" id="ourShippingAccount" name="ourShippingAccount" required>
+                <option value="YES" selected>YES</option>
+                <option value="NO">No</option>
                 </select>
             </div>
         </div>
@@ -115,7 +115,7 @@
         <button type="submit" class="btn gradient-custom">Save</button>
 
         <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 10px; right: 10px; min-height: 200px;">
-            <div class="toast" id="successToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast" id="vendorSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">
               <div class="toast-header">
                 <strong class="me-auto">Success</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

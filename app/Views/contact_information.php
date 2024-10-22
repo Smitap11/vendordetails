@@ -1,4 +1,4 @@
-<div class="carousel-item active">
+<div class="carousel-item">
     <div class="form-container">
       <h5 class="form-header">Contact Information</h5>
       <form id="contactInfoForm" method="post">
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="m-2" id="error-message" style="color: red;"></div>
+      <div class="m-2" id="contactErrMsg" style="color: red;"></div>
 
 
         <button type="submit" class="btn contact-info-save gradient-custom">Save</button>

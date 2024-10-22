@@ -22,7 +22,7 @@ class FinancePayInfoController extends Controller
                 'pocFlag' => $this->request->getPost('pocFlag') ? '1' : '0', // Ensuring it is saved as string '0' or '1'
                 'financeAccManager' => $this->request->getPost('financeAccManager'),
                 'financeEmail' => $this->request->getPost('financeEmail'),
-                'ContactNumber' => $this->request->getPost('ContactNumber'),
+                'contactNumber' => $this->request->getPost('contactNumber'),
                 'modeOfPayment' => $this->request->getPost('modeOfPayment'),
                 'paymentTerm' => $this->request->getPost('paymentTerm'),
                 'paymentSelectAny' => $this->request->getPost('paymentSelectAny'),

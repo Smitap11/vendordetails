@@ -197,8 +197,11 @@ $(document).ready(function() {
                     });
                 } else if (response.status === 'success') {
                     // Handle successful submission (if needed)
-                    var successToast = new bootstrap.Toast($('#successToast'));
+                    var successToast = new bootstrap.Toast($('#businessSuccessToast'));
                     successToast.show();
+                    setTimeout(() => {
+                      document.getElementById('businessDetailsForm').reset();
+                    }, 500);
                 }
             },
             error: function(xhr, status, error) {
@@ -220,34 +223,33 @@ $(document).ready(function() {
 
         // Validate main contact number
         if (!validateContactNumber(contactNumber)) {
-            $('#error-message').text('Please enter a valid 10-digit contact number.');
+            $('#contactErrMsg').text('Please enter a valid 10-digit contact number.');
             $('#contactNumber').focus();
             return;
         }
 
         // Validate alternate number if provided
         if (alternateNumber && !validateContactNumber(alternateNumber)) {
-            $('#error-message').text('Please enter a valid 10-digit alternate number.');
+            $('#contactErrMsg').text('Please enter a valid 10-digit alternate number.');
             $('#alternateNumber').focus();
             return;
         }
 
         // Validate inventory contact number if provided
         if (inventoryContactNo && !validateContactNumber(inventoryContactNo)) {
-            $('#error-message').text('Please enter a valid 10-digit inventory contact number.');
+            $('#contactErrMsg').text('Please enter a valid 10-digit inventory contact number.');
             $('#inventoryContactNo').focus();
             return;
         }
 
         // Validate ZIP code if provided
         if (zipcode && !validateZipCode(zipcode)) {
-            $('#error-message').text('Please enter a valid 5 digits ZIP code.');
+            $('#contactErrMsg').text('Please enter a valid 5 digits ZIP code.');
             $('#contactZipcode').focus();
             return;
         }
 
-        // Clear the error message
-        $('#error-message').text(''); // Clear error message
+        $('#contactErrMsg').text('');
 
        let formData = $(this).serialize();
 
@@ -269,7 +271,7 @@ $(document).ready(function() {
               successToast.show();
 
               setTimeout(() => {
-                $('#contactInfoForm')[0].reset();
+                document.getElementById('contactInfoForm').reset();
               }, 500);
     
           }
@@ -285,19 +287,13 @@ $(document).ready(function() {
 
 
 // shipping information form
-
     $('#shippingInfoForm').on('submit', function(e) {
-
         e.preventDefault();
 
-        // Serialize the form data
         var formData = $(this).serialize();
 
-        console.log("saveShippingInfoUrl = ", saveShippingInfoUrl);
-
-        // Send the AJAX request
         $.ajax({
-            url: saveShippingInfoUrl,  // URL for form submission
+            url: saveShippingInfoUrl,
             type: 'POST',
             data: formData,
             success: function(response) {
@@ -308,8 +304,11 @@ $(document).ready(function() {
                     });
                 } else if (response.status === 'success') {
                     // Handle successful submission (if needed)
-                    var successToast = new bootstrap.Toast($('#successToast'));
+                    var successToast = new bootstrap.Toast($('#shippingSuccessToast'));
                     successToast.show();
+                    setTimeout(() => {
+                      document.getElementById('shippingInfoForm').reset();
+                    }, 500);
                 }
             },
             error: function(xhr, status, error) {
@@ -324,10 +323,8 @@ $(document).ready(function() {
   $('#vendorFinanceForm').submit(function(e) {
     e.preventDefault(); 
 
-    // Capture form data
     var formData = $(this).serialize();
 
-    // Send data using AJAX
     $.ajax({
       url: saveVendorFinanceUrl,
       type: 'POST',
@@ -340,8 +337,11 @@ $(document).ready(function() {
               });
           } else if (response.status === 'success') {
               // Handle successful submission (if needed)
-              var successToast = new bootstrap.Toast($('#successToast'));
+              var successToast = new bootstrap.Toast($('#financeSuccessToast'));
               successToast.show();
+              setTimeout(() => {
+                document.getElementById('vendorFinanceForm').reset();
+              }, 500);
           }
       },
       error: function(xhr, status, error) {
@@ -357,14 +357,19 @@ $(document).ready(function() {
   $('#financePaymentInfo').submit(function(e) {
     e.preventDefault(); 
 
-    // Capture form data
+    const alternateNumber = $("#contactNumber").val();
+
+    // Validate alternate number if provided
+    if (alternateNumber && !validateContactNumber(alternateNumber)) {
+      $('#financeErrMsg').text('Please enter a valid 10-digit alternate number.');
+      $('#alternateNumber').focus();
+      return;
+    }
+
+    $('#financeErrMsg').text('');
+
     var formData = $(this).serialize();
-
-    console.log(' from js url = ', saveFinancePayInfoUrl);
-    console.log('formData = ', formData);
-
-
-    // Send data using AJAX
+    
     $.ajax({
       url: saveFinancePayInfoUrl,
       type: 'POST',
@@ -379,6 +384,10 @@ $(document).ready(function() {
               // Handle successful submission (if needed)
               var successToast = new bootstrap.Toast($('#paymentSuccessToast'));
               successToast.show();
+              
+              setTimeout(() => {
+                document.getElementById('financePaymentInfo').reset();
+              }, 500);
           }
       },
       error: function(xhr, status, error) {
@@ -398,9 +407,6 @@ $(document).ready(function() {
     // Capture form data
     var formData = $(this).serialize();
 
-    console.log("url = ", saveVendorSettingUrl);
-    console.log("formData = ", formData);
-
     // Send data using AJAX
     $.ajax({
       url: saveVendorSettingUrl,
@@ -414,8 +420,11 @@ $(document).ready(function() {
               });
           } else if (response.status === 'success') {
               // Handle successful submission (if needed)
-              var successToast = new bootstrap.Toast($('#successToast'));
+              var successToast = new bootstrap.Toast($('#vendorSuccessToast'));
               successToast.show();
+              setTimeout(() => {
+                document.getElementById('vendorSettingForm').reset();
+              }, 500);
           }
       },
       error: function(xhr, status, error) {
@@ -431,7 +440,26 @@ $(document).ready(function() {
   $('#companyRmaInfoForm').submit(function(e) {
     e.preventDefault(); 
 
-    // Capture form data
+    const contactNumberInput = document.getElementById('rmaContactNumber');
+    const contactNumber = contactNumberInput.value;
+    const zipcode = $('#rmaZipcode').val();
+
+    if (!validateContactNumber(contactNumber)) {
+        document.getElementById('rma-error-message').textContent = 'Please enter a valid contact number.';
+        contactNumberInput.focus();
+        return false;
+    }
+    
+    // Validate ZIP code if provided
+    if (zipcode && !validateZipCode(zipcode)) {
+      $('#rma-error-message').text('Please enter a valid 5 digits ZIP code.');
+      $('#contactZipcode').focus();
+      return false;
+    }
+
+    $('#rma-error-message').text('');
+
+
     var formData = $(this).serialize();
 
     console.log("url = ", saveCompanyRmaInfoUrl);
@@ -454,6 +482,10 @@ $(document).ready(function() {
               // Handle successful submission (if needed)
               var successToast = new bootstrap.Toast($('#rmaSuccessToast'));
               successToast.show();
+
+              setTimeout(() => {
+                document.getElementById('companyRmaInfoForm').reset();
+              }, 500);
           }
       },
       error: function(xhr, status, error) {
@@ -465,7 +497,7 @@ $(document).ready(function() {
   });
 
 
-  // Company RMA Information form
+  // Inventory Update Information form
   $('#inventoryUpdateForm').submit(function(e) {
     e.preventDefault(); 
 
@@ -474,19 +506,15 @@ $(document).ready(function() {
 
     // Validate contact number
     if (!validateContactNumber(contactNumber)) {
-        e.preventDefault(); // Prevent form submission
-        document.getElementById('error-message').textContent = 'Please enter a valid contact number.';
-        contactNumberInput.focus(); // Set focus back to input
+        document.getElementById('inventoryErrMsg').textContent = 'Please enter a valid contact number.';
+        contactNumberInput.focus();
         return false;
     } else {
-        document.getElementById('error-message').textContent = ''; // Clear error message
+        document.getElementById('inventoryErrMsg').textContent = '';
     }
 
     // Capture form data
     var formData = $(this).serialize();
-
-    console.log("url = ", saveInventoryUpdateUrl);
-    console.log("formData = ", formData);
 
     // Send data using AJAX
     $.ajax({
@@ -500,7 +528,6 @@ $(document).ready(function() {
                   $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
               });
           } else if (response.status === 'success') {
-              // Handle successful submission (if needed)
               var successToast = new bootstrap.Toast($('#inventorySuccessToast'));
               successToast.show();
 
