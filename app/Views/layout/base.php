@@ -10,34 +10,38 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"  rel="stylesheet"/>
 
     <title>Home & Hobbies</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light gradient-custom">
+  
+  <nav class="navbar navbar-expand-lg navbar-light gradient-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Home & Hobbies</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Supplier Regstration</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Supplier</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Product</a>
-            </li>
-        </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link <?= (uri_string() == '') ? 'active' : ''; ?>" aria-current="page" href="<?= base_url(); ?>">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= (uri_string() == 'supplier_registration') ? 'active' : ''; ?>" href="<?= base_url(); ?>supplier_registration">Supplier</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= (uri_string() == 'vendor_dashboard') ? 'active' : ''; ?>" href="<?= base_url(); ?>vendor_dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= (uri_string() == 'product') ? 'active' : ''; ?>" href="#">Product</a>
+                </li>
+            </ul>
         </div>
     </div>
-    </nav>
+</nav>
+
 
     <?= $this->renderSection("content"); ?>
 
@@ -61,6 +65,10 @@
 
 <!-- Custom JavaScript files -->
 <script src="<?= base_url('public/assets/js/main.js') ?>"></script>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 <!-- Custom JavaScript -->
 <script>

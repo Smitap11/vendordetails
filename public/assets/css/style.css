@@ -1,9 +1,38 @@
+/* Navigation Bar Styles */
+.navbar {
+  background-color: #98b6e2;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #fff;
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #8ab0e2;
+  color: #fff;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: #a2c0ef;
+  color: #fff;
+  font-weight: 500;
+}
+
+
 .carousel-control-prev,
 .carousel-control-next {
-  position: fixed; /* Ensures the arrows stay fixed to the sides of the window */
-  top: 50% !important; /* Center vertically in the viewport */
-  transform: translateY(-50%) !important; /* Align vertically to the middle */
-  z-index: 1000; /* Higher z-index to stay on top of the navbar and content */
+  position: fixed;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 1000;
   width: 60px !important;
   height: 50px;
   background-color: #98b6e2;
@@ -19,20 +48,6 @@
   right: 15px !important;
 }
 
-/* .carousel-control-prev.disabled::after, 
-.carousel-control-next.disabled::after {
-    content: '' !important;
-    display: block !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 15px !important;
-    height: 15px !important;
-    background-color: red !important;
-    border-radius: 50% !important;
-} */
-
 .carousel-control-prev.disabled, 
 .carousel-control-next.disabled {
     pointer-events: none !important; /* Disable clicking */
@@ -47,7 +62,12 @@
     background-color: gray;
 }
 
+  /* Ensure the carousel itself doesn't take full height */
+  .carousel-item {
+    padding-bottom: 20px;
+  }
 
+/* end slider */
   
   .gradient-custom {
     background: #98b6e2;
@@ -167,15 +187,85 @@
     
   .form-header{
     font-size: 22px;
-    font-weight: 600; /* Semi-bold */
-    color: #333333; /* Darker text for readability on light background */
-    text-align: left; /* Left align to keep the flow with form */
-    background: linear-gradient(90deg, #c2d4ee, #eaf2fc); /* Lighter gradient colors */
-    padding: 10px 20px; /* Padding for spacing */
-    border-radius: 5px 5px 0 0; /* Rounded top corners */
-    margin-bottom: 30px; /* Remove margin to connect with form */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow for 3D effect */
+    font-weight: 600;
+    color: #333333; 
+    text-align: left;
+    background: linear-gradient(90deg, #c2d4ee, #eaf2fc); 
+    padding: 10px 20px;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
+
+  /* start DataTables for vendor dashboard */
+
+  h4 {
+      color: #333;
+  }
+
+  .search-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background: #f2f4f8;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .search-section div {
+      flex: 1 1 200px;
+      min-width: 200px;
+  }
+
+  .search-section label {
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 5px;
+      display: block;
+  }
+
+  .search-section input, .search-section select {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+  }
+
+  .search-section input:focus, .search-section select:focus {
+      border-color: #98b6e2; /* Light blue color */
+      outline: none;
+  }
+
+  .search-section button {
+      padding: 12px 18px;
+      font-size: 16px;
+      background-color: #98b6e2;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+  }
+
+  .search-section button:hover {
+      background-color: #0d6efd;
+  }
+
+  .search-section button:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 60, 255, 0.5);
+  }
+
+  .dataTables_wrapper {
+      margin-top: 20px;
+  }
+
+
+  /* end DataTables for vendor dashboard */
 
 
     /* Make form fields full-width on smaller screens */
@@ -188,10 +278,11 @@
         padding-right: 0;
         margin-bottom: 10px;
       }
+      .navbar-nav .nav-link {
+        padding: 10px; /* Adjust padding for mobile view */
+    }
     }
 
-    /* Ensure the carousel itself doesn't take full height */
-    .carousel-item {
-      padding-bottom: 20px;
-    }
+
+
 

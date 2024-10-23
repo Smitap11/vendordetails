@@ -19,11 +19,13 @@ class CompanyRmaInfoController extends Controller
             var_dump($this->request->getPost());
             
             
+            $file = $this->request->getFile('processedFile');
 
 
             // $path = WRITEPATH . 'uploads';
+            $filepath = WRITEPATH . 'uploads/' . $file->store();
 
-            $file = $this->request->getFile('processedFile');
+
 
             // if($file->isValid()) {
             //     $file = $this->uploadFile($path, $file);
