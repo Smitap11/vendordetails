@@ -11,15 +11,15 @@ class ContactInformationController extends Controller
     {
         // Load the request and validation service
         $request = \Config\Services::request();
-        
-        
-        // Save data to the database
+                
         $contactModel = new ContactInformationModel();
 
         $modifiedOn = $request->getPost('inventoryModifiedOn');
         $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
+        $skuPrefix  = $request->getPost('skuPrefix');
+        $businessId = $request->getPost('businessId');
 
-        // Gather data from the form
+
         $contactData = [
             'contactEmail'           => $request->getPost('contactEmail'),
             'additionalEmail'        => $request->getPost('additionalEmail'),
@@ -33,17 +33,23 @@ class ContactInformationController extends Controller
             'inventoryContactNo'     => $request->getPost('inventoryContactNo'),
             'inventoryState'         => $request->getPost('inventoryState'),
             'inventoryModifiedOn'    => $formattedDate,
-            'inventoryModifiedBy'    => $request->getPost('inventoryModifiedBy')
+            'inventoryModifiedBy'    => $request->getPost('inventoryModifiedBy'),
+            'skuPrefix'              => $skuPrefix,
+            'businessId'             => $businessId
         ];
-        
 
-        // Insert data and log any errors
+    
         if ($contactModel->insert($contactData)) {
+
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Contact information saved successfully'
+                'message' => 'Contact information saved successfully',
+                'csrf_hash' => csrf_hash(),
+                'skuPrefix' => $skuPrefix,
+                'businessId' => $businessId,
             ]);
         } else {
+
             // Log the error and query
             log_message('error', 'Insert failed: ' . $contactModel->errors());
             log_message('error', 'Last Query: ' . $contactModel->getLastQuery());

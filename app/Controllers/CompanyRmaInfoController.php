@@ -14,40 +14,25 @@ class CompanyRmaInfoController extends Controller
 
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
-
-            var_dump($this->request->getFiles());
-            var_dump($this->request->getPost());
+            $skuPrefix       = $this->request->getPost('skuPrefix');
+            $businessId      = $this->request->getPost('businessId');    
             
+            $path = WRITEPATH . 'uploads';
+            $file = $this->request->getFile('file');
+            $originalFileName = '';
             
-            $file = $this->request->getFile('processedFile');
-
-
-            // $path = WRITEPATH . 'uploads';
-            $filepath = WRITEPATH . 'uploads/' . $file->store();
-
-
-
-            // if($file->isValid()) {
-            //     $file = $this->uploadFile($path, $file);
-            // } else {
-            //     $this->response->setJSON = [
-            //     'message' => 'Please select valid file',
-            //     'status'  => false
-            //     ];
-            // }
+            if ($file && $file->isValid()) {
+                $originalFileName = $file->getClientName(); // Keep the original file name
+    
+                // Move the file to the specified path without renaming
+                if (!is_dir($path)) {
+                    mkdir($path, 0777, true);
+                }
+                $file->move($path, $originalFileName);
+                $filePath = $path . $originalFileName;
             
-            // function uploadFile($path, $file) {
-            //     if(!is_dir($path))
-            //         mkdir($path, 0777, TRUE);
-
-            //     if($file->isValid() && $file->hasMoved()){
-            //         $file->move('./', $path, $newfile);
-            //         return $path.$file-getName();
-            //     }
-            //     return false;
-
-            // }
-
+            }    
+            
             // Proceed to insert the data if validation passes
             $companyRmaInfoModel = new CompanyRmaInfoModel();
 
@@ -57,30 +42,32 @@ class CompanyRmaInfoController extends Controller
                 'rmaAccManager' => $this->request->getPost('rmaAccManager'),
                 'rmaEmail' => $this->request->getPost('rmaEmail'),
                 'rmaContactNumber' => $this->request->getPost('rmaContactNumber'),
-                // 'daysOfDelivery' => $this->request->getPost('daysOfDelivery'),
-                // 'returnAddFlag' => $this->request->getPost('returnAddFlag') ?? '0', // Default to '0' if not checked
-                // 'rmaStreet' => $this->request->getPost('rmaStreet'),
-                // 'rmaCity' => $this->request->getPost('rmaCity'),
-                // 'rmaCountry' => $this->request->getPost('rmaCountry'),
-                // 'rmaState' => $this->request->getPost('rmaState'),
-                // 'rmaZipcode' => $this->request->getPost('rmaZipcode'),
-                // 'restockingFeeUnit' => $this->request->getPost('restockingFeeUnit'),
-                // 'restockingFee' => $this->request->getPost('restockingFee'),
-                // 'Comments' => $this->request->getPost('Comments'),
-                // 'modifiedOn' => $formattedDate,
-                // 'modifiedBy' => $this->request->getPost('modifiedBy'),
-                // 'processedFile' => $file,
+                'daysOfDelivery' => $this->request->getPost('daysOfDelivery'),
+                'returnAddFlag' => $this->request->getPost('returnAddFlag') ?? '0', // Default to '0' if not checked
+                'rmaStreet' => $this->request->getPost('rmaStreet'),
+                'rmaCity' => $this->request->getPost('rmaCity'),
+                'rmaCountry' => $this->request->getPost('rmaCountry'),
+                'rmaState' => $this->request->getPost('rmaState'),
+                'rmaZipcode' => $this->request->getPost('rmaZipcode'),
+                'restockingFeeUnit' => $this->request->getPost('restockingFeeUnit'),
+                'restockingFee' => $this->request->getPost('restockingFee'),
+                'Comments' => $this->request->getPost('Comments'),
+                'modifiedOn' => $formattedDate,
+                'modifiedBy' => $this->request->getPost('modifiedBy'),
+                'processedFile'   => $originalFileName,
+                'skuPrefix'       => $skuPrefix,
+                'businessId'      => $businessId
             ];    
 
-            var_dump($formData);
-
-            
 
             // Insert data and log any errors
             if ($companyRmaInfoModel->insert($formData)) {
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Finance/Payment information saved successfully'
+                    'message' => 'Finance/Payment information saved successfully',
+                    'skuPrefix' => $skuPrefix,
+                    'businessId' => $businessId,    
+                    'csrf_hash' => csrf_hash()
                 ]);
             } else {
                 // Log the error and query
@@ -94,4 +81,7 @@ class CompanyRmaInfoController extends Controller
             }
         }
     }
+
+
+
 }

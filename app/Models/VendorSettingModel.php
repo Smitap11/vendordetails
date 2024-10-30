@@ -22,7 +22,9 @@ class VendorSettingModel extends Model
         'modifiedOn',
         'modifiedBy',
         'vendorNote',
-        'moqFlag'
+        'moqFlag',
+        'skuPrefix',
+        'businessId',
     ];
     
     protected $useTimestamps = true; // Enable automatic timestamping

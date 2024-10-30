@@ -12,9 +12,8 @@ class BusinessDetailsModel extends Model
     protected $allowedFields = [
         'finalStatus', 
         'rebate',
-        'fbmCompanyName', 
+        'companyName', 
         'businessWebsite',
-        'fbaCompanyName',
         'accountManager',
         'businessAccount',
         'modifiedOn',
@@ -24,7 +23,9 @@ class BusinessDetailsModel extends Model
         'vendorHeighlightedConcern',
         'businessBrand',
         'businessUnit',
+        'businessCategory',
         'vendorDescription',
+        'skuPrefix',
         'createdAt', 
         'updatedAt'
     ];    

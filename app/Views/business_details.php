@@ -1,8 +1,8 @@
-<div class="carousel-item">
+<div class="carousel-item active">
       <div class="form-container">
         <h5 class="form-header">Business Details</h5>
         <form id="businessDetailsForm" method="post">
-        <?= csrf_field() ?>
+          <?= csrf_field() ?>
 
           <div class="row mb-3">
             <div class="col-md-6">
@@ -28,8 +28,8 @@
 
           <div class="row mb-3">
             <div class="col-md-6">
-              <label for="fbm-company-name" class="form-label">FBM Company Name <span style="color: red;">*</span></label>
-              <input type="text" class="form-control" id="fbm-company-name" name="fbmCompanyName" required>
+              <label for="company-name" class="form-label">Company Name<span style="color: red;">*</span></label>
+              <input type="text" class="form-control" id="company-name" name="companyName" required>
             </div>
 
             <div class="col-md-6">
@@ -44,13 +44,18 @@
 
           <div class="row mb-3">
             <div class="col-md-6">
-              <label for="fba-company-name" class="form-label">FBA Company Name <span style="color: red;">*</span></label>
-              <input type="text" class="form-control" id="fba-company-name" name="fbaCompanyName" aria-label="FBA Company Name"  placeholder="Ex. " aria-describedby="basic-addon1" required>  
+              <label for="businessUnit" class="form-label">Business Unit</label>
+              <select class="form-select business-unit" id="businessUnit" name="businessUnit" aria-label="Default select example">
+                <option value="home-hobbies">Home & Hobbies</option>
+                <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
+                <option value="dead-or-no-response">Dead/No Response</option>
+                <option value="approached">Approached</option>
+              </select>
             </div>
 
             <div class="col-md-6">
               <label for="textField1" class="form-label">Category</label>
-              <input type="text" class="form-control" id="fba-company-name" name="category" aria-label="FBA Company Name"  placeholder="Ex. " aria-describedby="basic-addon1">  
+              <input type="text" class="form-control" id="businessCategory" name="businessCategory" placeholder="Ex. Electronics" aria-describedby="basic-addon1">  
             </div>  
           </div>
 
@@ -120,7 +125,6 @@
               </div>
             </div>
 
-
             <div class="col-md-6">
               <label for="textField1" class="form-label">Brand</label>
               <input type="text" class="form-control" id="business-brand" name="businessBrand" placeholder="Ex. Nike" aria-describedby="basic-addon1">  
@@ -128,16 +132,6 @@
           </div>
 
           <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="dateField1" class="form-label">Business Unit</label>
-              <select class="form-select business-unit" id="business-unit" name="businessUnit" aria-label="Default select example">
-                <option value="home-hobbies">Home & Hobbies</option>
-                <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
-                <option value="dead-or-no-response">Dead/No Response</option>
-                <option value="approached">Approached</option>
-              </select>
-            </div>
-
             <div class="col-md-6">
               <label for="textField1" class="form-label">Vendor Description</label>
               <input type="text" class="form-control" id="vendor-description" name="vendorDescription" aria-label="Vendor Description"  placeholder="Describe here.." aria-describedby="basic-addon1">  

@@ -11,8 +11,9 @@ class VendorFinanceController extends BaseController
     {
         // Get the request object
         $request = $this->request;
-
-        log_message('info', 'Controller index method called');
+        
+        $skuPrefix       = $request->getPost('skuPrefix');
+        $businessId      = $request->getPost('businessId');
 
         // Capture form data using the request object
         $formData = [
@@ -21,26 +22,22 @@ class VendorFinanceController extends BaseController
             'dropshipFee'          => $request->getPost('dropshipFee'),
             'shippingTerm'         => $request->getPost('shippingTerm'),
             'modeOfPayment'        => $request->getPost('modeOfPayment'),
+            'skuPrefix'            => $skuPrefix,
+            'businessId'           => $businessId
         ];
-
-
-        echo '<pre>';
-        var_dump($formData);
-        echo '</pre>';
-
-
-        // exit;
 
         // Initialize model
         $vendorFinanceModel = new VendorFinanceModel();
         
         // Insert data and log any errors
         if ($vendorFinanceModel->insert($formData)) {
-            log_message('info', 'Last Query: ' . $vendorFinanceModel->getLastQuery());
 
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Shipping information saved successfully'
+                'message' => 'Shipping information saved successfully',
+                'skuPrefix' => $skuPrefix,
+                'businessId' => $businessId,    
+                'csrf_hash' => csrf_hash()
             ]);
 
         } else {

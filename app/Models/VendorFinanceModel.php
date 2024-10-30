@@ -13,7 +13,9 @@ class VendorFinanceModel extends Model
         'invoiveSrcLevel',
         'dropshipFee',
         'shippingTerm',
-        'modeOfPayment'
+        'modeOfPayment',
+        'skuPrefix',
+        'businessId',
     ];
 
     protected $useTimestamps = true;

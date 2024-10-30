@@ -14,6 +14,8 @@ class InventoryUpdateController extends Controller
 
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
+            $skuPrefix       = $this->request->getPost('skuPrefix');
+            $businessId      = $this->request->getPost('businessId');
             
             // Proceed to insert the data if validation passes
             $inventoryUpdateModel = new InventoryUpdateModel();
@@ -28,6 +30,8 @@ class InventoryUpdateController extends Controller
                 'contactNumber' => $this->request->getPost('contactNumber'),
                 'modifiedOn' => $formattedDate,
                 'modifiedBy' => $this->request->getPost('modifiedBy'),
+                'skuPrefix'       => $skuPrefix,
+                'businessId'      => $businessId
             ];    
             
             // Insert data and log any errors
@@ -35,7 +39,10 @@ class InventoryUpdateController extends Controller
 
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Inventory Updated successfully'
+                    'message' => 'Inventory Updated successfully',
+                    'skuPrefix' => $skuPrefix,
+                    'businessId' => $businessId,    
+                    'csrf_hash' => csrf_hash()
                 ]);
             } else {
                 // Log the error and query

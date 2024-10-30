@@ -14,6 +14,8 @@ class VendorSettingController extends Controller
 
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
+            $skuPrefix       = $this->request->getPost('skuPrefix');
+            $businessId      = $this->request->getPost('businessId');
             
             // Proceed to insert the data if validation passes
             $vendorSettingModel = new VendorSettingModel();
@@ -31,7 +33,9 @@ class VendorSettingController extends Controller
                 'modifiedOn'            => $formattedDate,
                 'modifiedBy'            => $this->request->getPost('modifiedBy'),
                 'vendorNote'            => $this->request->getPost('vendorNote'),
-                'moqFlag'               => $this->request->getPost('moqFlag') ? 1 : 0
+                'moqFlag'               => $this->request->getPost('moqFlag') ? 1 : 0,
+                'skuPrefix'            => $skuPrefix,
+                'businessId'           => $businessId
             ];    
             
 
@@ -39,7 +43,10 @@ class VendorSettingController extends Controller
             if ($vendorSettingModel->insert($formData)) {
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Vendor Setting information saved successfully'
+                    'message' => 'Vendor Setting information saved successfully',
+                    'skuPrefix' => $skuPrefix,
+                    'businessId' => $businessId,    
+                    'csrf_hash' => csrf_hash()
                 ]);
             } else {
                 // Log the error and query

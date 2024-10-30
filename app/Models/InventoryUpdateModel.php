@@ -18,7 +18,9 @@ class InventoryUpdateModel extends Model
         'email', 
         'contactNumber', 
         'modifiedOn', 
-        'modifiedBy'
+        'modifiedBy',
+        'skuPrefix',
+        'businessId',
     ];    
     
     protected $useTimestamps = true; // Enable automatic timestamping

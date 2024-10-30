@@ -14,6 +14,8 @@ class FinancePayInfoController extends Controller
 
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
+            $skuPrefix       = $this->request->getPost('skuPrefix');
+            $businessId      = $this->request->getPost('businessId');
             
             // Proceed to insert the data if validation passes
             $financePayInfoModel = new FinancePayInfoModel();
@@ -31,6 +33,8 @@ class FinancePayInfoController extends Controller
                 'extraDropshipFee' => $this->request->getPost('extraDropshipFee'),
                 'modifiedOn' => $formattedDate,
                 'modifiedBy' => $this->request->getPost('modifiedBy'),
+                'skuPrefix'       => $skuPrefix,
+                'businessId'      => $businessId
             ];    
             
 
@@ -38,7 +42,10 @@ class FinancePayInfoController extends Controller
             if ($financePayInfoModel->insert($formData)) {
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Finance/Payment information saved successfully'
+                    'message' => 'Finance/Payment information saved successfully',
+                    'skuPrefix' => $skuPrefix,
+                    'businessId' => $businessId,    
+                    'csrf_hash' => csrf_hash()
                 ]);
             } else {
                 // Log the error and query

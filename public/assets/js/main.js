@@ -164,8 +164,29 @@ $(document).ready(function() {
 }
 
 
+$.ajaxSetup({
+  headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+// After each successful response, update the CSRF token
+function updateCsrfToken(response) {
+  if (response.csrf_hash) {
+      $('input[name="csrf_test_name"]').val(response.csrf_hash);
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': response.csrf_hash
+          }
+      });
+  }
+}
+
 
     // Business Details Form
+    let skuPrefix = '';   // Initialize as empty to store the value
+    let businessId = '';  // Initialize as empty to store the value
+
     $('#businessDetailsForm').on('submit', function(e) {
         e.preventDefault();
 
@@ -173,22 +194,20 @@ $(document).ready(function() {
   
         let formData = new FormData(this);
 
+
         // Convert FormData to a plain object
         let formDataObj = {};
         formData.forEach((value, key) => {
           formDataObj[key] = value;
         });
 
-        // Append 'vendorHeighlightedConcern' to the plain object
         formDataObj['vendorHeighlightedConcern'] = vendorHighlightedConcern;
 
         // Send the AJAX request
         $.ajax({
-            url: saveBusinessDetailsUrl,  // URL for form submission
+            url: saveBusinessDetailsUrl,
             type: 'POST',
-            data: JSON.stringify(formDataObj),  // Sending as JSON
-            contentType: 'application/json; charset=utf-8',  // Specify the content type
-            dataType: 'json',  // Expect JSON response from server
+            data: JSON.stringify(formDataObj),
             success: function(response) { 
                 if (response.status === 'error') {
                     // Display validation errors
@@ -197,10 +216,18 @@ $(document).ready(function() {
                     });
                 } else if (response.status === 'success') {
                     // Handle successful submission (if needed)
+                    // $('[name="csrf_test_name"]').val(response.csrf_hash);
+                    updateCsrfToken(response);
+
+                    skuPrefix = response.skuPrefix;
+                    businessId = response.businessId
+    
                     var successToast = new bootstrap.Toast($('#businessSuccessToast'));
                     successToast.show();
                     setTimeout(() => {
                       document.getElementById('businessDetailsForm').reset();
+                      $('#vendorHeighConcern').val(''); // Standard multi-select reset
+                      $('.multi-select-input').text('');
                     }, 500);
                 }
             },
@@ -251,22 +278,28 @@ $(document).ready(function() {
 
         $('#contactErrMsg').text('');
 
-       let formData = $(this).serialize();
+        let formElement = document.getElementById('contactInfoForm');
+        let formData = new FormData(formElement);
+       formData.append('skuPrefix', skuPrefix);
+       formData.append('businessId', businessId);   
 
-        
-        // Send data using AJAX
+
     $.ajax({
       url: saveContactInfoUrl,
       type: 'POST',
       data: formData,
+      dataType: 'json',
+      processData: false,  // Important: Prevent jQuery from processing data
+      contentType: false,  // Important: Prevent jQuery from setting content type
       success: function(response) {
           if (response.status === 'error') {
-              // Display validation errors
               $.each(response.errors, function(field, error) {
                   $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
               });
           } else if (response.status === 'success') {
-              // Handle successful submission (if needed)
+              // $('input[name="<?= csrf_token() ?>"]').val(response.csrf_hash);
+              updateCsrfToken(response);
+
               var successToast = new bootstrap.Toast($('#contactSuccessToast'));
               successToast.show();
 
@@ -276,9 +309,13 @@ $(document).ready(function() {
     
           }
       },
-      error: function(xhr, status, error) {
-          console.log(xhr.responseText);
-      }
+      error: function(jqXHR, textStatus, errorThrown) {
+        // Log detailed error information
+        console.log('AJAX Error:', jqXHR);
+        console.log(jqXHR.responseText); // Full response from the server
+        console.log('Status Code:', jqXHR.status); 
+    }
+
 
   });
 
@@ -290,12 +327,21 @@ $(document).ready(function() {
     $('#shippingInfoForm').on('submit', function(e) {
         e.preventDefault();
 
-        var formData = $(this).serialize();
+        // var formData = $(this).serialize();
+
+        let formElement = document.getElementById('shippingInfoForm');
+        let formData = new FormData(formElement);
+       formData.append('skuPrefix', skuPrefix);
+       formData.append('businessId', businessId);   
+
 
         $.ajax({
             url: saveShippingInfoUrl,
             type: 'POST',
             data: formData,
+            dataType: 'json',
+            processData: false,  // Important: Prevent jQuery from processing data
+            contentType: false,  // Important: Prevent jQuery from setting content type
             success: function(response) {
                 if (response.status === 'error') {
                     // Display validation errors
@@ -304,6 +350,9 @@ $(document).ready(function() {
                     });
                 } else if (response.status === 'success') {
                     // Handle successful submission (if needed)
+                    // $('input[name="<?= csrf_token() ?>"]').val(response.csrf_hash);
+                    updateCsrfToken(response);
+
                     var successToast = new bootstrap.Toast($('#shippingSuccessToast'));
                     successToast.show();
                     setTimeout(() => {
@@ -311,8 +360,11 @@ $(document).ready(function() {
                     }, 500);
                 }
             },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText);
+            error: function(jqXHR, textStatus, errorThrown) {
+              // Log detailed error information
+              console.log('AJAX Error:', jqXHR);
+              console.log(jqXHR.responseText); // Full response from the server
+              console.log('Status Code:', jqXHR.status); 
             }
 
         });
@@ -322,13 +374,20 @@ $(document).ready(function() {
   //Vendor Finanace Details Form
   $('#vendorFinanceForm').submit(function(e) {
     e.preventDefault(); 
+    
+    let formElement = document.getElementById('vendorFinanceForm');
+    let formData = new FormData(formElement);
+   formData.append('skuPrefix', skuPrefix);
+   formData.append('businessId', businessId);  
 
-    var formData = $(this).serialize();
 
     $.ajax({
       url: saveVendorFinanceUrl,
       type: 'POST',
       data: formData,
+      dataType: 'json',
+      processData: false,  // Important: Prevent jQuery from processing data
+      contentType: false,  // Important: Prevent jQuery from setting content type
       success: function(response) {
           if (response.status === 'error') {
               // Display validation errors
@@ -337,6 +396,9 @@ $(document).ready(function() {
               });
           } else if (response.status === 'success') {
               // Handle successful submission (if needed)
+              // $('input[name="<?= csrf_token() ?>"]').val(response.csrf_hash);
+              updateCsrfToken(response);
+
               var successToast = new bootstrap.Toast($('#financeSuccessToast'));
               successToast.show();
               setTimeout(() => {
@@ -368,12 +430,18 @@ $(document).ready(function() {
 
     $('#financeErrMsg').text('');
 
-    var formData = $(this).serialize();
+    let formElement = document.getElementById('financePaymentInfo');
+    let formData = new FormData(formElement);
+   formData.append('skuPrefix', skuPrefix);
+   formData.append('businessId', businessId);  
     
     $.ajax({
       url: saveFinancePayInfoUrl,
       type: 'POST',
       data: formData,
+      dataType: 'json',
+      processData: false,  // Important: Prevent jQuery from processing data
+      contentType: false,  // Important: Prevent jQuery from setting content type
       success: function(response) {
           if (response.status === 'error') {
               // Display validation errors
@@ -382,6 +450,9 @@ $(document).ready(function() {
               });
           } else if (response.status === 'success') {
               // Handle successful submission (if needed)
+              // $('input[name="<?= csrf_token() ?>"]').val(response.csrf_hash);
+              updateCsrfToken(response);
+
               var successToast = new bootstrap.Toast($('#paymentSuccessToast'));
               successToast.show();
               
@@ -405,13 +476,21 @@ $(document).ready(function() {
     e.preventDefault(); 
 
     // Capture form data
-    var formData = $(this).serialize();
+    // var formData = $(this).serialize();
+
+    let formElement = document.getElementById('vendorSettingForm');
+    let formData = new FormData(formElement);
+   formData.append('skuPrefix', skuPrefix);
+   formData.append('businessId', businessId);  
 
     // Send data using AJAX
     $.ajax({
       url: saveVendorSettingUrl,
       type: 'POST',
       data: formData,
+      dataType: 'json',
+      processData: false,  // Important: Prevent jQuery from processing data
+      contentType: false,  // Important: Prevent jQuery from setting content type
       success: function(response) {
           if (response.status === 'error') {
               // Display validation errors
@@ -420,6 +499,10 @@ $(document).ready(function() {
               });
           } else if (response.status === 'success') {
               // Handle successful submission (if needed)
+              // $('input[name="<?= csrf_token() ?>"]').val(response.csrf_hash);
+              updateCsrfToken(response);
+
+
               var successToast = new bootstrap.Toast($('#vendorSuccessToast'));
               successToast.show();
               setTimeout(() => {
@@ -458,12 +541,11 @@ $(document).ready(function() {
     }
 
     $('#rma-error-message').text('');
-
-
-    var formData = $(this).serialize();
-
-    console.log("url = ", saveCompanyRmaInfoUrl);
-    console.log("formData = ", formData);
+   
+   let formElement = document.getElementById('companyRmaInfoForm');
+   let formData = new FormData(formElement);
+  formData.append('skuPrefix', skuPrefix);
+  formData.append('businessId', businessId);  
 
     // Send data using AJAX
     $.ajax({
@@ -480,6 +562,9 @@ $(document).ready(function() {
               });
           } else if (response.status === 'success') {
               // Handle successful submission (if needed)
+              // $('input[name="<?= csrf_token() ?>"]').val(response.csrf_hash);
+              updateCsrfToken(response);
+
               var successToast = new bootstrap.Toast($('#rmaSuccessToast'));
               successToast.show();
 
@@ -501,11 +586,11 @@ $(document).ready(function() {
   $('#inventoryUpdateForm').submit(function(e) {
     e.preventDefault(); 
 
-    const contactNumberInput = document.getElementById('contactNumber');
+    const contactNumberInput = document.getElementById('inventoryContactNumber');
     const contactNumber = contactNumberInput.value;
 
     // Validate contact number
-    if (!validateContactNumber(contactNumber)) {
+    if (contactNumber && !validateContactNumber(contactNumber)) {
         document.getElementById('inventoryErrMsg').textContent = 'Please enter a valid contact number.';
         contactNumberInput.focus();
         return false;
@@ -513,21 +598,31 @@ $(document).ready(function() {
         document.getElementById('inventoryErrMsg').textContent = '';
     }
 
-    // Capture form data
-    var formData = $(this).serialize();
+    
+   let formElement = document.getElementById('inventoryUpdateForm');
+   let formData = new FormData(formElement);
+  formData.append('skuPrefix', skuPrefix);
+  formData.append('businessId', businessId);  
 
-    // Send data using AJAX
+
     $.ajax({
       url: saveInventoryUpdateUrl,
       type: 'POST',
       data: formData,
+      dataType: 'json',
+      processData: false,  // Important: Prevent jQuery from processing data
+      contentType: false,  // Important: Prevent jQuery from setting content type
       success: function(response) {
           if (response.status === 'error') {
-              // Display validation errors
+              // Display validation errors5
               $.each(response.errors, function(field, error) {
                   $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
               });
           } else if (response.status === 'success') {
+              // $('input[name="<?= csrf_token() ?>"]').val(response.csrf_hash);
+
+              updateCsrfToken(response);
+
               var successToast = new bootstrap.Toast($('#inventorySuccessToast'));
               successToast.show();
 

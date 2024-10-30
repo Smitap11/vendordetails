@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ContactInformationModel extends Model
 {
-    protected $table = 'contactinformation'; // Change to your table name
+    protected $table = 'contactinformation';
     protected $primaryKey = 'contactInfoId';
 
     protected $allowedFields = [
@@ -23,12 +23,14 @@ class ContactInformationModel extends Model
         'inventoryState', 
         'inventoryModifiedOn', 
         'inventoryModifiedBy',
+        'skuPrefix',
+        'businessId',
         'createdAt', 
         'updatedAt'
     ];
     
 
-    protected $useTimestamps = true; // Enable automatic timestamping
+    protected $useTimestamps = true;
     protected $createdField  = 'createdAt';
     protected $updatedField  = 'updatedAt';
 

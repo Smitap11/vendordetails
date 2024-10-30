@@ -67,13 +67,15 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="shipping-info-comments" class="form-label">Comments</label>
-                    <textarea class="form-control" name="shippingInfoComments" id="shipping-info-comments" rows="2" required></textarea>
+                    <textarea class="form-control" name="shippingInfoComments" id="shipping-info-comments" rows="2"></textarea>
                 </div>
 
                 <div class="col-md-6">
 
-                    <label for="dateField1" class="form-label">Modified On</label>
-              <input type="date" class="form-control" id="modified-on" name="shippingModifiedOn" aria-label="Modified On" aria-describedby="basic-addon1">
+                    <label for="shippingModifiedOn" class="form-label">Modified On</label>
+              <!-- <input type="date" class="form-control" id="shippingModifiedOn" name="modifiedOn" aria-label="Modified On" aria-describedby="basic-addon1"> -->
+              <input type="date" class="form-control" id="shippingModifiedOn" name="modifiedOn" aria-label="Modified On" aria-describedby="basic-addon1">
+
 
                 </div>
             </div>

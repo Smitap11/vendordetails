@@ -20,7 +20,9 @@ class ShippingInformationModel extends Model
         'shippingModifiedOn', 
         'shippingModifiedBy', 
         'shipmentUpdatingType', 
-        'shippingTrackingSource'
+        'shippingTrackingSource',
+        'skuPrefix',
+        'businessId',
     ];    
     
     protected $useTimestamps = true; // Enable automatic timestamping

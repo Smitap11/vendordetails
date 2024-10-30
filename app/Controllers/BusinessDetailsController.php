@@ -9,7 +9,6 @@ class BusinessDetailsController extends Controller
 {
     public function saveBusinessFormData()
     {
-        if ($this->request->isAJAX()) {
             
             $concernArray = [];
 
@@ -21,6 +20,12 @@ class BusinessDetailsController extends Controller
 
                 $vendorConcern = $jsonData->vendorHeighlightedConcern;
 
+                // Get company name and generate skuPrefix
+                $companyName = $jsonData->companyName;
+                $cleanedCompanyName = str_replace(' ', '', $companyName); // Remove all spaces
+                $skuPrefix = strtoupper(substr($cleanedCompanyName, 0, 4). '-');
+
+
                 if (is_array($vendorConcern)) {
                     $concernArray = $vendorConcern;
                 }
@@ -28,9 +33,8 @@ class BusinessDetailsController extends Controller
                 $formData = [
                     'finalStatus' => $jsonData->finalStatus,
                     'rebate' => $jsonData->rebate,
-                    'fbmCompanyName' => $jsonData->fbmCompanyName,
+                    'companyName' => $companyName,
                     'businessWebsite' => $jsonData->businessWebsite,
-                    'fbaCompanyName' => $jsonData->fbaCompanyName,
                     'accountManager' => $jsonData->accountManager,
                     'businessAccount' => $jsonData->businessAccount,
                     'modifiedOn' => $formattedDate,
@@ -40,20 +44,28 @@ class BusinessDetailsController extends Controller
                     'vendorHeighlightedConcern' => json_encode($vendorConcern),
                     'businessBrand' => $jsonData->businessBrand,
                     'businessUnit' => $jsonData->businessUnit,
-                    'vendorDescription' => $jsonData->vendorDescription
+                    'businessCategory' => $jsonData->businessCategory,
+                    'vendorDescription' => $jsonData->vendorDescription,
+                    'skuPrefix' => $skuPrefix
                 ];
                 
-            }        
-
+            }   
+            
             // Proceed to insert the data if validation passes
             $businessModel = new BusinessDetailsModel();
+            $businessId = $businessModel->insert($formData);        
+
+        // print_r($formData);
 
             // Insert data and log any errors
-            if ($businessModel->insert($formData)) {
+            if ($businessId) {
 
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Business details saved successfully'
+                    'message' => 'Business details saved successfully',
+                    'skuPrefix' => $skuPrefix,
+                    'businessId' => $businessId,    
+                    'csrf_hash' => csrf_hash()
                 ]);
                 
             } else {
@@ -66,9 +78,6 @@ class BusinessDetailsController extends Controller
                     'message' => 'Failed to save business details'
                 ]);
             }
-
-
-        }
 
     }
 }

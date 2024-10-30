@@ -56,7 +56,7 @@
             </div>
             <div class="m-2">
             <label for="Contact Number" class="form-label">Contact Number</label>
-            <input type="number" class="form-control" id="contactNumber" name="contactNumber" value="<?= old('contactNumber') ?>">
+            <input type="number" class="form-control" id="inventoryContactNumber" name="contactNumber" value="">
             </div>
             <div class="m-2">
             <label for="modified On" class="form-label">Modified On</label>

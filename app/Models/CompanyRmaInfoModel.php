@@ -13,7 +13,9 @@ class CompanyRmaInfoModel extends Model
         'addDiscNoReturn', 'pocRmaFlag', 'rmaAccManager', 'rmaEmail', 'rmaContactNumber',
         'daysOfDelivery', 'returnAddFlag', 'rmaStreet', 'rmaCity', 'rmaCountry',
         'rmaState', 'rmaZipcode', 'restockingFeeUnit', 'restockingFee', 'Comments',
-        'modifiedOn', 'modifiedBy', 'processedFile'
+        'modifiedOn', 'modifiedBy', 'processedFile',
+        'skuPrefix',
+        'businessId'
     ];
     
     protected $useTimestamps = true; // Enable automatic timestamping
