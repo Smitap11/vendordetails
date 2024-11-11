@@ -1,50 +1,51 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\VendorDashboardModel;
+use App\Models\ContactInformationModel;
+use App\Models\VendorSettingModel;
+use CodeIgniter\Controller;
 
-
-class VendorDashboardController extends BaseController
+class VendorDashboardController extends Controller
 {
-    public function index(): string
+    public function index()
     {
-        $request = \Config\Services::request();
+        // Load models for data retrieval
+        $VendorDashboardModel = new VendorDashboardModel();
 
-        $vendorModel = new VendorDashboardModel();
-        
-        $companyName = $this->request->getVar('companyName');
-        $contactNumber = $this->request->getVar('contactNumber');
-        $website = $this->request->getVar('website');
-        $contactEmail = $this->request->getVar('contactEmail');
-        $businessUnit = $this->request->getVar('businessUnit');
-        $type = $this->request->getVar('type');
-        $category = $this->request->getVar('category');
+        // Fetch categories for the category dropdown
+        $data['categories'] = $VendorDashboardModel->getAllCategories();
 
-        // Call the model method to fetch the search results
-        $data['vendors'] = $vendorModel->searchVendors(
-            $companyName,
-            $contactNumber,
-            $website,
-            $contactEmail,
-            $businessUnit,
-            $type,
-            $category
-        );
-
-
-    return view('vendor_dashboard', $data);
-
+        return view('vendor_dashboard', $data);
     }
 
-    public function vendorCategory()
+    public function fetchVendorData()
     {
-        $categoryModel = new VendorDashboardModel();
-        $data['categories'] = $categoryModel->getCategories(); // Fetch categories
+        $VendorDashboardModel = new VendorDashboardModel();
 
-        log_message('info', 'VendorDashboard::index() method called');
+        // Capture search filters from request
+        $filters = [
+            'companyName' => $this->request->getPost('companyName'),
+            'contactNumber' => $this->request->getPost('contact'),
+            'category' => $this->request->getPost('category'),
+            'vendorManager' => $this->request->getPost('vendorManager'),
+            'email' => $this->request->getPost('email'),
+            'sku' => $this->request->getPost('sku'),
+            'website' => $this->request->getPost('website'),
+            'businessUnit' => $this->request->getPost('businessUnit'),
+        ];
 
+        // Query database based on filters
+        $vendorData = $VendorDashboardModel->getFilteredData($filters);
 
-        return view('vendor_dashboard', $data); // Pass categories to your view
+        echo "<pre>";
+        print_r($vendorData);
+        echo "</pre>";
+        exit(); // Stop further execution for debugging purposes
+    
+
+        // Return data as JSON for DataTables
+        return $this->response->setJSON(['data' => $vendorData]);
     }
-
 }

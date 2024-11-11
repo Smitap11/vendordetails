@@ -6,68 +6,40 @@ use CodeIgniter\Model;
 
 class VendorDashboardModel extends Model
 {
-
     protected $table = 'businessdetails';
-    
-    public function searchVendors($companyName = null, $contactNumber = null, $website = null, $contactEmail = null, $businessUnit = null, $type = null, $category = null)
-{
-    $builder = $this->db->table('businessdetails as bd');
-    $builder->select('
-        bd.businessUnit, 
-        vs.vendorSettingType AS type, 
-        bd.companyName, 
-        NULL AS orderProcessingEmail, 
-        bd.businessWebsite AS website, 
-        bd.businessCategory AS category, 
-        NULL AS assignSKU, 
-        vs.vendorManager
-    ');
-    
-    // Update the join condition based on actual relationship
-    $builder->join('contactinformation ci', 'bd.businessId = ci.businessId', 'left'); 
-    $builder->join('vendorsetting vs', 'bd.companyName = vs.companyName', 'left');
+    protected $primaryKey = 'businessId';
 
-    // Apply conditions for each search field
-    if ($companyName) {
-        $builder->like('bd.companyName', $companyName);
-    }
-    if ($contactNumber) {
-        $builder->like('ci.contactNumber', $contactNumber);
-    }
-    if ($website) {
-        $builder->like('bd.businessWebsite', $website);
-    }
-    if ($contactEmail) {
-        $builder->like('ci.contactEmail', $contactEmail);
-    }
-    if ($businessUnit) {
-        $builder->like('bd.businessUnit', $businessUnit);
-    }
-    if ($type) {
-        $builder->like('vs.vendorSettingType', $type);
-    }
-    if ($category) {
-        $builder->like('bd.businessCategory', $category);
+    public function getAllCategories()
+    {
+        return $this->db->table('vendordashboardcategory')->select('categoryName')->get()->getResultArray();
     }
 
-    // Execute and return the result
-    $query = $builder->get();
-    return $query->getResult();
-}
-
+    public function getFilteredData($filters)
+    {
+        $builder = $this->db->table('businessdetails')
+        ->join('contactinformation', 'contactinformation.businessId = businessdetails.businessId', 'left')
+        ->join('vendorsetting', 'vendorsetting.businessId = businessdetails.businessId', 'left')
+        ->select('businessdetails.businessUnit, 
+                  businessdetails.companyName, 
+                  MAX(contactinformation.contactEmail) as contactEmail,
+                  businessdetails.businessWebsite AS website, 
+                  businessdetails.businessCategory AS category, 
+                  vendorsetting.skuPrefix,
+                  vendorsetting.vendorManager')
+        ->groupBy('businessdetails.businessId');  // Group by businessId to get a unique row
     
 
+        // Apply filters if provided
+        if (!empty($filters['companyName'])) $builder->like('businessdetails.companyName', $filters['companyName'], 'both'); // 'both' applies wildcard around the search term
+        if (!empty($filters['contactNumber'])) $builder->like('contactinformation.contactNumber', $filters['contactNumber'], 'both');
+        if (!empty($filters['category'])) $builder->where('businessdetails.businessCategory', $filters['category']);
+        if (!empty($filters['vendorManager'])) $builder->where('vendorsetting.vendorManager', $filters['vendorManager']);
+        if (!empty($filters['email'])) $builder->like('contactinformation.contactEmail', $filters['email'], 'both');
+        if (!empty($filters['sku'])) $builder->like('vendorsetting.skuPrefix', $filters['sku'], 'both');
+        if (!empty($filters['website'])) $builder->like('businessdetails.businessWebsite', $filters['website'], 'both');
+        if (!empty($filters['businessUnit'])) $builder->where('businessdetails.businessUnit', $filters['businessUnit']);
 
+        return $builder->get()->getResultArray();
+    }
 
-    
-    // public function getCategories()
-    // {
-    //     protected $table = 'vendordashboardcategory';
-    //     protected $primaryKey = 'categoryId';
-    //     protected $allowedFields = ['categoryName'];
-
-    //     return $this->findAll();
-    // }
-
-    
-}
+    }

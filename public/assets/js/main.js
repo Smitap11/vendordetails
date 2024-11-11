@@ -640,45 +640,8 @@ function updateCsrfToken(response) {
 
   });
 
-  /* Initialize DataTables */
-
-  var table = $('#vendorTable').DataTable({
-    // AJAX call to fetch data from the server (you'll need to set this up)
-    "ajax": {
-        "url": "/path/to/server-side/data",
-        "dataSrc": ""
-    },
-    "columns": [
-        { "data": "businessUnit" },
-        { "data": "type" },
-        { "data": "companyName" },
-        { "data": "orderProcessingEmail" },
-        { "data": "website" },
-        { "data": "category" },
-        { "data": "assignSku" },
-        { "data": "vendorManager" }
-    ]
-});
-
-// Search Button functionality
-$('#searchBtn').on('click', function() {
-    var company = $('#company').val();
-    var contact = $('#contact').val();
-    var category = $('#category').val();
-    var vendorManager = $('#vendorManager').val();
-    var email = $('#email').val();
-    var sku = $('#sku').val();
-    var website = $('#website').val();
-    var businessUnit = $('#businessUnit').val();
-
-    // Implement search/filter logic using these variables
-    table.column(2).search(company).draw(); // Search by company/brand name
-    // Add more filters based on your columns
-});
-
-
-
-
 
 
 });
+
+

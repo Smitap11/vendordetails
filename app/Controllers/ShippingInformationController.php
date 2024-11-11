@@ -36,11 +36,6 @@ class ShippingInformationController extends Controller
                 'businessId'      => $businessId
             ];
 
-            // echo '<pre>';
-            // var_dump($formData);
-            // echo '</pre>';
-            // exit;
-
             // Insert data and log any errors
             if ($shippingModel->insert($formData)) {
                 return $this->response->setJSON([

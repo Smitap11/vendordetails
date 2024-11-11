@@ -28,8 +28,7 @@
         <?= $this->include("/finance_payment_info");  ?>
         
         <!-- Order Processing Information Ninth form slide -->
-        <?= $this->include("/order_processing_info");  ?>
-
+         <!-- will be added later -->
         
         <!-- Inventory Update Tenth form slide -->
         <?= $this->include("/inventory_update");  ?>

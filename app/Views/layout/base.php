@@ -48,8 +48,8 @@
     <footer class="bg-primary py-2 gradient-custom footer-section">
     <div>
         <p class="text-center">&copy; 2024 All copy rights reserved</p>
-    </div>
-</footer>
+    </div>  
+    </footer>
 
 <!-- Optional Javascript -->
 <!-- jQuery first then Bootstrap.js -->
@@ -62,6 +62,8 @@
 
 <!-- Include jQuery from a CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Custom JavaScript files -->
 <script src="<?= base_url('public/assets/js/main.js') ?>"></script>

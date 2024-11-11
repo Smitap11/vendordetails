@@ -19,11 +19,9 @@ $routes->post('VendorSettingController/saveVendorSettingFormData', 'VendorSettin
 $routes->post('FinancePayInfoController/saveFinancePayInfoFormData', 'FinancePayInfoController::saveFinancePayInfoFormData');
 $routes->post('CompanyRmaInfoController/saveCompanyRmaFormData', 'CompanyRmaInfoController::saveCompanyRmaFormData');
 $routes->post('InventoryUpdateController/saveInventoryUpdateFormData', 'InventoryUpdateController::saveInventoryUpdateFormData');
+$routes->post('VendorDashboardController/fetchVendorData', 'VendorDashboardController::fetchVendorData');
 
-$routes->get('/vendor_dashboard', 'VendorDashboardController::vendorCategory');
 
-$routes->get('upload', 'Upload::index');          // Add this line.
-$routes->post('upload/upload', 'Upload::upload'); // Add this line.
 
 
 
