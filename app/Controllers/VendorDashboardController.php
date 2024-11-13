@@ -3,12 +3,11 @@
 namespace App\Controllers;
 
 use App\Models\VendorDashboardModel;
-use App\Models\ContactInformationModel;
-use App\Models\VendorSettingModel;
 use CodeIgniter\Controller;
 
 class VendorDashboardController extends Controller
 {
+
     public function index()
     {
         // Load models for data retrieval
@@ -27,7 +26,7 @@ class VendorDashboardController extends Controller
         // Capture search filters from request
         $filters = [
             'companyName' => $this->request->getPost('companyName'),
-            'contactNumber' => $this->request->getPost('contact'),
+            'contactNumber' => $this->request->getPost('contactNumber'),
             'category' => $this->request->getPost('category'),
             'vendorManager' => $this->request->getPost('vendorManager'),
             'email' => $this->request->getPost('email'),
@@ -36,16 +35,36 @@ class VendorDashboardController extends Controller
             'businessUnit' => $this->request->getPost('businessUnit'),
         ];
 
-        // Query database based on filters
+        // Execute the query
         $vendorData = $VendorDashboardModel->getFilteredData($filters);
 
-        echo "<pre>";
-        print_r($vendorData);
-        echo "</pre>";
-        exit(); // Stop further execution for debugging purposes
-    
+        if (!empty($vendorData)) {
+            // Success response
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Data retrieved successfully',
+                'data' => $vendorData,
+                'csrf_hash' => csrf_hash()
+            ]);
+        } else {
+            // Log errors if available
+            $errors = $VendorDashboardModel->errors();
+            if (!empty($errors)) {
+                log_message('error', 'Query errors: ' . print_r($errors, true));
+            }
 
-        // Return data as JSON for DataTables
-        return $this->response->setJSON(['data' => $vendorData]);
+            // Log the last compiled query for debugging
+            $query = $VendorDashboardModel->getLastQuery();
+            log_message('error', 'Last Query: ' . (is_string($query) ? $query : print_r($query, true)));
+
+            // Failure response with empty data to show "No data available" in DataTables
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'No data found',
+                'data' => [],
+                'csrf_hash' => csrf_hash()
+            ]);
+        }
+
     }
 }

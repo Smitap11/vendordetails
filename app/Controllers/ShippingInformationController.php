@@ -43,8 +43,7 @@ class ShippingInformationController extends Controller
                     'message' => 'Shipping information saved successfully',
                     'skuPrefix' => $skuPrefix,
                     'businessId' => $businessId,    
-                    'csrf_hash' => csrf_hash()
-                    
+                    'csrf_hash' => csrf_hash()   
                 ]);
             } else {
                 // Log the error and query
