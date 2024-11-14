@@ -14,8 +14,7 @@ class CompanyRmaInfoModel extends Model
         'daysOfDelivery', 'returnAddFlag', 'rmaStreet', 'rmaCity', 'rmaCountry',
         'rmaState', 'rmaZipcode', 'restockingFeeUnit', 'restockingFee', 'Comments',
         'modifiedOn', 'modifiedBy', 'processedFile',
-        'skuPrefix',
-        'businessId'
+        'skuPrefix', 'businessId', 'formStatus'
     ];
     
     protected $useTimestamps = true; // Enable automatic timestamping

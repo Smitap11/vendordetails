@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\FinancePayInfoModel;
+use App\Models\CompanyRmaInfoModel;
 use CodeIgniter\Controller;
 
 class FinancePayInfoController extends Controller
@@ -15,7 +16,21 @@ class FinancePayInfoController extends Controller
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
             $skuPrefix       = $this->request->getPost('skuPrefix');
-            $businessId      = $this->request->getPost('businessId');
+
+            echo 'BId = '.$businessId = $request->getPost('businessId') ?? null;
+
+            // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
+            if (empty($businessId)) {
+                $CompanyRmaInfoModel = new CompanyRmaInfoModel();
+                $businessRecord = $CompanyRmaInfoModel
+                    ->where('skuPrefix', $skuPrefix)
+                    ->orderBy('businessId', 'DESC') // Get the latest record
+                    ->first();
+
+                if ($businessRecord) {
+                    $businessId = $businessRecord['businessId'];
+                }
+            }
             
             // Proceed to insert the data if validation passes
             $financePayInfoModel = new FinancePayInfoModel();

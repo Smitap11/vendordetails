@@ -26,6 +26,7 @@ class BusinessDetailsModel extends Model
         'businessCategory',
         'vendorDescription',
         'skuPrefix',
+        'formStatus',
         'createdAt', 
         'updatedAt'
     ];    

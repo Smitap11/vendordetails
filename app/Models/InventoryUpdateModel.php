@@ -21,6 +21,7 @@ class InventoryUpdateModel extends Model
         'modifiedBy',
         'skuPrefix',
         'businessId',
+        'formStatus'
     ];    
     
     protected $useTimestamps = true; // Enable automatic timestamping

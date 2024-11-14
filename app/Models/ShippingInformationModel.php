@@ -23,6 +23,7 @@ class ShippingInformationModel extends Model
         'shippingTrackingSource',
         'skuPrefix',
         'businessId',
+        'formStatus'
     ];    
     
     protected $useTimestamps = true; // Enable automatic timestamping

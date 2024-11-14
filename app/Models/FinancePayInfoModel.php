@@ -22,6 +22,7 @@ class FinancePayInfoModel extends Model
         'extraDropshipFee',
         'modifiedOn',
         'modifiedBy',
+        'formStatus',
         'skuPrefix',
         'businessId',
     ];

@@ -16,6 +16,7 @@ class VendorFinanceModel extends Model
         'modeOfPayment',
         'skuPrefix',
         'businessId',
+        'formStatus'
     ];
 
     protected $useTimestamps = true;

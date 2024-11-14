@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ContactInformationModel;
+use App\Models\BusinessDetailsModel;
 use CodeIgniter\Controller;
 
 class ContactInformationController extends Controller
@@ -17,8 +18,22 @@ class ContactInformationController extends Controller
         $modifiedOn = $request->getPost('inventoryModifiedOn');
         $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
         $skuPrefix  = $request->getPost('skuPrefix');
-        $businessId = $request->getPost('businessId');
 
+        echo 'BId = '.$businessId = $request->getPost('businessId') ?? null;
+
+        // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
+        if (empty($businessId)) {
+            $businessDetailsModel = new BusinessDetailsModel();
+            $businessRecord = $businessDetailsModel
+                ->where('skuPrefix', $skuPrefix)
+                ->orderBy('businessId', 'DESC') // Get the latest record
+                ->first();
+
+            if ($businessRecord) {
+                $businessId = $businessRecord['businessId'];
+            }
+        }
+        
 
         $contactData = [
             'contactEmail'           => $request->getPost('contactEmail'),

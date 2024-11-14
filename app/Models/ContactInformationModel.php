@@ -25,6 +25,7 @@ class ContactInformationModel extends Model
         'inventoryModifiedBy',
         'skuPrefix',
         'businessId',
+        'formStatus',
         'createdAt', 
         'updatedAt'
     ];

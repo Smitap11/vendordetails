@@ -25,6 +25,7 @@ class VendorSettingModel extends Model
         'moqFlag',
         'skuPrefix',
         'businessId',
+        'formStatus'
     ];
     
     protected $useTimestamps = true; // Enable automatic timestamping
