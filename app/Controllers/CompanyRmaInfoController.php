@@ -56,7 +56,8 @@ class CompanyRmaInfoController extends Controller
                 'modifiedBy' => $this->request->getPost('modifiedBy'),
                 'processedFile'   => $originalFileName,
                 'skuPrefix'       => $skuPrefix,
-                'businessId'      => $businessId
+                'businessId'      => $businessId,
+                'formStatus'      => 'incomplete'
             ];    
 
 

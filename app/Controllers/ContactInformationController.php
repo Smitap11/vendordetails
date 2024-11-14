@@ -35,7 +35,8 @@ class ContactInformationController extends Controller
             'inventoryModifiedOn'    => $formattedDate,
             'inventoryModifiedBy'    => $request->getPost('inventoryModifiedBy'),
             'skuPrefix'              => $skuPrefix,
-            'businessId'             => $businessId
+            'businessId'             => $businessId,
+            'formStatus'             => 'incomplete'
         ];
 
     

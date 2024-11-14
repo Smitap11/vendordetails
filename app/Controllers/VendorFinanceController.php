@@ -23,7 +23,8 @@ class VendorFinanceController extends BaseController
             'shippingTerm'         => $request->getPost('shippingTerm'),
             'modeOfPayment'        => $request->getPost('modeOfPayment'),
             'skuPrefix'            => $skuPrefix,
-            'businessId'           => $businessId
+            'businessId'           => $businessId,
+            'formStatus'           => 'incomplete'
         ];
 
         // Initialize model

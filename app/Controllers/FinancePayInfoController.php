@@ -34,7 +34,8 @@ class FinancePayInfoController extends Controller
                 'modifiedOn' => $formattedDate,
                 'modifiedBy' => $this->request->getPost('modifiedBy'),
                 'skuPrefix'       => $skuPrefix,
-                'businessId'      => $businessId
+                'businessId'      => $businessId,
+                'formStatus' => 'incomplete'
             ];    
             
 

@@ -33,7 +33,8 @@ class ShippingInformationController extends Controller
                 'shipmentUpdatingType'     => $this->request->getPost('shipmentUpdatingType'),
                 'shippingTrackingSource'   => $this->request->getPost('shippingTrackingSource'),
                 'skuPrefix'       => $skuPrefix,
-                'businessId'      => $businessId
+                'businessId'      => $businessId,
+                'formStatus' => 'incomplete'
             ];
 
             // Insert data and log any errors

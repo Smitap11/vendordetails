@@ -46,7 +46,8 @@ class BusinessDetailsController extends Controller
                     'businessUnit' => $jsonData->businessUnit,
                     'businessCategory' => $jsonData->businessCategory,
                     'vendorDescription' => $jsonData->vendorDescription,
-                    'skuPrefix' => $skuPrefix
+                    'skuPrefix' => $skuPrefix,
+                    'formStatus' => 'incomplete'
                 ];
                 
             }   

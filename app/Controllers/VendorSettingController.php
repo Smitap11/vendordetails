@@ -35,7 +35,8 @@ class VendorSettingController extends Controller
                 'vendorNote'            => $this->request->getPost('vendorNote'),
                 'moqFlag'               => $this->request->getPost('moqFlag') ? 1 : 0,
                 'skuPrefix'            => $skuPrefix,
-                'businessId'           => $businessId
+                'businessId'           => $businessId,
+                'formStatus'           => 'incomplete'
             ];    
             
 

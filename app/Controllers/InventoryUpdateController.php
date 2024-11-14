@@ -31,7 +31,8 @@ class InventoryUpdateController extends Controller
                 'modifiedOn' => $formattedDate,
                 'modifiedBy' => $this->request->getPost('modifiedBy'),
                 'skuPrefix'       => $skuPrefix,
-                'businessId'      => $businessId
+                'businessId'      => $businessId,
+                'formStatus' => 'incomplete'
             ];    
             
             // Insert data and log any errors
