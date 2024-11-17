@@ -21,6 +21,19 @@ $routes->post('CompanyRmaInfoController/saveCompanyRmaFormData', 'CompanyRmaInfo
 $routes->post('InventoryUpdateController/saveInventoryUpdateFormData', 'InventoryUpdateController::saveInventoryUpdateFormData');
 $routes->post('VendorDashboardController/fetchVendorData', 'VendorDashboardController::fetchVendorData');
 
+// $routes->get('auth/signup', 'AuthController::register');
+$routes->post('auth/signup', 'AuthController::register');
+
+// $routes->get('auth/login', 'AuthController::login');
+$routes->post('auth/login', 'AuthController::login');
+
+
+// $routes->get('/logout', 'AuthController::logout');
+$routes->get('auth/logout', 'AuthController::logout');
+
+$routes->get('supplier_registration', 'VendorDashboardController::index', ['filter' => 'auth']);
+
+
 
 
 

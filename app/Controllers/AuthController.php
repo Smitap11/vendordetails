@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\UserModel;
+use CodeIgniter\Controller;
+
+class AuthController extends Controller
+{
+    public function register()
+    {
+        helper(['form']);
+
+        log_message('error', 'Inside controller before ' . $this->request->getMethod());
+
+        if ($this->request->getMethod() === 'POST') {
+
+            $userModel = new UserModel();
+
+            $username = $this->request->getVar('username');
+            $email = $this->request->getVar('email');
+            $password = $this->request->getVar('password');
+
+            log_message('error', 'Form data: ' . print_r($this->request->getPost(), true));
+
+            // Check for duplicate username
+            if ($userModel->where('username', $username)->first()) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'This username is already taken. Please choose another.',
+                    'csrf_hash' => csrf_hash()
+                ]);
+            }
+
+            // Check for duplicate email
+            if ($userModel->where('email', $email)->first()) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'This email is already registered. Please use a different email.',
+                    'csrf_hash' => csrf_hash()
+                ]);
+            }
+
+            // Proceed to save user data
+            $data = [
+                'username' => $username,
+                'email' => $email,
+                'password' => password_hash($password, PASSWORD_DEFAULT),
+            ];
+
+            if ($userModel->save($data)) {
+                // Create session and send success response as JSON
+                session()->set('userId', $userModel->getInsertID());
+                session()->set('username', $data['username']);
+
+                log_message('error', 'Session Data: ' . print_r(session()->get(), true));  // Check session data here
+
+                return $this->response->setJSON(['status' => 'success', 'csrf_hash' => csrf_hash() ]);
+            } else {
+                // If save fails, send an error message
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Failed to create account. Please try again.',
+                    'csrf_hash' => csrf_hash()
+                ]);
+            }
+        }
+
+        // Return the signup view (not used in AJAX)
+        return view('auth/signup');
+    }
+
+    public function login()
+    {
+        if ($this->request->getMethod() === 'POST') {
+
+            log_message('error', 'Inside controller post request');
+            $username = $this->request->getPost('username');
+            $password = $this->request->getPost('password');
+
+            $userModel = new UserModel();
+            $user = $userModel->where('username', $username)->first();
+
+            if ($user && password_verify($password, $user['password'])) {
+    
+                log_message('error', 'inside pwd');
+
+                // Set user session
+                session()->set([
+                    'userId' => $user['id'],
+                    'username' => $user['username'],
+                ]);
+                return $this->response->setJSON(['status' => 'success', 'csrf_hash' => csrf_hash()]);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid username or password.', 'csrf_hash' => csrf_hash()]);
+            }
+        } else {
+            log_message('error', 'not post request');
+
+        }
+
+        // If not a POST request, redirect to login page
+        // return redirect()->to('auth/login');
+    }
+
+
+    public function logout()
+    {
+        // Destroy the session
+        session()->destroy();
+
+        // Redirect to the login page
+        return redirect()->to(base_url('auth/login'));
+    }
+
+}

@@ -113,9 +113,6 @@
         var csrfName = '<?= csrf_token() ?>';
         var csrfHash = '<?= csrf_hash() ?>';
 
-        /* Initialize DataTables */
-        var saveVendoDashUrl = "<?= base_url('VendorDashboardController/fetchVendorData') ?>";
-
         // Initialize DataTable
         var vendorTable = $('#vendorTable').DataTable({
             columns: [{
@@ -165,6 +162,9 @@
             console.log('button clicked');
             // Collect form data
             var searchData = $('#searchForm').serialize(); // Automatically serializes form data
+            
+            var saveVendoDashUrl = "<?= base_url('VendorDashboardController/fetchVendorData') ?>";
+
 
             console.log('searchData = ', searchData);
 
