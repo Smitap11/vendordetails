@@ -20,6 +20,8 @@ $routes->post('FinancePayInfoController/saveFinancePayInfoFormData', 'FinancePay
 $routes->post('CompanyRmaInfoController/saveCompanyRmaFormData', 'CompanyRmaInfoController::saveCompanyRmaFormData');
 $routes->post('InventoryUpdateController/saveInventoryUpdateFormData', 'InventoryUpdateController::saveInventoryUpdateFormData');
 $routes->post('VendorDashboardController/fetchVendorData', 'VendorDashboardController::fetchVendorData');
+$routes->post('OrderProcessingController/saveOrderProcessingFormData', 'OrderProcessingController::saveOrderProcessingFormData');
+
 
 $routes->get('/signup', 'AuthController::showSignupForm');
 $routes->post('/signup', 'AuthController::register');

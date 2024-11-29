@@ -11,6 +11,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -46,14 +48,27 @@
                 <?php endif; ?>
             </ul>
 
-            <!-- Right-aligned Login/Logout Menu -->
+            <!-- Right-aligned User Dropdown -->
             <ul class="navbar-nav ms-auto">
                 <?php if (session()->has('userId')): ?>
-                    <li class="nav-item">
-                        <form action="<?= site_url('logout'); ?>" method="POST" style="display:inline;">
-                            <?= csrf_field(); ?>
-                            <button type="submit" class="btn nav-link" style="border: none; background: none; padding: 0; cursor: pointer;">Logout</button>
-                        </form>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i> <!-- User icon -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item">
+                                    <b><?= session('userName'); ?></b>
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="<?= site_url('logout'); ?>" method="POST" style="display: inline;">
+                                    <?= csrf_field(); ?>
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
@@ -64,6 +79,8 @@
         </div>
     </div>
 </nav>
+
+
 
 
     <?= $this->renderSection("content"); ?>

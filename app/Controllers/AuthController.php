@@ -100,7 +100,7 @@ class AuthController extends Controller
                 // Set user session
                 session()->set([
                     'userId' => $user['id'],
-                    'username' => $user['username'],
+                    'userName' => $user['username'],
                 ]);
                 return $this->response->setJSON(['status' => 'success', 'csrf_hash' => csrf_hash()]);
             } else {
@@ -108,7 +108,7 @@ class AuthController extends Controller
             }
         } else {
             log_message('error', 'not post request');
-        }
+        }    
 
         // If not a POST request, redirect to login page
         return redirect()->to('login');

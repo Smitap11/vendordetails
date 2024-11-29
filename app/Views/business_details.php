@@ -1,4 +1,4 @@
-<div class="carousel-item active">
+<div class="carousel-item">
       <div class="form-container">
         <h5 class="form-header">Business Details</h5>
         <form id="businessDetailsForm" method="post">
@@ -9,14 +9,25 @@
               <label for="selectBox1" class="form-label">Final Status</label>
               <select class="form-select final-status" id="final-status" name="finalStatus" aria-label="Default select example">
                 <option value="not-approached">Not Approached</option>
-                <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
-                <option value="dead-or-no-response">Dead/No Response</option>
-                <option value="approached">Approached</option>
-                <option value="onboard-vendor">Onboard Vendor</option>
-                <option value="inprogress">In progress</option>
-                <option value="dropped-by-vendor">Dropped By Vendor</option>
-                <option value="dropped-by-us">Dropped By Us</option>
-                <option value="document-issue">Document Issue</option>
+                <option value="Converted/Pre Qualified">Converted/Pre Qualified</option>
+                <option value="Dead/No Response">Dead/No Response</option>
+                <option value="Approached">Approached</option>
+                <option value="Onboard Vendor">Onboard Vendor</option>
+                <option value="In progress">In progress</option>
+                <option value="Dropped By Vendor">Dropped By Vendor</option>
+                <option value="Dropped By Us">Dropped By Us</option>
+                <option value="Document Issue">Document Issue</option>
+                <option value="Waiting/No Response">Waiting/No Response</option>
+                <option value="Contact In Future">Contact In Future</option>
+                <option value="Cancelled/Lost">Cancelled/Lost</option>
+                <option value="Registered">Registered</option>
+                <option value="Reverted/In Progress">Reverted/In Progress</option>
+                <option value="Declined By Us">Declined By Us</option>
+                <option value="Declined By Vendor">Declined By Vendor</option>
+                <option value="Rejected By Bulkbuy">Rejected By Bulkbuy</option>
+                <option value="TO Sent">TO Sent</option>
+                <option value="PO Sent">PO Sent</option>
+                <option value="Pending at 2nd Level">Pending at 2nd Level</option>
               </select>
             </div>
 
@@ -43,19 +54,38 @@
           </div>
 
           <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="businessUnit" class="form-label">Business Unit</label>
-              <select class="form-select business-unit" id="businessUnit" name="businessUnit" aria-label="Default select example">
-                <option value="home-hobbies">Home & Hobbies</option>
-                <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
-                <option value="dead-or-no-response">Dead/No Response</option>
-                <option value="approached">Approached</option>
+            
+          <div class="col-md-6">
+              <label for="textField1" class="form-label">Category</label>
+              <!-- <input type="text" class="form-control" id="businessCategory" name="businessCategory" placeholder="Ex. Electronics" aria-describedby="basic-addon1">   -->
+              <select class="form-select" id="businessCategory" name="businessCategory" aria-label="Default select example">
+                <option value="Accessories and Apparels">Accessories and Apparels</option>
+                <option value="Appliance">Appliance</option>
+                <option value="Arts, Crafts & Sewing">Arts, Crafts & Sewing</option>
+                <option value="Automotive & Industrial Scientific">Automotive & Industrial Scientific</option>
+                <option value="Baby & Baby Care">Baby & Baby Care</option>
+                <option value="Beauty, Personal & Health Care">Beauty, Personal & Health Care</option>
+                <option value="Bed, Bath & Linon">Bed, Bath & Linon</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Grocery & Gourmet Food">Grocery & Gourmet Food</option>
+                <option value="Hardware & Tools">Hardware & Tools</option>
+                <option value="Health Care">Health Care</option>
+                <option value="Home & Decor">Home & Decor</option>
+                <option value="Kitchen & Dining">Kitchen & Dining</option>
+                <option value="Lamps & Lightings">Lamps & Lightings</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Musical Instruments">Musical Instruments</option>
+                <option value="Outdoor & Garden">Outdoor & Garden</option>
+                <option value="Pet & Pet Care">Pet & Pet Care</option>
+                <option value="Sports & Fitness">Sports & Fitness</option>
+                <option value="Toys & Games">Toys & Games</option>
               </select>
             </div>
 
             <div class="col-md-6">
-              <label for="textField1" class="form-label">Category</label>
-              <input type="text" class="form-control" id="businessCategory" name="businessCategory" placeholder="Ex. Electronics" aria-describedby="basic-addon1">  
+              <label for="textField1" class="form-label">Brand</label>
+              <input type="text" class="form-control" id="business-brand" name="businessBrand" placeholder="Ex. Nike" aria-describedby="basic-addon1">  
             </div>  
           </div>
 
@@ -87,16 +117,21 @@
               <label for="selectBox1" class="form-label">Vendor Type</label>
               <select class="form-select vendor-type" id="vendor-type" name="vendorType" aria-label="Default select example">
                 <option value="Manufacturer/Producer" selected>Manufacturer/Producer</option>
-                <option value="Converted/Pre Qualified">Converted/Pre Qualified</option>
-                <option value="Dead/No Response">Dead/No Response</option>
+                <option value="Converted/Pre Qualified">Distributor</option>
+                <option value="Wholeseller">Wholeseller</option>
+                <option value="Converted/Pre Qualified">Distributor</option>
               </select>
             </div>
 
             <div class="col-md-6">
               <label for="dateField1" class="form-label">Vendor Behaviour</label>
               <select class="form-select vendor-behaviour" id="vendor-behaviour" name="vendorBehaviour">
-                <option value="Inactive" selected>Inactive</option>
-                <option value="converted-or-pre-Qualified">Active</option>
+                <option value="Normal" selected>Normal</option>
+                <option value="Complex">Complex</option>
+                <option value="Demanded">Demanded</option>
+                <option value="Critical">Critical</option>
+                <option value="Slow in Response">Slow in Response</option>
+                <option value="Inactive">Inactive</option>
               </select>
             </div>
           </div>
@@ -104,12 +139,10 @@
           <div class="row mb-3">
             <div class="col-md-6">
               <label for="select" class="form-label">Vendor Highlighted Concern</label>
-              
               <div class="multi-select-container vendor-heigh-con">
                 <div class="multi-select-input form-control" id="multiSelectInput">
                   <input type="text" id="vendorHeighConcern" placeholder="Select Options" readonly>
                 </div>
-                
                 <ul class="dropdown-menu" id="dropdownMenu">
                   <li class="dropdown-item" data-value="Option 1">Option 1</li>
                   <li class="dropdown-item" data-value="Option 2">Option 2</li>
@@ -126,8 +159,13 @@
             </div>
 
             <div class="col-md-6">
-              <label for="textField1" class="form-label">Brand</label>
-              <input type="text" class="form-control" id="business-brand" name="businessBrand" placeholder="Ex. Nike" aria-describedby="basic-addon1">  
+              <label for="businessUnit" class="form-label">Business Unit</label>
+              <select class="form-select business-unit" id="businessUnit" name="businessUnit" aria-label="Default select example">
+                <option value="home-hobbies">Home & Hobbies</option>
+                <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
+                <option value="dead-or-no-response">Dead/No Response</option>
+                <option value="approached">Approached</option>
+              </select>
             </div>
           </div>
 

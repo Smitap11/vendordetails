@@ -19,7 +19,7 @@ class ContactInformationController extends Controller
         $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
         $skuPrefix  = $request->getPost('skuPrefix');
 
-        echo 'BId = '.$businessId = $request->getPost('businessId') ?? null;
+        $businessId = $request->getPost('businessId') ?? null;
 
         // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
         if (empty($businessId)) {

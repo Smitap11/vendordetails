@@ -470,7 +470,6 @@ function updateCsrfToken(response) {
   });
 
   
-    
   //Vendor Setting Details Form
   $('#vendorSettingForm').submit(function(e) {
     e.preventDefault(); 
@@ -544,8 +543,8 @@ function updateCsrfToken(response) {
    
    let formElement = document.getElementById('companyRmaInfoForm');
    let formData = new FormData(formElement);
-  formData.append('skuPrefix', skuPrefix);
-  formData.append('businessId', businessId);  
+    formData.append('skuPrefix', skuPrefix);
+    formData.append('businessId', businessId);  
 
     // Send data using AJAX
     $.ajax({
@@ -624,6 +623,70 @@ function updateCsrfToken(response) {
               updateCsrfToken(response);
 
               var successToast = new bootstrap.Toast($('#inventorySuccessToast'));
+              successToast.show();
+
+              setTimeout(() => {
+                document.getElementById('inventoryUpdateForm').reset();
+              }, 500);
+    
+          }
+      },
+      error: function(xhr, status, error) {
+          console.log(xhr.responseText);
+      }
+
+  });
+
+  });
+
+
+  // Order Processing Information form
+  $('#OrderProcessingInfo').submit(function(e) {
+    e.preventDefault(); 
+
+    const labelPhoneNo = $('#labelPhoneNo').val();
+    const zipcode = $('#orderZipcode').val();
+
+    // Validate alternate number if provided
+    if (labelPhoneNo && !validateContactNumber(labelPhoneNo)) {
+        $('#orderErrMsg').text('Please enter a valid 10-digit alternate number.');
+        labelPhoneNo.focus();
+        return;
+    }
+
+    // Validate ZIP code if provided
+    if (zipcode && !validateZipCode(zipcode)) {
+        $('#orderErrMsg').text('Please enter a valid 5 digits ZIP code.');
+        zipcode.focus();
+        return;
+    }
+
+    $('#orderErrMsg').text('');
+
+    let formElement = document.getElementById('contactInfoForm');
+    let formData = new FormData(formElement);
+   formData.append('skuPrefix', skuPrefix);
+   formData.append('businessId', businessId);   
+
+
+
+    $.ajax({
+      url: saveOrderProcessingUrl,
+      type: 'POST',
+      data: formData,
+      dataType: 'json',
+      processData: false,  // Important: Prevent jQuery from processing data
+      contentType: false,  // Important: Prevent jQuery from setting content type
+      success: function(response) {
+          if (response.status === 'error') {
+              // Display validation errors5
+              $.each(response.errors, function(field, error) {
+                  $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+              });
+          } else if (response.status === 'success') {
+
+              updateCsrfToken(response);
+              var successToast = new bootstrap.Toast($('#orderSuccessToast'));
               successToast.show();
 
               setTimeout(() => {

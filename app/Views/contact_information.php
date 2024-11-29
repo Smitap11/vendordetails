@@ -43,10 +43,7 @@
         </div>
         <div class="col-md-3">
           <label for="business_country" class="form-label">Country <span style="color: red;">*</span></label>
-          <select class="form-select" name="contactCountry" required>
-            <option value="United States">United States</option>
-            <option value="Option 2">Option 2</option>
-          </select>
+          <input type="text" class="form-control" name="contactCountry" value="" required>
         </div>
       </div>  
 
@@ -60,12 +57,8 @@
           <input type="number" class="form-control" id="inventoryContactNo" name="inventoryContactNo" value="<?= old('inventoryContactNo') ?>">
         </div>
         <div class="col-md-3 m-2">
-          <label for="inventory_state" class="form-label">State <span style="color: red;">*</span></label>
-          <select class="form-select" name="inventoryState" required>
-            <option value="State1">State1</option>
-            <option value="State2">State2</option>
-            <option value="State3">State3</option>
-          </select>
+          <label for="inventoryState" class="form-label">State <span style="color: red;">*</span></label>
+          <input type="text" class="form-control" name="inventoryState" value="" required>
         </div>
       </div>
 
