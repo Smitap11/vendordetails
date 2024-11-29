@@ -251,6 +251,24 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 
+  .default-toast {
+    position: fixed; top: 50px; right: 10px; min-height: 200px;
+  }
+
+  .spinner-overlay {
+    background-color: rgba(255, 255, 255, 0.8); /* Slight overlay */
+    width: 100%; /* Full table width */
+    height: 100%; /* Full table height */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Horizontal center */
+    align-items: center; /* Vertical center */
+  }
+
+  .spinner-overlay.d-none {
+      display: none !important;
+  }
+
+
   /* start DataTables for vendor dashboard */
 
   h4 {

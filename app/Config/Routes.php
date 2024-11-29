@@ -21,18 +21,21 @@ $routes->post('CompanyRmaInfoController/saveCompanyRmaFormData', 'CompanyRmaInfo
 $routes->post('InventoryUpdateController/saveInventoryUpdateFormData', 'InventoryUpdateController::saveInventoryUpdateFormData');
 $routes->post('VendorDashboardController/fetchVendorData', 'VendorDashboardController::fetchVendorData');
 
-// $routes->get('auth/signup', 'AuthController::register');
-$routes->post('auth/signup', 'AuthController::register');
+$routes->get('/signup', 'AuthController::showSignupForm');
+$routes->post('/signup', 'AuthController::register');
 
-// $routes->get('auth/login', 'AuthController::login');
-$routes->post('auth/login', 'AuthController::login');
-
+$routes->get('/login', 'AuthController::showLoginForm'); // For rendering the login form
+$routes->post('/login', 'AuthController::loginForm');    // For handling login submission
 
 // $routes->get('/logout', 'AuthController::logout');
-$routes->get('auth/logout', 'AuthController::logout');
+$routes->post('/logout', 'AuthController::logout');
 
-$routes->get('supplier_registration', 'VendorDashboardController::index', ['filter' => 'auth']);
+// $routes->get('supplier_registration', 'VendorDashboardController::index', ['filter' => 'auth']);
 
+$routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
+    $routes->get('vendor_dashboard', 'VendorDashboardController::index');
+    $routes->get('supplier_registration', 'SupplierRegController::index');
+});
 
 
 

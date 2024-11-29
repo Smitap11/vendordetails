@@ -38,6 +38,11 @@ class VendorDashboardController extends Controller
         // Execute the query
         $vendorData = $VendorDashboardModel->getFilteredData($filters);
 
+        // echo "<pre>";
+        // var_dump($vendorData);
+        // echo "</pre>";
+        // exit;
+
         if (!empty($vendorData)) {
             // Success response
             return $this->response->setJSON([
@@ -60,7 +65,7 @@ class VendorDashboardController extends Controller
             // Failure response with empty data to show "No data available" in DataTables
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'No data found',
+                'message' => 'No data available',
                 'data' => [],
                 'csrf_hash' => csrf_hash()
             ]);

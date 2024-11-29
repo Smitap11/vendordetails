@@ -86,7 +86,7 @@
 
         <button type="submit" class="btn contact-info-save gradient-custom">Save</button>
 
-        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 10px; right: 10px; min-height: 200px;">
+        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center default-toast">        
           <div class="toast" id="contactSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
               <strong class="me-auto">Success</strong>

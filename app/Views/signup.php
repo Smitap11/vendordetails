@@ -99,8 +99,10 @@
                     } else {
                         // Show error message in the toast
                         updateCsrfToken(response);  
-
                         showBootstrapToast('Error', response.message, 'danger');
+                        setTimeout(() => {
+                            document.getElementById('contactInfoForm').reset();
+                        }, 500);
                     }
                 },
                 error: function (xhr) {

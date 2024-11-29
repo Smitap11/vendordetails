@@ -107,15 +107,14 @@
                 </div>
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="restocking-fee" name="restockingFee"
-                        placeholder="10"></textarea>
+                        placeholder="10">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="comments" class="form-label"><b>Comments</b></label>
-                    <textarea class="form-control" placeholder="Leave a comment here" id="comment"
-                        name="Comments"></textarea>
+                    <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="Comments"></textarea>
                 </div>
                 <div class="col-md-4">
                     <label for="ModifiedOn" class="form-label"><b>Modified On</b></label>
@@ -139,8 +138,7 @@
 
             <button type="submit" class="btn gradient-custom">Save</button>
 
-            <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
-                style="position: fixed; top: 10px; right: 10px; min-height: 200px;">
+            <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center default-toast">
                 <div class="toast" id="rmaSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         <strong class="me-auto">Success</strong>

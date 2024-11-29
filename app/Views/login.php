@@ -6,6 +6,13 @@
     <div class="auth-container">
         <div class="auth-wrapper">
             <h3>Login</h3>
+
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger">
+                    <?= session()->getFlashdata('error'); ?>
+                </div>
+            <?php endif; ?>
+
             <form id="loginForm" method="post">
                 <?= csrf_field() ?>
                 <div class="mb-3">
@@ -78,6 +85,10 @@
                         // Show error message in toast
                         updateCsrfToken(response);  
                         showBootstrapToast('Error', response.message, 'danger');
+                        
+                        setTimeout(() => {
+                            document.getElementById('contactInfoForm').reset();
+                        }, 500);
 
                     }
                 },

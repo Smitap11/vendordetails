@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="<?= base_url();?>public/assets/css/style.css" />
+    <link rel="stylesheet" href="public/assets/css/style.css" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -20,49 +20,50 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light gradient-custom">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Home & Hobbies</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar navbar-expand-lg navbar-light gradient-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Home & Hobbies</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <?php if (!session()->has('userId')): ?>
+                    <!-- Visible only when logged out -->
                     <li class="nav-item">
-                        <a class="nav-link <?= (uri_string() == '') ? 'active' : ''; ?>" aria-current="page"
-                            href="<?= base_url(); ?>">Home</a>
+                        <a class="nav-link <?= (uri_string() == '') ? 'active' : ''; ?>" aria-current="page" href="/">Home</a>
+                    </li>
+                <?php else: ?>
+                    <!-- Visible only when logged in -->
+                    <li class="nav-item">
+                        <a class="nav-link <?= (uri_string() == 'supplier_registration') ? 'active' : ''; ?>" href="supplier_registration">Supplier</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= (uri_string() == 'supplier_registration') ? 'active' : ''; ?>"
-                            href="<?= base_url(); ?>supplier_registration">Supplier</a>
+                        <a class="nav-link <?= (uri_string() == 'vendor_dashboard') ? 'active' : ''; ?>" href="vendor_dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= (uri_string() == 'vendor_dashboard') ? 'active' : ''; ?>"
-                            href="<?= base_url(); ?>vendor_dashboard">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= (uri_string() == 'product') ? 'active' : ''; ?>" href="#">Product</a>
-                    </li>
-                </ul>
+                <?php endif; ?>
+            </ul>
 
-                <!-- Right-aligned Login/Logout Menu -->
-                <ul class="navbar-nav ms-auto">
-                    <?php if (session()->has('userId')): ?>
+            <!-- Right-aligned Login/Logout Menu -->
+            <ul class="navbar-nav ms-auto">
+                <?php if (session()->has('userId')): ?>
                     <li class="nav-item">
-                        <a href="<?= site_url('auth/logout') ?>" class="btn btn-link">Logout</a>
+                        <form action="<?= site_url('logout'); ?>" method="POST" style="display:inline;">
+                            <?= csrf_field(); ?>
+                            <button type="submit" class="btn nav-link" style="border: none; background: none; padding: 0; cursor: pointer;">Logout</button>
+                        </form>
                     </li>
-                    <?php else: ?>
+                <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= site_url('auth/login'); ?>">Login</a>
+                        <a class="nav-link" href="<?= site_url('login'); ?>">Login</a>
                     </li>
-                    <?php endif; ?>
-                </ul>
-            </div>
+                <?php endif; ?>
+            </ul>
         </div>
-    </nav>
-
+    </div>
+</nav>
 
 
     <?= $this->renderSection("content"); ?>
@@ -94,7 +95,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Custom JavaScript files -->
-    <script src="<?= base_url('public/assets/js/main.js') ?>"></script>
+    <script src="public/assets/js/main.js"></script>
 
     <!-- jQuery and DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

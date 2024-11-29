@@ -7,11 +7,16 @@ use CodeIgniter\Controller;
 
 class AuthController extends Controller
 {
+    
+    public function showSignupForm()
+    {
+        log_message('debug', 'Rendering signup form');
+        return view('signup'); // Replace with the actual login view
+    }
+
     public function register()
     {
         helper(['form']);
-
-        log_message('error', 'Inside controller before ' . $this->request->getMethod());
 
         if ($this->request->getMethod() === 'POST') {
 
@@ -67,10 +72,17 @@ class AuthController extends Controller
         }
 
         // Return the signup view (not used in AJAX)
-        return view('auth/signup');
+            return view('signup');
     }
 
-    public function login()
+    public function showLoginForm()
+    {
+        log_message('debug', 'Rendering login form');
+        return view('login'); // Replace with the actual login view
+    }
+
+
+    public function loginForm()
     {
         if ($this->request->getMethod() === 'POST') {
 
@@ -96,11 +108,10 @@ class AuthController extends Controller
             }
         } else {
             log_message('error', 'not post request');
-
         }
 
         // If not a POST request, redirect to login page
-        // return redirect()->to('auth/login');
+        return redirect()->to('login');
     }
 
 
@@ -110,7 +121,7 @@ class AuthController extends Controller
         session()->destroy();
 
         // Redirect to the login page
-        return redirect()->to(base_url('auth/login'));
+        return redirect()->to('/');
     }
 
 }

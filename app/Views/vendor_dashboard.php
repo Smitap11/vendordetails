@@ -69,7 +69,16 @@
 
         </div>
 
-        <div class="border my-3 p-3">
+        <div class="border my-3 p-3 table-responsive position-relative">
+            <div id="dataTableLoader" 
+                class="spinner-overlay d-none position-absolute" 
+                style="z-index: 10;">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+
             <table id="vendorTable" class="display py-3">
                 <thead>
                     <tr>
@@ -90,6 +99,7 @@
         </div>
 
     </div>
+
 
 
     <!-- Define the URL using PHP -->
@@ -156,17 +166,23 @@
         });
 
 
-
         $('#searchForm').on('submit', function(e) {
             e.preventDefault();
             console.log('button clicked');
+        
+            // Disable the search button
+            var $searchBtn = $('#vendorSearchBtn');
+            $searchBtn.prop('disabled', true);
+            
+            // Show the DataTable spinner
+            $('#dataTableLoader').removeClass('d-none');
+
             // Collect form data
             var searchData = $('#searchForm').serialize(); // Automatically serializes form data
             
             var saveVendoDashUrl = "<?= base_url('VendorDashboardController/fetchVendorData') ?>";
 
-
-            console.log('searchData = ', searchData);
+            // console.log('searchData = ', searchData);
 
             // AJAX call
             $.ajax({
@@ -176,28 +192,32 @@
                 dataType: 'json',
                 success: function(response) {
 
-                    console.log('response.status = ', response.data);
-                    if (response.status === 'error') {
-                        // Display validation errors
-                        $.each(response.errors, function(field, error) {
-                            $('#' + field).after(
-                                '<span class="error" style="color:red;">' +
-                                error + '</span>');
-                        });
-                    } else if (response.status === 'success') {
-                        updateCsrfToken(response);
+                    // console.log('response.status = ', response.data);
+                    updateCsrfToken(response);
 
-                        // Clear and add new data
+                    if (response.status === 'error' || response.data.length === 0) {
+                        // Clear the DataTable and show "No data available" message
+                        vendorTable.clear().draw(); // Clear the table
+                    } else if (response.status === 'success') {
                         vendorTable.clear().rows.add(response.data).draw();
 
                         setTimeout(() => {
                             document.getElementById('searchForm').reset();
                         }, 100);
                     }
+
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error('AJAX Error:', textStatus, errorThrown);
+                },
+                complete: function () {
+                    // Re-enable the search button
+                    $searchBtn.prop('disabled', false);
+
+                    // Hide the DataTable spinner
+                    $('#dataTableLoader').addClass('d-none');
                 }
+
             });
 
 
