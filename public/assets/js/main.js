@@ -663,12 +663,10 @@ function updateCsrfToken(response) {
 
     $('#orderErrMsg').text('');
 
-    let formElement = document.getElementById('contactInfoForm');
+    let formElement = document.getElementById('OrderProcessingInfo');
     let formData = new FormData(formElement);
-   formData.append('skuPrefix', skuPrefix);
-   formData.append('businessId', businessId);   
-
-
+    formData.append('skuPrefix', skuPrefix);
+    formData.append('businessId', businessId);    
 
     $.ajax({
       url: saveOrderProcessingUrl,
@@ -706,5 +704,41 @@ function updateCsrfToken(response) {
 
 
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const sections = document.querySelectorAll('.order-section');
+  const defaultSection = 'emailSection';
+  const dropdown = document.getElementById('howToPlaceOrder');
+
+  // Helper function to toggle required attribute
+  function toggleRequiredAttributes(sectionId) {
+      sections.forEach(section => {
+          const inputs = section.querySelectorAll('input, select');
+          inputs.forEach(input => {
+              input.required = (section.id === sectionId);
+          });
+      });
+  }
+
+  // Initially show the default section and set required attributes
+  sections.forEach(section => {
+      section.style.display = section.id === defaultSection ? 'flex' : 'none';
+  });
+  toggleRequiredAttributes(defaultSection);
+
+  // Event listener for dropdown change
+  dropdown.addEventListener('change', function () {
+      const selectedValue = this.value.toLowerCase();
+      const selectedSection = `${selectedValue}Section`;
+
+      sections.forEach(section => {
+          section.style.display = section.id === selectedSection ? 'flex' : 'none';
+      });
+      toggleRequiredAttributes(selectedSection);
+  });
+});
+
+
+
 
 

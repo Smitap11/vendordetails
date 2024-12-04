@@ -10,6 +10,7 @@ class FinancePayInfoController extends Controller
     public function saveFinancePayInfoFormData()
     {
 
+        $session = session();
         // Check if the request is AJAX
         if ($this->request->isAJAX()) {
 
@@ -17,7 +18,8 @@ class FinancePayInfoController extends Controller
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
             $skuPrefix       = $this->request->getPost('skuPrefix');
 
-            echo 'BId = '.$businessId = $request->getPost('businessId') ?? null;
+            $sessionBusinessId = $session->get('businessId');
+            $businessId = $sessionBusinessId ?? $request->getPost('businessId');
 
             // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
             if (empty($businessId)) {

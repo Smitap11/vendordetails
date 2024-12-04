@@ -9,11 +9,15 @@ class VendorFinanceController extends BaseController
 {
     public function saveVendorFinanceFormData()
     {
+        $session = session();
         // Get the request object
         $request = $this->request;
         
         $skuPrefix       = $request->getPost('skuPrefix');
-        $businessId      = $request->getPost('businessId');
+        //$businessId      = $request->getPost('businessId');
+        
+        $sessionBusinessId = $session->get('businessId');
+        $businessId = $sessionBusinessId ?? $request->getPost('businessId');
 
         // Capture form data using the request object
         $formData = [

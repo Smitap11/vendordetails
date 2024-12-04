@@ -252,7 +252,8 @@
   }
 
   .default-toast {
-    position: fixed; top: 50px; right: 10px; min-height: 200px;
+    position: fixed; top: 50px; right: 10px; min-height: 200px;pointer-events: none; /* Prevent the toast from blocking interactions */
+  
   }
 
   .spinner-overlay {

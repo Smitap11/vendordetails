@@ -10,6 +10,7 @@ class ContactInformationController extends Controller
 {
     public function saveContactInfoFormData()
     {
+        $session = session();
         // Load the request and validation service
         $request = \Config\Services::request();
                 
@@ -18,21 +19,23 @@ class ContactInformationController extends Controller
         $modifiedOn = $request->getPost('inventoryModifiedOn');
         $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
         $skuPrefix  = $request->getPost('skuPrefix');
+        
+        $sessionBusinessId = $session->get('businessId');
+        $businessId = $sessionBusinessId ?? $request->getPost('businessId');
 
-        $businessId = $request->getPost('businessId') ?? null;
+        // print_r($businessId);
 
         // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
-        if (empty($businessId)) {
-            $businessDetailsModel = new BusinessDetailsModel();
-            $businessRecord = $businessDetailsModel
-                ->where('skuPrefix', $skuPrefix)
-                ->orderBy('businessId', 'DESC') // Get the latest record
-                ->first();
+        // if (empty($businessId)) {
+        //     $businessDetailsModel = new BusinessDetailsModel();
+        //     $businessRecord = $businessDetailsModel
+        //         ->where('skuPrefix', $skuPrefix)
+        //         ->orderBy('businessId', 'DESC') // Get the latest record
+        //         ->first();
 
-            if ($businessRecord) {
-                $businessId = $businessRecord['businessId'];
-            }
-        }
+        //     if ($businessRecord) {
+        //         $businessId = $businessRecord['businessId'];
+        //     }        // }
         
 
         $contactData = [

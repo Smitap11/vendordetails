@@ -8,14 +8,17 @@ class VendorSettingController extends Controller
 {
     public function saveVendorSettingFormData()
     {
-
+        $session = session();
         // Check if the request is AJAX
         if ($this->request->isAJAX()) {
 
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
             $skuPrefix       = $this->request->getPost('skuPrefix');
-            $businessId      = $this->request->getPost('businessId');
+            //$businessId      = $this->request->getPost('businessId');
+            
+            $sessionBusinessId = $session->get('businessId');
+            $businessId = $sessionBusinessId ?? $request->getPost('businessId');
             
             // Proceed to insert the data if validation passes
             $vendorSettingModel = new VendorSettingModel();

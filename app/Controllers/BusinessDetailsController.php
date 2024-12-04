@@ -9,7 +9,7 @@ class BusinessDetailsController extends Controller
 {
     public function saveBusinessFormData()
     {
-            
+            $session = session();
             $concernArray = [];
 
             $jsonData = $this->request->getJSON();
@@ -56,10 +56,11 @@ class BusinessDetailsController extends Controller
             $businessModel = new BusinessDetailsModel();
             $businessId = $businessModel->insert($formData);        
 
-        // print_r($formData);
-
             // Insert data and log any errors
             if ($businessId) {
+
+                // Set businessId in session
+                $session->set('businessId', $businessId);
 
                 return $this->response->setJSON([
                     'status' => 'success',

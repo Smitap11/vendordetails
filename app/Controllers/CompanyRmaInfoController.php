@@ -9,6 +9,7 @@ class CompanyRmaInfoController extends Controller
 {
     public function saveCompanyRmaFormData()
     {
+        $session = session();
 
         // Check if the request is AJAX
         if ($this->request->isAJAX()) {
@@ -17,20 +18,21 @@ class CompanyRmaInfoController extends Controller
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
             $skuPrefix       = $this->request->getPost('skuPrefix');
 
-            echo 'BId = '.$businessId = $request->getPost('businessId') ?? null;
+            $sessionBusinessId = $session->get('businessId');
+            $businessId = $sessionBusinessId ?? $request->getPost('businessId');
 
             // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
-            if (empty($businessId)) {
-                $ContactInformationModel = new ContactInformationModel();
-                $businessRecord = $ContactInformationModel
-                    ->where('skuPrefix', $skuPrefix)
-                    ->orderBy('businessId', 'DESC') // Get the latest record
-                    ->first();
+            // if (empty($businessId)) {
+            //     $ContactInformationModel = new ContactInformationModel();
+            //     $businessRecord = $ContactInformationModel
+            //         ->where('skuPrefix', $skuPrefix)
+            //         ->orderBy('businessId', 'DESC') // Get the latest record
+            //         ->first();
 
-                if ($businessRecord) {
-                    $businessId = $businessRecord['businessId'];
-                }
-            }
+            //     if ($businessRecord) {
+            //         $businessId = $businessRecord['businessId'];
+            //     }
+            // }
         
             
             $path = WRITEPATH . 'uploads';

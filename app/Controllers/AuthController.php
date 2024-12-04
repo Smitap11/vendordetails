@@ -94,8 +94,6 @@ class AuthController extends Controller
             $user = $userModel->where('username', $username)->first();
 
             if ($user && password_verify($password, $user['password'])) {
-    
-                log_message('error', 'inside pwd');
 
                 // Set user session
                 session()->set([

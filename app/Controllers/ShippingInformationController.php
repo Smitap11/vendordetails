@@ -8,14 +8,17 @@ class ShippingInformationController extends Controller
 {
     public function saveShippingInfoFormData()
     {
-
+        $session = session();
         // Check if the request is AJAX
         if ($this->request->isAJAX()) {
 
             $modifiedOn = $this->request->getPost('shippingModifiedOn') ? $this->request->getPost('shippingModifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
             $skuPrefix       = $this->request->getPost('skuPrefix');
-            $businessId      = $this->request->getPost('businessId');
+            // $businessId      = $this->request->getPost('businessId');
+
+            $sessionBusinessId = $session->get('businessId');
+            $businessId = $sessionBusinessId ?? $request->getPost('businessId');
             
             // Proceed to insert the data if validation passes
             $shippingModel = new ShippingInformationModel();
