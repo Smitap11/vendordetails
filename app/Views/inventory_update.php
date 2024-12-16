@@ -10,10 +10,6 @@
             <option value="Email">Email</option>
             <option value="Website">Website</option>
             <option value="FTP">FTP</option>
-            <option value="Made To Order">Made To Order</option>
-            <option value="Desktop Application">Desktop Application</option>
-            <option value="EDI">EDI</option>
-            <option value="Link">Link</option>
           </select>
         </div>
       </div>

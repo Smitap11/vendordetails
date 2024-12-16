@@ -5,14 +5,14 @@
         <?= csrf_field() ?>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="selectBox2" class="form-label">Type</label>
-                <select class="form-select" id="selectBox2" name="vendorSettingType">
-                <option value="fba" selected>FBA</option>
-                <option value="fbm">FBM</option>
+                <label for="vendorSettingType" class="form-label">Type</label>
+                <select class="form-select" id="vendorSettingType" name="vendorSettingType">
+                <option value="FBA" selected>FBA</option>
+                <option value="Dropship">Dropship</option>
+                <option value="Both">Both</option>
                 </select>
             </div>
 
-            <!-- Second column -->
             <div class="col-md-6">
                 <label for="inputBox2" class="form-label">FBA SKU</label>
                 <input type="text" class="form-control" id="fba-sku" name="fbaSku" placeholder="Ex. VVULK">
@@ -29,8 +29,9 @@
                 <label for="Vendor Manager" class="form-label">Vendor Manager</label>
                 <select class="form-select" id="vendor-manager" name="vendorManager">
                 <option>Select Vendor Manager</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option value="Karan Singh Chauhan">Karan Singh Chauhan</option>
+                <option value="Shahrukh Khan">Shahrukh Khan</option>
+                <option value="Smita Parab">Smita Parab</option>
                 </select>
             </div>
         </div>
@@ -39,16 +40,16 @@
             <div class="col-md-6">
                 <label for="Prime Eligible" class="form-label">Prime Eligible</label>
                 <select class="form-select" id="prime-eligible" name="primeEligible">
-                <option value="YES" selected>YES</option>
-                <option value="NO">No</option>
+                <option value="Yes" selected>Yes</option>
+                <option value="No">No</option>
                 </select>
             </div>
 
             <div class="col-md-6">
-                <label for="dateField2" class="form-label">Our Shipping Account <span style="color: red;">*</span></label>
+                <label for="ourShippingAccount" class="form-label">Our Shipping Account <span style="color: red;">*</span></label>
                 <select class="form-select" id="ourShippingAccount" name="ourShippingAccount" required>
-                <option value="YES" selected>YES</option>
-                <option value="NO">No</option>
+                    <option value="Yes" selected>Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
         </div>
@@ -57,16 +58,19 @@
             <div class="col-md-6">
                 <label for="Shipping Account Detail" class="form-label">Shipping Account Detail</label>
                 <select class="form-select" id="shipping-account-detail" name="shippingAccountDetail">
-                <option value="usps" selected>USPS</option>
-                <option value="0">No</option>
+                    <option value="USPS" selected>USPS</option>
+                    <option value="No Ship Details">No Ship Details</option>
+                    <option value="UPS">UPS</option>
+                    <option value="FedEx">FedEx</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
 
             <div class="col-md-6">
                 <label for="dateField2" class="form-label">Shipping Account Number</label>
                 <select class="form-select" id="shipping-account-number" name="shippingAccountNumber">
-                <option value="1" selected>YES</option>
-                <option value="0">No</option>
+                <option value="Yes" selected>YES</option>
+                <option value="No">No</option>
                 </select>
             </div>
         </div>
@@ -76,8 +80,9 @@
             <div class="col-md-6">
                 <label for="Shipping Account Detail" class="form-label">Need to share the Label</label>
                 <select class="form-select" id="vendor-share-label" name="vendorShareLabel">
-                <option value="1" selected>YES</option>
-                <option value="0">No</option>
+                <option value="N/A">N/A</option>
+                <option value="No" selected>No</option>
+                <option value="Yes">Yes</option>
                 </select>
             </div>
 
@@ -89,16 +94,13 @@
         
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="Shipping Account Detail" class="form-label">Modified By</label>
-                <select class="form-select" id="vendor-share-label" name="modifiedBy">
-                <option value="1" selected>YES</option>
-                <option value="0">No</option>
-                </select>
+                <label for="modified By" class="form-label">Modified By</label>
+                <input type="text" class="form-control" name="modifiedBy" id="modifiedBy">
             </div>
 
             <div class="col-md-6">
-                <label for="dateField2" class="form-label">Vendor Note</label>
-                <input type="input" class="form-control" id="modified-on" name="vendorNote">
+                <label for="vendorNote" class="form-label">Vendor Note</label>
+                <input type="input" class="form-control" id="vendorNote" name="vendorNote">
             </div>
         </div>
 

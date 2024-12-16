@@ -8,18 +8,18 @@
                 <div class="col-md-6">
                     <label for="shipping-account" class="form-label">Shipping Account</label>
                     <select class="form-select" name="shippingAccount" id="shipping-account">
-                        <option value="Vendor Account" selected>Vendor Account</option>
-                        <option value="Option 2">Option 2</option>
-                        <option value="Option 3">Option 3</option>
+                        <option value="Home & Hobbies" selected>Home & Hobbies</option>
+                        <option value="Vendor Account">Vendor Account</option>
                     </select>
                 </div>
 
                 <div class="col-md-6">
                     <label for="ltl-freight" class="form-label">LTL/Freight Shipments</label>
                     <select class="form-select" name="ltlFreight" id="ltl-freight">
-                        <option value="Select LTL" selected>Select LTL</option>
-                        <option value="Option 2">Option 2</option>
-                        <option value="Option 3">Option 3</option>
+                        <option selected>Select One</option>
+                        <option value="Home & Hobbies">Home & Hobbies</option>
+                        <option value="Vendor">Vendor</option>
+                        <option value="N/A">N/A</option>
                     </select>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                     <label for="share-label" class="form-label">Need to share the Label</label>
                     <select class="form-select" name="shareLabel" id="share-label">
                         <option selected>Select One</option>
-                        <option value="Option 2">Option 2</option>
-                        <option value="Option 3">Option 3</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
 
@@ -38,8 +38,11 @@
                     <label for="rate-type" class="form-label">Rate Type</label>
                     <select class="form-select" name="rateType" id="rate-type">
                         <option selected>Select Rate Type</option>
-                        <option value="Option 2">Option 2</option>
-                        <option value="Option 3">Option 3</option>
+                        <option value="Our Estimates">Our Estimates</option>
+                        <option value="Flat">Flat</option>
+                        <option value="Included In Buy Price">Included In Buy Price</option>
+                        <option value="SKU Specific">SKU Specific</option>
+                        <option value="N/A">N/A</option>
                     </select>
                 </div>
             </div>
@@ -48,18 +51,18 @@
                 <div class="col-md-6">
                     <label for="international-shipping" class="form-label">International Shipping</label>
                     <select class="form-select" name="internationalShipping" id="international-shipping">
-                        <option value="Vendor Account" selected>Vendor Account</option>
-                        <option value="Option 2">Option 2</option>
-                        <option value="Option 3">Option 3</option>
+                        <option selected>Select One</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
 
                 <div class="col-md-6">
                     <label for="push-company-name" class="form-label">Push CompanyName in AddressLine1?</label>
                     <select class="form-select" name="pushCompanyName" id="push-company-name">
-                        <option value="Vendor Account" selected>Vendor Account</option>
-                        <option value="Option 2">Option 2</option>
-                        <option value="Option 3">Option 3</option>
+                        <option selected>Select One</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
             </div>
@@ -71,12 +74,8 @@
                 </div>
 
                 <div class="col-md-6">
-
                     <label for="shippingModifiedOn" class="form-label">Modified On</label>
-              <!-- <input type="date" class="form-control" id="shippingModifiedOn" name="modifiedOn" aria-label="Modified On" aria-describedby="basic-addon1"> -->
-              <input type="date" class="form-control" id="shippingModifiedOn" name="modifiedOn" aria-label="Modified On" aria-describedby="basic-addon1">
-
-
+                    <input type="date" class="form-control" id="shippingModifiedOn" name="modifiedOn" aria-label="Modified On" aria-describedby="basic-addon1">
                 </div>
             </div>
 
@@ -88,9 +87,12 @@
                 <div class="col-md-6">
                     <label for="shipment-updating-type" class="form-label">Shipment Updating Type</label>
                     <select class="form-select" name="shipmentUpdatingType" id="shipment-updating-type">
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                        <option value="FTP" selected>FTP</option>
+                        <option value="Quntum">Quntum</option>
+                        <option value="EDI">EDI</option>
+                        <option value="LABEL CREATION FEDEX">LABEL CREATION FEDEX</option>
+                        <option value="LABEL CREATION USPS">LABEL CREATION USPS</option>
+                        <option value="Manual">Manual</option>
                     </select>
                 </div>
             </div>

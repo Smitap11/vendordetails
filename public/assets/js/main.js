@@ -419,12 +419,12 @@ function updateCsrfToken(response) {
   $('#financePaymentInfo').submit(function(e) {
     e.preventDefault(); 
 
-    const alternateNumber = $("#contactNumber").val();
+    const alternateNumber = $("#paymentContactNo").val();
 
     // Validate alternate number if provided
     if (alternateNumber && !validateContactNumber(alternateNumber)) {
-      $('#financeErrMsg').text('Please enter a valid 10-digit alternate number.');
-      $('#alternateNumber').focus();
+      $('#financeErrMsg').text('Please enter a valid 10-digit number.');
+      $('#paymentContactNo').focus();
       return;
     }
 
@@ -649,15 +649,15 @@ function updateCsrfToken(response) {
 
     // Validate alternate number if provided
     if (labelPhoneNo && !validateContactNumber(labelPhoneNo)) {
-        $('#orderErrMsg').text('Please enter a valid 10-digit alternate number.');
-        labelPhoneNo.focus();
+        $('#orderErrMsg').text('Please enter a valid 10-digit number.');
+        $('#labelPhoneNo').focus();
         return;
     }
 
     // Validate ZIP code if provided
     if (zipcode && !validateZipCode(zipcode)) {
         $('#orderErrMsg').text('Please enter a valid 5 digits ZIP code.');
-        zipcode.focus();
+        $('#orderZipcode').focus();
         return;
     }
 
@@ -688,7 +688,7 @@ function updateCsrfToken(response) {
               successToast.show();
 
               setTimeout(() => {
-                document.getElementById('inventoryUpdateForm').reset();
+                document.getElementById('OrderProcessingInfo').reset();
               }, 500);
     
           }
@@ -701,7 +701,49 @@ function updateCsrfToken(response) {
 
   });
 
-
+    // Add Record form
+    $('#addRecordForm').submit(function(e) {
+      e.preventDefault(); 
+  
+      $('#recordErrMsg').text('');
+  
+      let formElement = document.getElementById('addRecordForm');
+      let formData = new FormData(formElement);
+      formData.append('skuPrefix', skuPrefix);
+      formData.append('businessId', businessId);    
+  
+      $.ajax({
+        url: saveAddRecordUrl,
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        processData: false,  // Important: Prevent jQuery from processing data
+        contentType: false,  // Important: Prevent jQuery from setting content type
+        success: function(response) {
+            if (response.status === 'error') {
+                // Display validation errors5
+                $.each(response.errors, function(field, error) {
+                    $('#' + field).after('<span class="error" style="color:red;">' + error + '</span>');
+                });
+            } else if (response.status === 'success') {
+  
+                updateCsrfToken(response);
+                var successToast = new bootstrap.Toast($('#addRecordSuccessToast'));
+                successToast.show();
+  
+                setTimeout(() => {
+                  document.getElementById('addRecordForm').reset();
+                }, 500);
+      
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+        }
+  
+    });
+  
+    });
 
 });
 

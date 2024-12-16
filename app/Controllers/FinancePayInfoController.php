@@ -16,24 +16,12 @@ class FinancePayInfoController extends Controller
 
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
-            $skuPrefix       = $this->request->getPost('skuPrefix');
 
             $sessionBusinessId = $session->get('businessId');
-            $businessId = $sessionBusinessId ?? $request->getPost('businessId');
+            $sessionSkuPrefix  = $session->get('skuPrefix');
+            $businessId = $sessionBusinessId ?? $this->request->getPost('businessId');
+            $skuPrefix = $sessionSkuPrefix ?? $this->request->getPost('skuPrefix');
 
-            // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
-            if (empty($businessId)) {
-                $CompanyRmaInfoModel = new CompanyRmaInfoModel();
-                $businessRecord = $CompanyRmaInfoModel
-                    ->where('skuPrefix', $skuPrefix)
-                    ->orderBy('businessId', 'DESC') // Get the latest record
-                    ->first();
-
-                if ($businessRecord) {
-                    $businessId = $businessRecord['businessId'];
-                }
-            }
-            
             // Proceed to insert the data if validation passes
             $financePayInfoModel = new FinancePayInfoModel();
 

@@ -11,9 +11,9 @@ class OrderProcessingModel extends Model
     protected $allowedFields = [
         'howToPlaceOrder',
         'orderPrimeEmail',
-        'orderWebsite',
-        'orderUsername',
-        'orderPassword',
+        'websiteUrl',
+        'websiteUsername',
+        'websitePassword',
         'warehouseAddr',
         'orderStreet',
         'orderCity',
@@ -23,8 +23,11 @@ class OrderProcessingModel extends Model
         'timeToShip',
         'shippingContactEmail',
         'inventoryHandlingTime',
-        'websiteEmail',
-        'websiteHowToPlaceOrder',
+        'emailEmailId',
+        'ftpHost',
+        'ftpUsername',
+        'ftpPassword',
+        'emailHowToPlaceOrder',
         'shippingDestinations',
         'poBoxNo',
         'assgEmailTemp',
@@ -45,6 +48,7 @@ class OrderProcessingModel extends Model
         'shipFollowTemplates',
         'epgAddress',
         'formStatus',
+        'skuPrefix',
         'businessId'
     ];
 

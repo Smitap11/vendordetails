@@ -7,21 +7,22 @@
         <div class="row mb-3">
         <div class="col-md-12"><b>Invoice Sourcing Details</b></div>
         <div class="col-md-6">
-            <label for="selectBox2" class="form-label">Allocation</label>
-            <select class="form-select" id="selectBox2" name="invoiveSrcAllocation">
+            <label for="invoiveSrcAllocation" class="form-label">Allocation</label>
+            <select class="form-select" id="invoiveSrcAllocation" name="invoiveSrcAllocation">
             <option selected>Select</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            <option value="Karan Singh Chauhan">Karan Singh Chauhan</option>
+            <option value="Shahrukh Khan">Shahrukh Khan</option>
+            <option value="Smita Parab">Smita Parab</option>
             </select>
         </div>
 
         <div class="col-md-6">
-            <label for="inputBox2" class="form-label">Vendor Level</label>
+            <label for="vendor-level" class="form-label">Vendor Level</label>
             <select class="form-select" id="vendor-level" name="invoiveSrcLevel">
-            <option value="1">Level 1</option>
-            <option value="2">Level 2</option>
-            <option value="3">Level 3</option>
+              <option selected>Select Level</option>
+              <option value="Level 1">Level 1</option>
+              <option value="Level 2">Level 2</option>
+              <option value="Level 3">Level 3</option>
             </select>
         </div>
         </div>
@@ -44,9 +45,12 @@
         <div class="col-md-6">
             <label for="textField2" class="form-label">Mode Of Payment</label>
             <select class="form-select" id="mode-of-payment" name="modeOfPayment">
-            <option>Select Payment Mode</option>
-            <option value="2">Level 2</option>
-            <option value="3">Level 3</option>
+              <option>Select Payment Mode</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Credit Card with Net Terms">Credit Card with Net Terms</option>
+              <option value="ACH with Net Terms">ACH with Net Terms</option>
+              <option value="PayPal with Net Terms">PayPal with Net Terms</option>
+              <option value="Advance">Advance</option>
             </select>
         </div>
 

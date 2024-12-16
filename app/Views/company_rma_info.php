@@ -8,8 +8,8 @@
                     <label for="selectBox2" class="form-label"><b>Do you offer additonal discount against No Return
                             Policy? (Yes/No)</b></label>
                     <select class="form-select" id="add-disc-no-return" name="addDiscNoReturn">
-                        <option value="YES" selected>Yes</option>
-                        <option value="NO">No</option>
+                        <option value="Yes" selected>Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
 
@@ -73,22 +73,16 @@
                     <input type="text" class="form-control" id="street" name="rmaStreet">
                 </div>
                 <div class="m-2">
-                    <label for="Email" class="form-label">City</label>
+                    <label for="City" class="form-label">City</label>
                     <input type="text" class="form-control" id="city" name="rmaCity">
                 </div>
                 <div class="m-2">
-                    <label for="Contact Number" class="form-label">Contry</label>
-                    <select class="form-select" id="selectBox2" name="rmaCountry">
-                        <option value="1">United State</option>
-                        <option value="0">No</option>
-                    </select>
+                    <label for="rmaCountry" class="form-label">Contry</label>
+                    <input type="text" class="form-control" id="rmaCountry" name="rmaCountry">
                 </div>
                 <div class="m-2">
                     <label for="state" class="form-label">State</label>
-                    <select class="form-select" id="selectBox2" name="rmaState">
-                        <option value="1">smndns</option>
-                        <option value="0">No</option>
-                    </select>
+                    <input type="text" class="form-control" id="state" name="rmaState">
                 </div>
                 <div class="m-2">
                     <label for="Zipcode" class="form-label">Zipcode</label>
@@ -107,7 +101,7 @@
                 </div>
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="restocking-fee" name="restockingFee"
-                        placeholder="10">
+                        placeholder="Ex. 10">
                 </div>
             </div>
 
@@ -130,7 +124,7 @@
                 <div class="col-md-6">
                     <label for="file" class="form-label"><b>Processed file</b></label>
                     <input class="form-control" type="file" id="file" name="file" />
-                    <label for="formFile" class="form-label m-1"><b>Processed file list:</b></label>
+                    <!-- <label for="formFile" class="form-label m-1"><b>Processed file list:</b></label> -->
                 </div>
             </div>
 

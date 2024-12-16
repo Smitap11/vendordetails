@@ -19,9 +19,11 @@ class OrderProcessingController extends Controller
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
             $shippingDestinations = $this->request->getPost('shippingDestinations');
-
+            
             $sessionBusinessId = $session->get('businessId');
+            $sessionSkuPrefix  = $session->get('skuPrefix');
             $businessId = $sessionBusinessId ?? $this->request->getPost('businessId');
+            $skuPrefix = $sessionSkuPrefix ?? $this->request->getPost('skuPrefix');
 
             if (is_array($shippingDestinations)) {
                 $shippingDestinations = implode(',', $shippingDestinations);
@@ -34,14 +36,21 @@ class OrderProcessingController extends Controller
             $orderData = [
                 'howToPlaceOrder' => $this->request->getPost('howToPlaceOrder'),
                 'orderPrimeEmail' => $this->request->getPost('orderPrimeEmail'),
-                'orderWebsite' => $this->request->getPost('orderWebsite') ?? null,
-                'orderUsername' => $this->request->getPost('orderUsername') ?? null,
-                'orderPassword' => $this->request->getPost('orderPassword') ?? null,
-                'websiteEmail' => $this->request->getPost('websiteEmail') ?? null,
-                'websiteHowToPlaceOrder' => $this->request->getPost('websiteHowToPlaceOrder') ?? null,
+
+                // website section
+                'websiteUrl' => $this->request->getPost('websiteUrl') ?? null,
+                'websiteUsername' => $this->request->getPost('websiteUsername') ?? null,
+                'websitePassword' => $this->request->getPost('websitePassword') ?? null,
+
+                // email section
+                'emailEmailId' => $this->request->getPost('emailEmailId') ?? null,
+                'emailHowToPlaceOrder' => $this->request->getPost('emailHowToPlaceOrder') ?? null,
+
+                //ftp section
                 'ftpHost' => $this->request->getPost('ftpHost') ?? null,
                 'ftpUsername' => $this->request->getPost('ftpUsername') ?? null,
                 'ftpPassword' => $this->request->getPost('ftpPassword') ?? null,
+
                 'timeToShip' => $this->request->getPost('timeToShip'),
                 'shippingContactEmail' => $this->request->getPost('shippingContactEmail'),
                 'inventoryHandlingTime' => $this->request->getPost('inventoryHandlingTime'),
@@ -71,6 +80,7 @@ class OrderProcessingController extends Controller
                 'shipFollowTemplates' => $this->request->getPost('shipFollowTemplates'),
                 'epgAddress' => $this->request->getPost('epgAddress'),
                 'businessId'             => $businessId,
+                'skuPrefix'              => $skuPrefix,
                 'formStatus'             => 'incomplete'
             ];
         
@@ -82,8 +92,8 @@ class OrderProcessingController extends Controller
                 $response = [
                     'status' => 'success',
                     'message' => 'Order Processing Information saved successfully.',
-                    'orderId' => $orderId,
-                    'businessId' => $businessId,    
+                    'businessId' => $businessId, 
+                    'skuPrefix'  => $skuPrefix,  
                     'csrf_hash' => csrf_hash()
                 ];
             } else {

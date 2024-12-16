@@ -1,4 +1,4 @@
-<div class="carousel-item">
+<div class="carousel-item active">
       <div class="form-container">
         <h5 class="form-header">Business Details</h5>
         <form id="businessDetailsForm" method="post">
@@ -33,7 +33,7 @@
 
             <div class="col-md-6">
               <label for="inputBox1" class="form-label">Rebate</label>
-              <input type="text" class="form-control" id="rebate" name="rebate" placeholder="0">
+              <input type="text" class="form-control" id="rebate" name="rebate" placeholder="Ex. 0">
             </div>
           </div>
 
@@ -97,7 +97,7 @@
 
             <div class="col-md-6">
               <label for="dateField1" class="form-label">Account (if any)</label>
-              <input type="text" class="form-control" id="business-account" name="businessAccount" aria-label="Account" aria-describedby="basic-addon1" placeholder="0">
+              <input type="text" class="form-control" id="business-account" name="businessAccount" aria-label="Account" aria-describedby="basic-addon1" placeholder="Ex. 0">
             </div>
           </div>
           
@@ -144,16 +144,13 @@
                   <input type="text" id="vendorHeighConcern" placeholder="Select Options" readonly>
                 </div>
                 <ul class="dropdown-menu" id="dropdownMenu">
-                  <li class="dropdown-item" data-value="Option 1">Option 1</li>
-                  <li class="dropdown-item" data-value="Option 2">Option 2</li>
-                  <li class="dropdown-item" data-value="Option 3">Option 3</li>
-                  <li class="dropdown-item" data-value="Option 4">Option 4</li>
-                  <li class="dropdown-item" data-value="Option 5">Option 5</li>
-                  <li class="dropdown-item" data-value="Option 6">Option 6</li>
-                  <li class="dropdown-item" data-value="Option 7">Option 7</li>
-                  <li class="dropdown-item" data-value="Option 8">Option 8</li>
-                  <li class="dropdown-item" data-value="Option 9">Option 9</li>
-                  <li class="dropdown-item" data-value="Option 10">Option 10</li>
+                  <li class="dropdown-item" data-value="None">None</li>
+                  <li class="dropdown-item" data-value="Listing Issue on Website">Listing Issue on Website</li>
+                  <li class="dropdown-item" data-value="Pricing Issue on Website">Pricing issue on Website</li>
+                  <li class="dropdown-item" data-value="Stock Issue on Website">Stock Issue on Website</li>
+                  <li class="dropdown-item" data-value="Promotional Issue on Website">Promotional Issue on Website</li>
+                  <li class="dropdown-item" data-value="Map violation Issue on Website">Map violation Issue on Website</li>
+                  <li class="dropdown-item" data-value="Other">Other</li>
                 </ul>
               </div>
             </div>
@@ -161,10 +158,10 @@
             <div class="col-md-6">
               <label for="businessUnit" class="form-label">Business Unit</label>
               <select class="form-select business-unit" id="businessUnit" name="businessUnit" aria-label="Default select example">
-                <option value="home-hobbies">Home & Hobbies</option>
-                <option value="converted-or-pre-Qualified">Converted/Pre Qualified</option>
-                <option value="dead-or-no-response">Dead/No Response</option>
-                <option value="approached">Approached</option>
+                <option value="Home & Hobbies">Home & Hobbies</option>
+                <option value="Converted/Pre Qualified">Converted/Pre Qualified</option>
+                <option value="Dead/No Response">Dead/No Response</option>
+                <option value="Approached">Approached</option>
               </select>
             </div>
           </div>

@@ -15,12 +15,12 @@ class InventoryUpdateController extends Controller
 
             $modifiedOn = $this->request->getPost('modifiedOn') ? $this->request->getPost('modifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
-            $skuPrefix       = $this->request->getPost('skuPrefix');
-            //$businessId      = $this->request->getPost('businessId');
-
             
             $sessionBusinessId = $session->get('businessId');
-            $businessId = $sessionBusinessId ?? $request->getPost('businessId');
+            $sessionSkuPrefix  = $session->get('skuPrefix');
+            $businessId = $sessionBusinessId ?? $this->request->getPost('businessId');
+            $skuPrefix = $sessionSkuPrefix ?? $this->request->getPost('skuPrefix');
+
             
             // Proceed to insert the data if validation passes
             $inventoryUpdateModel = new InventoryUpdateModel();

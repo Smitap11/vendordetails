@@ -61,6 +61,7 @@ class BusinessDetailsController extends Controller
 
                 // Set businessId in session
                 $session->set('businessId', $businessId);
+                $session->set('skuPrefix', $skuPrefix);
 
                 return $this->response->setJSON([
                     'status' => 'success',

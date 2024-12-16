@@ -34,26 +34,7 @@
         <?= $this->include("/inventory_update");  ?>
 
           <!-- Sixth form slide -->
-          <div class="carousel-item">
-            <div class="form-container">
-              <h5>Other Details</h5>
-              <form>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label for="Modified On" class="form-label">Record added On</label>
-                    <input type="date" class="form-control" id="record-added-on">
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="Modified By" class="form-label">Record added By</label>
-                    <input type="type" class="form-control" id="record-added-by">
-                  </div>
-                </div>
-                <button type="submit" class="btn gradient-custom">Save</button>
-
-              </form>
-            </div>
-        </div>
+          <?= $this->include("/add_record"); ?>
 
       </div>
     </div>

@@ -57,7 +57,7 @@
                     <div class="col-md-3">
                         <label>Business Unit</label>
                         <select id="businessUnit" name="businessUnit">
-                            <option value="">Select Business Unit</option>
+                            <option>Select Business Unit</option>
                             <option value="Home & Hobbies">Home & Hobbies</option>
                         </select>
                     </div>

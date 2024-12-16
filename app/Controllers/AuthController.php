@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function showSignupForm()
     {
         log_message('debug', 'Rendering signup form');
-        return view('signup'); // Replace with the actual login view
+        return view('signup');
     }
 
     public function register()
@@ -54,9 +54,15 @@ class AuthController extends Controller
             ];
 
             if ($userModel->save($data)) {
-                // Create session and send success response as JSON
-                session()->set('userId', $userModel->getInsertID());
-                session()->set('username', $data['username']);
+                
+                $user = $userModel->where('username', $username)->first();
+    
+                // Set user session
+                session()->set([
+                    'userId' => $user['id'],
+                    'userName' => $user['username'],
+                    'isLoggedIn' => true,
+                ]);
 
                 log_message('error', 'Session Data: ' . print_r(session()->get(), true));  // Check session data here
 
@@ -94,13 +100,17 @@ class AuthController extends Controller
             $user = $userModel->where('username', $username)->first();
 
             if ($user && password_verify($password, $user['password'])) {
-
                 // Set user session
                 session()->set([
                     'userId' => $user['id'],
                     'userName' => $user['username'],
+                    'isLoggedIn' => true,
                 ]);
-                return $this->response->setJSON(['status' => 'success', 'csrf_hash' => csrf_hash()]);
+                $this->response->setJSON(['status' => 'success', 'csrf_hash' => csrf_hash()]);
+                
+                return redirect()->to('/vendordetails');
+
+                // return $this->response->setJSON(['status' => 'success', 'csrf_hash' => csrf_hash()]);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid username or password.', 'csrf_hash' => csrf_hash()]);
             }

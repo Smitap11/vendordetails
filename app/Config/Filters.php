@@ -13,6 +13,7 @@ use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
 
+
 class Filters extends BaseFilters
 {
     /**
@@ -34,7 +35,10 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'authCheck'     => \App\Filters\AuthCheck::class,
+
     ];
+
 
     /**
      * List of special required filters.
@@ -72,6 +76,7 @@ class Filters extends BaseFilters
             // 'honeypot',
                 'csrf',
             // 'invalidchars',
+                'authCheck'
         ],
         'after' => [
             // 'honeypot',
@@ -103,5 +108,13 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    // public array $filters = [
+    //     'authCheck' => ['before' => ['supplier_registration', 'vendor_dashboard']]
+    // ];
+
+    public array $filters = [
+        'authCheck' => ['before' => ['vendordetails/*', 'supplier_registration/*', 'vendor_dashboard/*']],
+    ];
+    
+
 }

@@ -28,7 +28,7 @@
 
             <div class="col-md-4">
                 <label for="Contact Number" class="form-label">Contact Number</label>
-                <input type="number" class="form-control" id="ContactNumber" name="contactNumber">
+                <input type="number" class="form-control" id="paymentContactNo" name="contactNumber">
             </div>
         </div>      
 
@@ -36,49 +36,60 @@
             <div class="col-md-4">
                 <label for="Mode of Payment" class="form-label">Mode of Payment <span style="color: red;">*</span></label>
                 <select class="form-select" id="mode-of-payment" name="modeOfPayment" required>
-                    <option value="1" selected>Select One</option>
-                    <option value="0">No</option>
+                    <option selected>Select One</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="PayPal">PayPal</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
 
             <div class="col-md-4">
                 <label for="Email" class="form-label">Payment Term</label>
                 <select class="form-select" id="payment-term" name="paymentTerm">
-                    <option value="1" selected>Select Payment Term</option>
-                    <option value="0">No</option>
+                    <option selected>Select Payment Term</option>
+                    <option value="Pre Payment">Pre Payment</option>
+                    <option value="Net 7">Net 7</option>
+                    <option value="Net 10">Net 10</option>
+                    <option value="Net 15">Net 15</option>
+                    <option value="Net 30">Net 30</option>
+                    <option value="Net 60">Net 60</option>
+                    <option value="Advanace Deposit">Advanace Deposit</option>
+                    <option value="COD">COD</option>
                 </select>
             </div>
 
             <div class="col-md-4">
-                <label for="Contact Number" class="form-label">Select any</label>
+                <label for="Contact Number" class="form-label">Select Any</label>
                 <select class="form-select" id="select-one" name="paymentSelectAny">
-                    <option value="select 1" selected>Select One</option>
-                    <option value="select 0">No</option>
+                    <option selected>Select One</option>
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">MasterCard</option>
                 </select>
             </div>
         </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                    <label for="linkField2" class="form-label"><b>Charging Company Name (How charge will reflect on our card system)</b></label>
-                    <input type="text" class="form-control" id="charging-company-name" name="chargingCompanyName">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="multiSelect2" class="form-label"><b>Do you charge Dropship fee?</b></label>
-                        <select class="form-select" id="charge-dropship-fee" name="chargeDropshipFee">
-                            <option value="1">YES</option>
-                            <option value="0">NO</option>
-                        </select>
-                    </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                <label for="linkField2" class="form-label"><b>Charging Company Name (How charge will reflect on our card system)</b> <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="charging-company-name" name="chargingCompanyName" required>
                 </div>
+
+                <div class="col-md-6">
+                    <label for="chargeDropshipFee" class="form-label"><b>Do you charge Dropship fee?</b></label>
+                    <select class="form-select" id="charge-dropship-fee" name="chargeDropshipFee">
+                        <option selected>Select One</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
 
               <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="multiSelect2" class="form-label"><b>Please select if there are any extra charges applicable from your end apart from dropship</b></label>
                     <select class="form-select" id="extra-dropship-fee" name="extraDropshipFee">
-                        <option value="1">YES</option>
-                        <option value="0">NO</option>
+                        <option value="Yes">YES</option>
+                        <option value="No">NO</option>
                     </select>
                     </div>
                 </div>

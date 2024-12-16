@@ -14,11 +14,11 @@ class ShippingInformationController extends Controller
 
             $modifiedOn = $this->request->getPost('shippingModifiedOn') ? $this->request->getPost('shippingModifiedOn') : date('Y-m-d');
             $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
-            $skuPrefix       = $this->request->getPost('skuPrefix');
-            // $businessId      = $this->request->getPost('businessId');
 
             $sessionBusinessId = $session->get('businessId');
-            $businessId = $sessionBusinessId ?? $request->getPost('businessId');
+            $sessionSkuPrefix  = $session->get('skuPrefix');
+            $businessId = $sessionBusinessId ?? $this->request->getPost('businessId');
+            $skuPrefix = $sessionSkuPrefix ?? $this->request->getPost('skuPrefix');
             
             // Proceed to insert the data if validation passes
             $shippingModel = new ShippingInformationModel();
@@ -28,7 +28,7 @@ class ShippingInformationController extends Controller
                 'ltlFreight'               => $this->request->getPost('ltlFreight'),
                 'shareLabel'               => $this->request->getPost('shareLabel'),
                 'rateType'                 => $this->request->getPost('rateType'),
-                'internationalShipping'     => $this->request->getPost('internationalShipping'),
+                'internationalShipping'    => $this->request->getPost('internationalShipping'),
                 'pushCompanyName'          => $this->request->getPost('pushCompanyName'),
                 'shippingInfoComments'     => $this->request->getPost('shippingInfoComments'),
                 'shippingModifiedOn'       => $formattedDate,

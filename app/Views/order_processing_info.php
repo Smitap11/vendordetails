@@ -1,5 +1,5 @@
 
-<div class="carousel-item active">
+<div class="carousel-item">
       <div class="form-container">
         <h5 class="form-header">Order Processing Information</h5>
         <form id="OrderProcessingInfo" method="post">
@@ -25,12 +25,13 @@
         <div id="emailSection" class="row mb-3 order-section">
             <div class="col-md-6">
                 <label for="ltl-freight" class="form-label">Email Id <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" name="websiteEmail" value="">
+                <input type="text" class="form-control" name="emailEmailId" value="">
             </div>
             <div class="col-md-6">
                 <label for="websiteHowToPlaceOrder" class="form-label">How should we place the order? <span style="color: red;">*</span></label>
-                <select class="form-select" name="websiteHowToPlaceOrder" id="websiteHowToPlaceOrder">
-                    <option value="AWS_SES" selected>AWS_SES</option>
+                <select class="form-select" name="emailHowToPlaceOrder" id="websiteHowToPlaceOrder">
+                    <option selected>Select One</option>
+                    <option value="AWS_SES">AWS_SES</option>
                     <option value="Win-Some_Wood">Win-Some_Wood</option>
                     <option value="Twilio">Twilio</option>
                 </select>
@@ -93,7 +94,7 @@
           <div class="form-check mx-3">
               <input class="form-check-input" type="checkbox" value="1" id="warehouseAddr" name="warehouseAddr">
               <label class="form-check-label" for="warehouseAddr">
-                  If wherehouse address is same as company address then click this checkbox
+                  If wearhouse address is same as company address then click this checkbox
               </label>
           </div>  
         </div>
@@ -127,7 +128,7 @@
           <div class="col-md-4">
             <div class="form-group">
                 <label for="shippingDestinations"><b>4. Do you ship order's to?</b></label>
-                <div class="d-flex inline-block gap-4">
+                <div class="d-flex inline-block gap-4 my-2">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="alaska" name="shippingDestinations[]" value="Alaska">
                         <label class="form-check-label" for="alaska">Alaska</label>
@@ -146,7 +147,7 @@
 
           <div class="col-md-4">
             <label for="Zipcode" class="form-label">PO BOX NO.</label>
-            <input type="number" class="form-control" id="poBoxNo" name="poBoxNo">
+            <input type="text" class="form-control" id="poBoxNo" name="poBoxNo">
           </div>
 
           <div class="col-md-4">
@@ -235,16 +236,16 @@
 
       <div class="d-flex mb-3 inline-block">
           <div class="m-2 ">
-              <label for="Street" class="form-label">Tracking Followup Email Id</label>
+              <label for="trackingEmail" class="form-label">Tracking Followup Email Id</label>
               <input type="text" class="form-control" name="trackingEmail">
           </div>
           <div class="m-2">
-              <label for="Email" class="form-label">Label Send Email Id</label>
-              <input type="text" class="form-control" id="city" name="labelEmail">
+              <label for="labelEmail" class="form-label">Label Send Email Id</label>
+              <input type="text" class="form-control" id="labelEmail" name="labelEmail">
           </div>
           <div class="m-2">
-              <label for="Contact Number" class="form-label">Label Send Phone No.</label>
-              <input type="text" class="form-control" id="city" name="labelPhoneNo">
+              <label for="labelPhoneNo" class="form-label">Label Send Phone No.</label>
+              <input type="text" class="form-control" id="labelPhoneNo" name="labelPhoneNo">
           </div>
           <div class="m-2">
               <label for="state" class="form-label">RRD Involved</label>

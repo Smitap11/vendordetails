@@ -17,26 +17,12 @@ class ContactInformationController extends Controller
         $contactModel = new ContactInformationModel();
 
         $modifiedOn = $request->getPost('inventoryModifiedOn');
-        $formattedDate = date('Y-m-d', strtotime($modifiedOn)); 
-        $skuPrefix  = $request->getPost('skuPrefix');
+        $formattedDate = date('Y-m-d', strtotime($modifiedOn));         
         
         $sessionBusinessId = $session->get('businessId');
+        $sessionSkuPrefix  = $session->get('skuPrefix');
         $businessId = $sessionBusinessId ?? $request->getPost('businessId');
-
-        // print_r($businessId);
-
-        // Check if businessId is empty, if so, fetch it based on skuPrefix and latest bussinesId
-        // if (empty($businessId)) {
-        //     $businessDetailsModel = new BusinessDetailsModel();
-        //     $businessRecord = $businessDetailsModel
-        //         ->where('skuPrefix', $skuPrefix)
-        //         ->orderBy('businessId', 'DESC') // Get the latest record
-        //         ->first();
-
-        //     if ($businessRecord) {
-        //         $businessId = $businessRecord['businessId'];
-        //     }        // }
-        
+        $skuPrefix = $sessionSkuPrefix ?? $request->getPost('skuPrefix');
 
         $contactData = [
             'contactEmail'           => $request->getPost('contactEmail'),
